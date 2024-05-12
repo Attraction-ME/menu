@@ -9,25 +9,25 @@
     <meta content="" name="author" />
 
     <!--[if lt IE 9]>
-    <script src="<?php echo e(url('public/website/owner/js/html5shiv.js')); ?>"></script>
+    <script src="<?php echo e(url('website/owner/js/html5shiv.js')); ?>"></script>
     <![endif]-->
 
     <!-- CSS Files
 ================================================== -->
-    <link id="bootstrap" href="<?php echo e(url('public/website/owner/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
-    <link id="bootstrap-grid" href="<?php echo e(url('public/website/owner/css/bootstrap-grid.min.css')); ?>" rel="stylesheet" type="text/css" />
-    <link id="bootstrap-reboot" href="<?php echo e(url('public/website/owner/css/bootstrap-reboot.min.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/animate.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/owl.carousel.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/owl.theme.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/owl.transitions.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/magnific-popup.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/jquery.countdown.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/style.css')); ?>" rel="stylesheet" type="text/css" />
+    <link id="bootstrap" href="<?php echo e(url('website/owner/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link id="bootstrap-grid" href="<?php echo e(url('website/owner/css/bootstrap-grid.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link id="bootstrap-reboot" href="<?php echo e(url('website/owner/css/bootstrap-reboot.min.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/animate.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/owl.carousel.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/owl.theme.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/owl.transitions.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/magnific-popup.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/jquery.countdown.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/style.css')); ?>" rel="stylesheet" type="text/css" />
 
     <!-- color scheme -->
-    <link id="colors" href="<?php echo e(url('public/website/owner/css/colors/scheme-01.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(url('public/website/owner/css/coloring.css')); ?>" rel="stylesheet" type="text/css" />
+    <link id="colors" href="<?php echo e(url('website/owner/css/colors/scheme-01.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="<?php echo e(url('website/owner/css/coloring.css')); ?>" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -62,8 +62,8 @@
                             <!-- logo begin -->
                             <div id="logo">
                                 <a href="index.html">
-                                    <img alt="" class="logo" src="<?php echo e(url('public/website/owner//images/logo-light.png')); ?>" />
-                                    <img alt="" class="logo-2" src="<?php echo e(url('public/website/owner//images/logo.png')); ?>" />
+                                    <img alt="" class="logo" src="<?php echo e(url('website/owner//images/logo-light.png')); ?>" />
+                                    <img alt="" class="logo-2" src="<?php echo e(url('website/owner//images/logo.png')); ?>" />
                                 </a>
                             </div>
                             <!-- logo close -->
@@ -140,7 +140,7 @@
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
 
-        <section aria-label="section" data-bgimage="url(<?php echo e(url('public/website/owner//images/background/1.jpg')); ?>) top" class="text-light">
+        <section aria-label="section" data-bgimage="url(<?php echo e(url('website/owner//images/background/1.jpg')); ?>) top" class="text-light">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="col-lg-6 offset-lg-1 text-center wow fadeInLeft" data-wow-delay=".5s">
-                        <img src="<?php echo e(url('public/website/owner//images/misc/1.png')); ?>" class="img-fluid" alt="" />
+                        <img src="<?php echo e(url('website/owner//images/misc/1.png')); ?>" class="img-fluid" alt="" />
                     </div>
                 </div>
             </div>
@@ -249,7 +249,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 d-none d-lg-block d-xl-block text-center wow fadeInRight" data-wow-delay="0s">
-                        <img class="relative img-fluid" src="<?php echo e(url('public/website/owner//images/misc/5.png')); ?>" alt="" />
+                        <img class="relative img-fluid" src="<?php echo e(url('website/owner//images/misc/5.png')); ?>" alt="" />
                     </div>
 
                     <div class="col-lg-5 offset-md-1 wow fadeInLeft" data-wow-delay="0s">
@@ -688,12 +688,12 @@
                         <span class="p-title">Download</span><br>
                         <h2>Available on iOS and Android</h2>
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem.</p>
-                        <a href="download.html"><img src="<?php echo e(url('public/website/owner//images/misc/download-appstore.png')); ?>" class="img-fluid" alt="download"></a>&nbsp;
-                        <a href="download.html"><img src="<?php echo e(url('public/website/owner//images/misc/download-playstore.png')); ?>" class="img-fluid" alt="download"></a>
+                        <a href="download.html"><img src="<?php echo e(url('website/owner//images/misc/download-appstore.png')); ?>" class="img-fluid" alt="download"></a>&nbsp;
+                        <a href="download.html"><img src="<?php echo e(url('website/owner//images/misc/download-playstore.png')); ?>" class="img-fluid" alt="download"></a>
                     </div>
 
                     <div class="col-md-6 text-center">
-                        <img src="<?php echo e(url('public/website/owner//images/misc/2.png')); ?>" class="img-fluid" alt="">
+                        <img src="<?php echo e(url('website/owner//images/misc/2.png')); ?>" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -709,7 +709,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="widget">
-                        <a href="index.html"><img alt="" class="logo" src="<?php echo e(url('public/website/owner//images/logo.png')); ?>"></a>
+                        <a href="index.html"><img alt="" class="logo" src="<?php echo e(url('website/owner//images/logo.png')); ?>"></a>
                     </div>
                 </div>
 
@@ -818,23 +818,23 @@
 
 <!-- Javascript Files
 ================================================== -->
-<script src="<?php echo e(url('public/website/owner/js/jquery.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/popper.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/bootstrap.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/wow.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/jquery.isotope.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/easing.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/owl.carousel.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/validation.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/jquery.magnific-popup.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/enquire.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/jquery.stellar.min.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/jquery.plugin.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/typed.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/jquery.countTo.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/jquery.countdown.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/typed.js')); ?>"></script>
-<script src="<?php echo e(url('public/website/owner/js/designesia.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/popper.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/bootstrap.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/wow.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.isotope.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/easing.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/owl.carousel.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/validation.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.magnific-popup.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/enquire.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.stellar.min.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.plugin.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/typed.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.countTo.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/jquery.countdown.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/typed.js')); ?>"></script>
+<script src="<?php echo e(url('website/owner/js/designesia.js')); ?>"></script>
 
 <script>
     $(function () {

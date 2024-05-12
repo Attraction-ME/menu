@@ -43,7 +43,7 @@
                 <?php $total += $details['price'] * $details['quantity'] ?>
                     <tr data-id="<?php echo e($id); ?>" class="cart_item">
                         <td data-th="Product" data-title="Product">
-                            <a class="cart-productimage" href="#"><img width="91" height="91" src="<?php echo e(url('public/products/' .$details['image']  )); ?>" alt="Image"></a>
+                            <a class="cart-productimage" href="#"><img width="91" height="91" src="<?php echo e(url('products/' .$details['image']  )); ?>" alt="Image"></a>
                             <input type="hidden" name="shop_id" class="form-control" value="<?php echo e($details['shop_id']); ?>">
                                 <input type="hidden" name="product_id[]" class="form-control" value="<?php echo e($id); ?>">
                                 <input type="hidden" name="price[]" class="form-control" value="<?php echo e($details['price']); ?>">

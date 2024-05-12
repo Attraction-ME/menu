@@ -1,6 +1,6 @@
 <?php $__env->startSection('title', "$shop->slug"); ?>
 <?php $__env->startSection('body'); ?>
-<div class="breadcumb-wrapper" data-bg-src="<?php echo e(url('public/shops/' . $shop->cover)); ?>">
+<div class="breadcumb-wrapper" data-bg-src="<?php echo e(url('shops/' . $shop->cover)); ?>">
     <div class="container z-index-common">
         <div class="breadcumb-content">
             <h1 class="breadcumb-title text-center"><?php echo e($shop->name); ?></h1>
@@ -17,14 +17,14 @@
                     <div class="product-thumb-tab" data-asnavfor=".product-big-img">
                         <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="tab-btn active">
-                            <img src="<?php echo e(url('public/products/'.$image->name)); ?>" alt="Product Thumb">
+                            <img src="<?php echo e(url('products/'.$image->name)); ?>" alt="Product Thumb">
                         </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="product-big-img th-carousel" data-slide-show="1" data-md-slide-show="1" data-fade="true">
                         <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-auto">
-                            <div class="img"><img src="<?php echo e(url('public/products/'.$image->name)); ?>" alt="Product Image"></div>
+                            <div class="img"><img src="<?php echo e(url('products/'.$image->name)); ?>" alt="Product Image"></div>
                         </div>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
@@ -83,7 +83,7 @@ $.ajax({
         $("#noticart").append(`
             <li class="woocommerce-mini-cart-item mini_cart_item">
                 <a href="#" type="button"  data-id="${productId}" class="remove remove_from_cart_button remove-from-cart mego"><i class="far fa-times"></i></a>
-                <a href="/Menu/product/${productId}"><img src="<?php echo e(url('/public/products')); ?>/${order.image}" alt="Cart Image">${order.name}</a>
+                <a href="/Menu/product/${productId}"><img src="<?php echo e(url('/products')); ?>/${order.image}" alt="Cart Image">${order.name}</a>
                 <span class="quantity">${order.quantity} ×
                     <span class="woocommerce-Price-amount amount">
                         <span class="woocommerce-Price-currencySymbol">${order.price}</span> <?php echo e($shop->currency->name); ?></span>
@@ -139,7 +139,7 @@ function deleteOrder() {
                             $("#noticart").append(`
                                 <li class="woocommerce-mini-cart-item mini_cart_item">
                                     <a data-id="${productId}" href="#" type="button" class="remove remove_from_cart_button remove-from-cart"><i class="far fa-times"></i></a>
-                                    <a href="/Menu/product/${productId}"><img src="<?php echo e(url('/public/products')); ?>/${order.image}" alt="Cart Image">${order.name}</a>
+                                    <a href="/Menu/product/${productId}"><img src="<?php echo e(url('/products')); ?>/${order.image}" alt="Cart Image">${order.name}</a>
                                     <span class="quantity">${order.quantity} ×
                                         <span class="woocommerce-Price-amount amount">
                                             <span class="woocommerce-Price-currencySymbol">${order.price}</span> <?php echo e($shop->currency->name); ?></span>

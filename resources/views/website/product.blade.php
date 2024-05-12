@@ -1,7 +1,7 @@
 @extends('website.includes.master')
 @section('title', "$shop->slug")
 @section('body')
-<div class="breadcumb-wrapper" data-bg-src="{{ url('public/shops/' . $shop->cover) }}">
+<div class="breadcumb-wrapper" data-bg-src="{{ url('shops/' . $shop->cover) }}">
     <div class="container z-index-common">
         <div class="breadcumb-content">
             <h1 class="breadcumb-title text-center">{{$shop->name}}</h1>
@@ -18,14 +18,14 @@
                     <div class="product-thumb-tab" data-asnavfor=".product-big-img">
                         @foreach ($product->images as $image )
                         <div class="tab-btn active">
-                            <img src="{{url('public/products/'.$image->name)}}" alt="Product Thumb">
+                            <img src="{{url('products/'.$image->name)}}" alt="Product Thumb">
                         </div>
                         @endforeach
                     </div>
                     <div class="product-big-img th-carousel" data-slide-show="1" data-md-slide-show="1" data-fade="true">
                         @foreach ($product->images as $image )
                         <div class="col-auto">
-                            <div class="img"><img src="{{url('public/products/'.$image->name)}}" alt="Product Image"></div>
+                            <div class="img"><img src="{{url('products/'.$image->name)}}" alt="Product Image"></div>
                         </div>
                         @endforeach
                     </div>
@@ -84,7 +84,7 @@ $.ajax({
         $("#noticart").append(`
             <li class="woocommerce-mini-cart-item mini_cart_item">
                 <a href="#" type="button"  data-id="${productId}" class="remove remove_from_cart_button remove-from-cart mego"><i class="far fa-times"></i></a>
-                <a href="/Menu/product/${productId}"><img src="{{ url('/public/products') }}/${order.image}" alt="Cart Image">${order.name}</a>
+                <a href="/Menu/product/${productId}"><img src="{{ url('/products') }}/${order.image}" alt="Cart Image">${order.name}</a>
                 <span class="quantity">${order.quantity} ×
                     <span class="woocommerce-Price-amount amount">
                         <span class="woocommerce-Price-currencySymbol">${order.price}</span> {{$shop->currency->name}}</span>
@@ -140,7 +140,7 @@ function deleteOrder() {
                             $("#noticart").append(`
                                 <li class="woocommerce-mini-cart-item mini_cart_item">
                                     <a data-id="${productId}" href="#" type="button" class="remove remove_from_cart_button remove-from-cart"><i class="far fa-times"></i></a>
-                                    <a href="/Menu/product/${productId}"><img src="{{ url('/public/products') }}/${order.image}" alt="Cart Image">${order.name}</a>
+                                    <a href="/Menu/product/${productId}"><img src="{{ url('/products') }}/${order.image}" alt="Cart Image">${order.name}</a>
                                     <span class="quantity">${order.quantity} ×
                                         <span class="woocommerce-Price-amount amount">
                                             <span class="woocommerce-Price-currencySymbol">${order.price}</span> {{$shop->currency->name}}</span>

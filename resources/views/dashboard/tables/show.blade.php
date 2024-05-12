@@ -8,7 +8,7 @@
 </head>
 <body>
     <div style="text-align: center">
-        <img src="{{ url('public/qr/' . $table->qrcode) }}" width="500" height="500" alt="">
+        <img src="{{ url('qr/' . $table->qrcode) }}" width="500" height="500" alt="">
         <h1> {{ $table->shop->name }} </h1>
         <h2>Table Number : {{ $table->name }} </h2>
     </div>

@@ -63,7 +63,7 @@
                                     <div class="img-wrapper">
                                         <div class="front">
                                             <a href="{{ route('product.show', $product->id) }}"><img alt=""
-                                                                                                     src="{{ url('public/products/' . $product->image_temp) }}"class="img-fluid blur-up lazyload bg-img"></a>
+                                                                                                     src="{{ url('products/' . $product->image_temp) }}"class="img-fluid blur-up lazyload bg-img"></a>
                                         </div>
                                     </div>
                                     <div class="product-box product-style-5">

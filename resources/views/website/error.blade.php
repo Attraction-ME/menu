@@ -14,22 +14,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Favicons - Place favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{{url('public/website/assets/img/favicons/apple-icon-57x57.png')}}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{url('public/website/assets/img/favicons/apple-icon-60x60.png')}}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{url('public/website/assets/img/favicons/apple-icon-72x72.png')}}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{url('public/website/assets/img/favicons/apple-icon-76x76.png')}}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{url('public/website/assets/img/favicons/apple-icon-114x114.png')}}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{url('public/website/assets/img/favicons/apple-icon-120x120.png')}}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{url('public/website/assets/img/favicons/apple-icon-144x144.png')}}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{url('public/website/assets/img/favicons/apple-icon-152x152.png')}}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{url('public/website/assets/img/favicons/apple-icon-180x180.png')}}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{url('public/website/assets/img/favicons/android-icon-192x192.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{url('public/website/assets/img/favicons/favicon-32x32.png')}}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{url('public/website/assets/img/favicons/favicon-96x96.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{url('public/website/assets/img/favicons/favicon-16x16.png')}}">
-    <link rel="manifest" href="{{url('public/website/assets/img/favicons/manifest.json')}}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{url('website/assets/img/favicons/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{url('website/assets/img/favicons/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{url('website/assets/img/favicons/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{url('website/assets/img/favicons/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{url('website/assets/img/favicons/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{url('website/assets/img/favicons/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{url('website/assets/img/favicons/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{url('website/assets/img/favicons/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url('website/assets/img/favicons/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{url('website/assets/img/favicons/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url('website/assets/img/favicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{url('website/assets/img/favicons/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url('website/assets/img/favicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{url('website/assets/img/favicons/manifest.json')}}">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{url('public/website/assets/img/favicons/ms-icon-144x144.png')}}">
+    <meta name="msapplication-TileImage" content="{{url('website/assets/img/favicons/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
 
     <!--==============================
@@ -43,26 +43,26 @@
 	    All CSS File
 	============================== -->
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/bootstrap.min.css')}}">
     <!-- Fontawesome Icon -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/fontawesome.min.css')}}">
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/magnific-popup.min.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/magnific-popup.min.css')}}">
     <!-- Layerslider -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/layerslider.min.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/layerslider.min.css')}}">
     <!-- Datepicker -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/jquery.datetimepicker.min.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/jquery.datetimepicker.min.css')}}">
     <!-- Slick Slider -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/slick.min.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/slick.min.css')}}">
     <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="{{url('public/website/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{url('website/assets/css/style.css')}}">
 
 
 </head>
-<section class="bg-auto space" data-bg-src="{{url('public/website/assets/img/normal/error_bg.png')}}">
+<section class="bg-auto space" data-bg-src="{{url('website/assets/img/normal/error_bg.png')}}">
     <div class="container">
         <div class="error-img">
-            <img src="{{url('public/website/assets/img/normal/error_img.png')}}" alt="404 image">
+            <img src="{{url('website/assets/img/normal/error_img.png')}}" alt="404 image">
         </div>
         <div class="error-content">
             <h2 class="error-title">Scan Qrcode Please</h2>

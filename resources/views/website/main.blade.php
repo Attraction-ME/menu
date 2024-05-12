@@ -16,7 +16,7 @@
             @foreach($sliders as $slider)
                 <div>
                     <div class="home">
-                        <img src="{{ url('public/sliders/' . $slider->image) }}" alt="" class="bg-img blur-up lazyload">
+                        <img src="{{ url('sliders/' . $slider->image) }}" alt="" class="bg-img blur-up lazyload">
                     </div>
                 </div>
             @endforeach
@@ -54,7 +54,7 @@
                         <div class="img-wrapper">
                             <div class="front">
                                 <a href="{{ route('product.show', $product->id) }}"><img alt=""
-                                                                                         src="{{ url('public/products/' . $product->image_temp) }}"
+                                                                                         src="{{ url('products/' . $product->image_temp) }}"
                                                                                          class="img-fluid blur-up lazyload bg-img"></a>
                             </div>
                             <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i
@@ -222,7 +222,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{url('public/website/assets/images/marketplace/pro/43.jpg')}}"--}}
+{{--                                                                                 src="{{url('website/assets/images/marketplace/pro/43.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -253,7 +253,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/44.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/44.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -284,7 +284,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/45.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/45.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -315,7 +315,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/46.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/46.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -346,7 +346,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/47.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/47.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -377,7 +377,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/48.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/48.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -417,7 +417,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/49.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/49.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -448,7 +448,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/50.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/50.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -479,7 +479,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/1.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/1.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -510,7 +510,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/2.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/2.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -541,7 +541,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/3.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/3.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}
@@ -572,7 +572,7 @@
 {{--                            <div class="img-wrapper">--}}
 {{--                                <div class="front">--}}
 {{--                                    <a href="product-page(no-sidebar).html"><img alt=""--}}
-{{--                                                                                 src="{{ url('public/website/assets/images/marketplace/pro/4.jpg')}}"--}}
+{{--                                                                                 src="{{ url('website/assets/images/marketplace/pro/4.jpg')}}"--}}
 {{--                                                                                 class="img-fluid blur-up lazyload bg-img"></a>--}}
 {{--                                </div>--}}
 {{--                                <div class="cart-detail"><a href="javascript:void(0)" title="Add to Wishlist"><i--}}

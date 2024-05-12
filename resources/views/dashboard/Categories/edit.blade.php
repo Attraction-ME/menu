@@ -76,7 +76,7 @@
                                                 <div class="form-group col-md-6">
                                                     <label id="projectinput7" class="file center-block">
                                                         <input type="file" id="file" name="image" value="{{$category->image}}">
-                                                        <img src="{{ url('public/categories/' . $category->image) }}" width="50" height="50" alt="">
+                                                        <img src="{{ url('categories/' . $category->image) }}" width="50" height="50" alt="">
 
                                                         <span class="file-custom"></span>
                                                     </label>

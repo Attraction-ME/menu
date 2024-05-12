@@ -57,7 +57,7 @@
                                         <td><?php echo e($shop->owner); ?></td>
                                         <td><?php echo e($shop->phone); ?></td>
                                         <td>
-                                            <img src="<?php echo e(url('public/shops/' . $shop->logo)); ?>" width="50" height="50" alt="">
+                                            <img src="<?php echo e(url('shops/' . $shop->logo)); ?>" width="50" height="50" alt="">
                                         </td>
 
                                         <td><?php echo e($shop->created_at->toDateString()); ?></td>

@@ -53,7 +53,7 @@
                                     <span>Al-Ftooh General Trading</span>
                                 </div>
                                 <div class="col-6 d-flex justify-content-end invoice-logo">
-                                    <img src="{{ url('public/website/assets/images/icon/alftooh/Logo footer.png') }}"
+                                    <img src="{{ url('website/assets/images/icon/alftooh/Logo footer.png') }}"
                                          alt="company-logo" height="46" width="164">
                                 </div>
                             </div>

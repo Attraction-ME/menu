@@ -67,7 +67,7 @@
                                             <div class="row">
                                                 <div class="media col-md-12 mb-2">
                                                     <a class="mr-2" href="#">
-                                                        <img src="{{ url('public/shops/' . $shop->logo) }}" alt="users avatar" class="users-avatar-shadow rounded-circle" height="64" width="64">
+                                                        <img src="{{ url('shops/' . $shop->logo) }}" alt="users avatar" class="users-avatar-shadow rounded-circle" height="64" width="64">
                                                     </a>
                                                     <div class="media-body">
                                                         <h4 class="media-heading">Shop Logo</h4>
@@ -80,7 +80,7 @@
                                                 </div>
                                                 <div class="media col-md-12 mb-2">
                                                     <a class="mr-2" href="#">
-                                                        <img src="{{ url('public/shops/' . $shop->cover) }}" alt="users avatar" class="" height="64" width="500">
+                                                        <img src="{{ url('shops/' . $shop->cover) }}" alt="users avatar" class="" height="64" width="500">
                                                     </a>
                                                     <div class="media-body">
                                                         <h4 class="media-heading">Shop Cover</h4>

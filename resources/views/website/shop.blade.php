@@ -14,7 +14,7 @@
                 </div>
             @endif
             <div class="homescreen-third-sec" >
-                <img class="homescreen-third-seccc" src="{{ url('public/shops/' . $shop->cover) }}">
+                <img class="homescreen-third-seccc" src="{{ url('shops/' . $shop->cover) }}">
             </div>
             <div class="noresult-screen-full">
                 <form  action="#" method="POST" class="search-form w-100">
@@ -83,7 +83,7 @@
                                                     <div class="shoes-screen-top">
                                                         <div class="shoes-img wishlist-img">
                                                             <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{$product->id}}">
-                                                                <img style="height: 100px !important;" src="{{ url('public/products/' .$product->image_temp) }}" alt="{{$product->name}}">
+                                                                <img style="height: 100px !important;" src="{{ url('products/' .$product->image_temp) }}" alt="{{$product->name}}">
                                                             </a>
                                                         </div>
 
@@ -124,7 +124,7 @@
                                                                                         @foreach ($product->images as $image )
                                                                                             <div class="carousel-item active">
                                                                                                 <div class="single-clothes-slide-img">
-                                                                                                    <img style="height: 200px !important;" src="{{url('public/products/'.$image->name)}}" alt="img">
+                                                                                                    <img style="height: 200px !important;" src="{{url('products/'.$image->name)}}" alt="img">
                                                                                                 </div>
 
                                                                                             </div>
@@ -289,7 +289,7 @@
                                                         <div class="cart-without-promocode-first-full">
                                                             <div>
                                                                 <div class="cart-without-img-sec">
-                                                                    <img src="{{ url('public/products/' .$details['image']  ) }}" alt="">
+                                                                    <img src="{{ url('products/' .$details['image']  ) }}" alt="">
                                                                 </div>
                                                             </div>
                                                             <div class="cart-without-content-sec">
@@ -633,7 +633,7 @@
                                                     <div class="shoes-screen-top">
                                                         <div class="shoes-img wishlist-img">
                                                             <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
-                                                                <img style="height: 100px !important;" src="{{url('public/products/${res.products[i].image_temp}')}}" alt="product">
+                                                                <img style="height: 100px !important;" src="{{url('products/${res.products[i].image_temp}')}}" alt="product">
                                                             </a>
                                                         </div>
 
@@ -673,7 +673,7 @@
                         <div class="carousel-inner">
                         <div class="carousel-item active">
                         <div class="single-clothes-slide-img">
-                        <img style="height: 200px !important;" src="{{url('public/products/${res.products[i].image_temp}')}}" alt="img">
+                        <img style="height: 200px !important;" src="{{url('products/${res.products[i].image_temp}')}}" alt="img">
                         </div>
 
                         </div>
@@ -851,7 +851,7 @@ $.ajax({
                                                         <div class="cart-without-promocode-first-full">
                                                             <div>
                                                                 <div class="cart-without-img-sec">
-                                                                    <img src="{{ url('/public/products') }}/${order.image}" alt="">
+                                                                    <img src="{{ url('/products') }}/${order.image}" alt="">
                                                                 </div>
                                                             </div>
                                                             <div class="cart-without-content-sec">
@@ -920,7 +920,7 @@ function deleteOrder() {
                                                         <div class="cart-without-promocode-first-full">
                                                             <div>
                                                                 <div class="cart-without-img-sec">
-                                                                    <img src="{{ url('/public/products') }}/${order.image}" alt="">
+                                                                    <img src="{{ url('/products') }}/${order.image}" alt="">
                                                                 </div>
                                                             </div>
                                                             <div class="cart-without-content-sec">

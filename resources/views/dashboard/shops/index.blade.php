@@ -57,7 +57,7 @@
                                         <td>{{ $shop->owner }}</td>
                                         <td>{{ $shop->phone }}</td>
                                         <td>
-                                            <img src="{{ url('public/shops/' . $shop->logo) }}" width="50" height="50" alt="">
+                                            <img src="{{ url('shops/' . $shop->logo) }}" width="50" height="50" alt="">
                                         </td>
 
                                         <td>{{ $shop->created_at->toDateString() }}</td>

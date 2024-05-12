@@ -34,7 +34,7 @@
                                         <div
                                             class="col-md-3 col-12 order-md-1 order-2 d-flex justify-content-end align-items-center mb-2 mb-md-0">
                                             <img
-                                                src="{{ url('public/website/assets/images/icon/alftooh/Logo footer.png') }}"
+                                                src="{{ url('website/assets/images/icon/alftooh/Logo footer.png') }}"
                                                 alt="logo" height="46" width="164">
                                         </div>
                                         <div

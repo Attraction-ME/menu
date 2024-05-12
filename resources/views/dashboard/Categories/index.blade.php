@@ -50,7 +50,7 @@
                                         <td>{{ $key +1 }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>
-                                            <img src="{{ url('public/categories/' . $category->image) }}" width="50" height="50" alt="">
+                                            <img src="{{ url('categories/' . $category->image) }}" width="50" height="50" alt="">
                                         </td>
                                         <td>{{ $category->created_at->toDateString() }}</td>
                                         <td>

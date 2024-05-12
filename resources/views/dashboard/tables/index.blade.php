@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>{{ $table->name }}</td>
                                         <td>
-                                            <img src="{{ url('public/qr/' . $table->qrcode) }}" width="50" height="50" alt="">
+                                            <img src="{{ url('qr/' . $table->qrcode) }}" width="50" height="50" alt="">
                                             <a target="_blank" href="{{ route('generateQrCode.show', $table->id) }}" class="btn btn-sm btn-success"><i
                                                 class="fa fa-qrcode "></i>  Show Qrcode</a>
 

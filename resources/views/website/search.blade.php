@@ -38,7 +38,7 @@
                                                 <div class="front">
                                                     <a href="{{ route('product.show', $product->id) }}">
                                                         <img
-                                                            src="{{ url('public/products/' . $product->image_temp) }}"
+                                                            src="{{ url('products/' . $product->image_temp) }}"
                                                             class="img-fluid blur-up lazyload bg-img"
                                                             alt="">
                                                     </a>
@@ -46,7 +46,7 @@
                                                 <div class="back">
                                                     <a href="{{ route('product.show', $product->id) }}">
                                                         <img
-                                                            src="{{ url('public/products/' . $product->image_temp) }}"
+                                                            src="{{ url('products/' . $product->image_temp) }}"
                                                             class="img-fluid blur-up lazyload bg-img"
                                                             alt="">
                                                     </a>

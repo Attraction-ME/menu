@@ -32,7 +32,7 @@
                                         <div
                                             class="col-md-3 col-12 order-md-1 order-2 d-flex justify-content-end align-items-center mb-2 mb-md-0">
                                             <img
-                                                src="<?php echo e(url('public/shops/' . $order->shop_order->logo)); ?>"
+                                                src="<?php echo e(url('shops/' . $order->shop_order->logo)); ?>"
                                                 alt="logo" height="46" width="164">
                                         </div>
                                         <div

@@ -9,7 +9,7 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mobile-menu d-md-none mr-auto pb-3"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="<?php echo e(url('waiter/dashboard')); ?>"><i class="feather icon-menu font-large-1"></i></a></li>
-                <li class="nav-item pb-3 move-up-li"><a class="navbar-brand" href="<?php echo e(url('waiter/dashboard')); ?>"><img class="brand-logo" style="width: 40px" alt="stack admin logo" src="<?php echo e(url('public/shops/' .  $userwaiter->shop->logo)); ?>">
+                <li class="nav-item pb-3 move-up-li"><a class="navbar-brand" href="<?php echo e(url('waiter/dashboard')); ?>"><img class="brand-logo" style="width: 40px" alt="stack admin logo" src="<?php echo e(url('shops/' .  $userwaiter->shop->logo)); ?>">
                         <h3 class="brand-text"><?php echo e(auth()->user()->name); ?></h3>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
@@ -30,7 +30,7 @@
                                 <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span><span id="orderCount"  class="notification-tag badge badge-danger float-right m-0">New</span></h6>
                             </li>
                             <audio id="notificationSound">
-                                <source src="<?php echo e(url('public/sound/notifaction.mp3')); ?>" type="audio/mpeg">
+                                <source src="<?php echo e(url('sound/notifaction.mp3')); ?>" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
                             <li id="noti" class="scrollable-container media-list">
@@ -43,7 +43,7 @@
 
 
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                            <div class="avatar avatar-online"><img src="<?php echo e(url('public/shops/' .  $userwaiter->shop->logo)); ?>" alt="avatar"><i></i></div><span class="user-name"><?php echo e(auth()->user()->name); ?></span>
+                            <div class="avatar avatar-online"><img src="<?php echo e(url('shops/' .  $userwaiter->shop->logo)); ?>" alt="avatar"><i></i></div><span class="user-name"><?php echo e(auth()->user()->name); ?></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -31,7 +31,7 @@
                                 <div class="card-header">
                                     <div class="row align-items-center">
                                         <div class="col-md-3 col-12 order-md-1 order-2 d-flex justify-content-end align-items-center mb-2 mb-md-0">
-                                            <img src="{{ url('public/website/assets/images/icon/alftooh/Logo footer.png') }}" alt="logo" height="46" width="164">
+                                            <img src="{{ url('website/assets/images/icon/alftooh/Logo footer.png') }}" alt="logo" height="46" width="164">
                                         </div>
                                         <div class="col-md-9 col-12 d-flex align-items-start align-items-md-start align-items-center flex-wrap pl-0">
                                             <div class="col-md-3 col-12 d-flex justify-content-start align-items-center mb-2 mb-md-0">

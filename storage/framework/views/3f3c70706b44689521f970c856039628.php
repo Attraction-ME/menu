@@ -53,7 +53,7 @@
 
                                     <tr>
                                         <td>
-                                            <img src="<?php echo e(url('public/products/' . $product->image_temp)); ?>" width="50" height="50" alt="">
+                                            <img src="<?php echo e(url('products/' . $product->image_temp)); ?>" width="50" height="50" alt="">
                                         </td>
                                         <td><?php echo e($product->name); ?></td>
                                         <td><?php echo e($product->price); ?></td>

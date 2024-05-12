@@ -110,7 +110,7 @@
                                                     <h4 class="form-section text-dark"><i class="fa fa-photo"></i>
                                                         Thumbnail Image </h4>
                                                     <label id="projectinput7" class="file center-block">
-                                                        <img src="<?php echo e(url('public/products/' . $product->image_temp)); ?>"
+                                                        <img src="<?php echo e(url('products/' . $product->image_temp)); ?>"
                                                              width="100" height="100" alt="">
                                                         <input type="file" id="file" name="image_temp"
                                                                value="<?php echo e($product->image_temp); ?>">
@@ -244,7 +244,7 @@
 
 
                                                             <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <img src="<?php echo e(url('public/products/' .$image->name)); ?>" width="50" height="50" alt="">
+                                                                <img src="<?php echo e(url('products/' .$image->name)); ?>" width="50" height="50" alt="">
                                                                 <input  class="form-check-input" name="delete_images[]"  type="checkbox" value="<?php echo e($image->id); ?>">
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         <span> Select Image To Delete It</span>

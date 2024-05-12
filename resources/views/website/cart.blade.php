@@ -42,7 +42,7 @@
                 @php $total += $details['price'] * $details['quantity'] @endphp
                     <tr data-id="{{ $id }}" class="cart_item">
                         <td data-th="Product" data-title="Product">
-                            <a class="cart-productimage" href="#"><img width="91" height="91" src="{{ url('public/products/' .$details['image']  ) }}" alt="Image"></a>
+                            <a class="cart-productimage" href="#"><img width="91" height="91" src="{{ url('products/' .$details['image']  ) }}" alt="Image"></a>
                             <input type="hidden" name="shop_id" class="form-control" value="{{ $details['shop_id'] }}">
                                 <input type="hidden" name="product_id[]" class="form-control" value="{{ $id }}">
                                 <input type="hidden" name="price[]" class="form-control" value="{{ $details['price'] }}">

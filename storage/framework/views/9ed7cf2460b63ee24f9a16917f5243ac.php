@@ -50,7 +50,7 @@
                                         <td><?php echo e($key +1); ?></td>
                                         <td><?php echo e($category->name); ?></td>
                                         <td>
-                                            <img src="<?php echo e(url('public/categories/' . $category->image)); ?>" width="50" height="50" alt="">
+                                            <img src="<?php echo e(url('categories/' . $category->image)); ?>" width="50" height="50" alt="">
                                         </td>
                                         <td><?php echo e($category->created_at->toDateString()); ?></td>
                                         <td>

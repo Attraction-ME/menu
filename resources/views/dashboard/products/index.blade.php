@@ -53,7 +53,7 @@
 
                                     <tr>
                                         <td>
-                                            <img src="{{ url('public/products/' . $product->image_temp) }}" width="50" height="50" alt="">
+                                            <img src="{{ url('products/' . $product->image_temp) }}" width="50" height="50" alt="">
                                         </td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->price }}</td>

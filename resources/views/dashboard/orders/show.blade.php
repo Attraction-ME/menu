@@ -52,7 +52,7 @@
                                     <span>{{$order->shop_order->name}} General Trading</span>
                                 </div>
                                 <div class="col-6 d-flex justify-content-end invoice-logo">
-                                    <img src="{{ url('public/shops/' . $order->shop_order->image) }}"
+                                    <img src="{{ url('shops/' . $order->shop_order->image) }}"
                                          alt="company-logo" height="46" width="164">
                                 </div>
                             </div>

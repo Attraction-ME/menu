@@ -238,7 +238,7 @@ class ProductController extends Controller
                 'finalprice' => $product->finalprice,
                 'sale' => $product->sale,
                 'product_link' => route('product.show', $product->id),
-                'image_src' => url('/public/products/' . $product->image_temp),
+                'image_src' => url('/products/' . $product->image_temp),
                 'image_alt' => $product->name, // Set alt text as the product name, you can customize it
                 // Add other product data here...
             ];

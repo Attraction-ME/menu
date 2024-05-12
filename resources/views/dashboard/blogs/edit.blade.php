@@ -95,7 +95,7 @@
                                                     <label id="projectinput7" class="file center-block">
                                                         <input type="file" id="file" value="{{$blog->image}}"
                                                                name="image">
-                                                        <img src="{{ url('public/blogs/' . $blog->image) }}" width="50"
+                                                        <img src="{{ url('blogs/' . $blog->image) }}" width="50"
                                                              height="50" alt="">
                                                         <span class="file-custom"></span>
                                                     </label>

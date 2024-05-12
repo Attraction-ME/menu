@@ -1,4 +1,4 @@
-<footer class="footer-wrapper footer-layout5" data-bg-src="{{url('public/website/assets/img/update_2/bg/footer_bg_5.png')}}">
+<footer class="footer-wrapper footer-layout5" data-bg-src="{{url('website/assets/img/update_2/bg/footer_bg_5.png')}}">
     {{-- <div class="widget-area">
         <div class="container">
             <div class="row justify-content-between">

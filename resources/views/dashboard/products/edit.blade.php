@@ -111,7 +111,7 @@
                                                     <h4 class="form-section text-dark"><i class="fa fa-photo"></i>
                                                         Thumbnail Image </h4>
                                                     <label id="projectinput7" class="file center-block">
-                                                        <img src="{{ url('public/products/' . $product->image_temp) }}"
+                                                        <img src="{{ url('products/' . $product->image_temp) }}"
                                                              width="100" height="100" alt="">
                                                         <input type="file" id="file" name="image_temp"
                                                                value="{{ $product->image_temp }}">
@@ -245,7 +245,7 @@
 
 
                                                             @foreach($product->images as $image)
-                                                                <img src="{{  url('public/products/' .$image->name) }}" width="50" height="50" alt="">
+                                                                <img src="{{  url('products/' .$image->name) }}" width="50" height="50" alt="">
                                                                 <input  class="form-check-input" name="delete_images[]"  type="checkbox" value="{{$image->id}}">
                                                             @endforeach
                                                         <span> Select Image To Delete It</span>

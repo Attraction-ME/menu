@@ -14,7 +14,7 @@
                 </div>
             <?php endif; ?>
             <div class="homescreen-third-sec" >
-                <img class="homescreen-third-seccc" src="<?php echo e(url('public/shops/' . $shop->cover)); ?>">
+                <img class="homescreen-third-seccc" src="<?php echo e(url('shops/' . $shop->cover)); ?>">
             </div>
             <div class="noresult-screen-full">
                 <form  action="#" method="POST" class="search-form w-100">
@@ -83,7 +83,7 @@
                                                     <div class="shoes-screen-top">
                                                         <div class="shoes-img wishlist-img">
                                                             <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo e($product->id); ?>">
-                                                                <img style="height: 100px !important;" src="<?php echo e(url('public/products/' .$product->image_temp)); ?>" alt="<?php echo e($product->name); ?>">
+                                                                <img style="height: 100px !important;" src="<?php echo e(url('products/' .$product->image_temp)); ?>" alt="<?php echo e($product->name); ?>">
                                                             </a>
                                                         </div>
 
@@ -124,7 +124,7 @@
                                                                                         <?php $__currentLoopData = $product->images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                                             <div class="carousel-item active">
                                                                                                 <div class="single-clothes-slide-img">
-                                                                                                    <img style="height: 200px !important;" src="<?php echo e(url('public/products/'.$image->name)); ?>" alt="img">
+                                                                                                    <img style="height: 200px !important;" src="<?php echo e(url('products/'.$image->name)); ?>" alt="img">
                                                                                                 </div>
 
                                                                                             </div>
@@ -291,7 +291,7 @@
                                                         <div class="cart-without-promocode-first-full">
                                                             <div>
                                                                 <div class="cart-without-img-sec">
-                                                                    <img src="<?php echo e(url('public/products/' .$details['image']  )); ?>" alt="">
+                                                                    <img src="<?php echo e(url('products/' .$details['image']  )); ?>" alt="">
                                                                 </div>
                                                             </div>
                                                             <div class="cart-without-content-sec">
@@ -635,7 +635,7 @@
                                                     <div class="shoes-screen-top">
                                                         <div class="shoes-img wishlist-img">
                                                             <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
-                                                                <img style="height: 100px !important;" src="<?php echo e(url('public/products/${res.products[i].image_temp}')); ?>" alt="product">
+                                                                <img style="height: 100px !important;" src="<?php echo e(url('products/${res.products[i].image_temp}')); ?>" alt="product">
                                                             </a>
                                                         </div>
 
@@ -675,7 +675,7 @@
                         <div class="carousel-inner">
                         <div class="carousel-item active">
                         <div class="single-clothes-slide-img">
-                        <img style="height: 200px !important;" src="<?php echo e(url('public/products/${res.products[i].image_temp}')); ?>" alt="img">
+                        <img style="height: 200px !important;" src="<?php echo e(url('products/${res.products[i].image_temp}')); ?>" alt="img">
                         </div>
 
                         </div>
@@ -853,7 +853,7 @@ $.ajax({
                                                         <div class="cart-without-promocode-first-full">
                                                             <div>
                                                                 <div class="cart-without-img-sec">
-                                                                    <img src="<?php echo e(url('/public/products')); ?>/${order.image}" alt="">
+                                                                    <img src="<?php echo e(url('/products')); ?>/${order.image}" alt="">
                                                                 </div>
                                                             </div>
                                                             <div class="cart-without-content-sec">
@@ -922,7 +922,7 @@ function deleteOrder() {
                                                         <div class="cart-without-promocode-first-full">
                                                             <div>
                                                                 <div class="cart-without-img-sec">
-                                                                    <img src="<?php echo e(url('/public/products')); ?>/${order.image}" alt="">
+                                                                    <img src="<?php echo e(url('/products')); ?>/${order.image}" alt="">
                                                                 </div>
                                                             </div>
                                                             <div class="cart-without-content-sec">

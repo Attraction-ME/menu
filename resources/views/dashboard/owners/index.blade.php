@@ -58,7 +58,7 @@
                                         <td>{{ $owner->job }}</td>
                                         <td>{!! $owner->desc !!}</td>
                                         <td>
-                                            <img src="{{ url('public/owner/' . $owner->image) }}" width="50" height="50" alt="">
+                                            <img src="{{ url('owner/' . $owner->image) }}" width="50" height="50" alt="">
                                         </td>
 
                                         <td>{{ $owner->created_at->toDateString() }}</td>

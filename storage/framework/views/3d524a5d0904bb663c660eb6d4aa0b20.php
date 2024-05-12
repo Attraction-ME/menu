@@ -1,4 +1,4 @@
-<footer class="footer-wrapper footer-layout5" data-bg-src="<?php echo e(url('public/website/assets/img/update_2/bg/footer_bg_5.png')); ?>">
+<footer class="footer-wrapper footer-layout5" data-bg-src="<?php echo e(url('website/assets/img/update_2/bg/footer_bg_5.png')); ?>">
     
 
     <div class="copyright-wrap">

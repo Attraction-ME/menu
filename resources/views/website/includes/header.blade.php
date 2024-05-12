@@ -25,7 +25,7 @@
                 </div> -->
                 <div class="top-navbar-title">
                     <a href="{{ route('website.welcome',$shop->slug) }}">
-                        <img style="height: 56px !important;" src="{{ url('public/shops/' . $shop->logo) }}" alt="Pizzan">
+                        <img style="height: 56px !important;" src="{{ url('shops/' . $shop->logo) }}" alt="Pizzan">
                     </a>
                 </div>
                 <div class="top-navbar-title">

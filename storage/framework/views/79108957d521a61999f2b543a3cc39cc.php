@@ -48,7 +48,7 @@
                                     <tr>
                                         <td><?php echo e($table->name); ?></td>
                                         <td>
-                                            <img src="<?php echo e(url('public/qr/' . $table->qrcode)); ?>" width="50" height="50" alt="">
+                                            <img src="<?php echo e(url('qr/' . $table->qrcode)); ?>" width="50" height="50" alt="">
                                             <a target="_blank" href="<?php echo e(route('generateQrCode.show', $table->id)); ?>" class="btn btn-sm btn-success"><i
                                                 class="fa fa-qrcode "></i>  Show Qrcode</a>
 

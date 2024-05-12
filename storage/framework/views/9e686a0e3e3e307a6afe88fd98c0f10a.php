@@ -9,7 +9,7 @@
 
 
     <title><?php echo $__env->yieldContent('title'); ?></title>
-    <link rel="shortcut icon" href="<?php echo e(url('/public/dashboard/app-assets/images/logo/logoo.ico')); ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo e(url('/dashboard/app-assets/images/logo/logoo.ico')); ?>" type="image/x-icon">
 
 
 
@@ -20,33 +20,33 @@
     <!-- Scripts -->
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/vendors/css/vendors.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/vendors/css/charts/morris.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/vendors/css/extensions/unslider.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/vendors/css/weather-icons/climacons.min.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/vendors/css/tables/datatable/datatables.min.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/vendors/css/vendors.min.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/vendors/css/charts/morris.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/vendors/css/extensions/unslider.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/vendors/css/weather-icons/climacons.min.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/vendors/css/tables/datatable/datatables.min.css')); ?>">
 
 
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/css/bootstrap.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/css/bootstrap-extended.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/css/colors.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/css/components.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/fonts/font-awesome/css/font-awesome.min.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/css/bootstrap.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/css/bootstrap-extended.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/css/colors.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/css/components.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/fonts/font-awesome/css/font-awesome.min.css')); ?>">
 
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/css/core/menu/menu-types/vertical-menu.css')); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/app-assets/css/core/colors/palette-gradient.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/css/core/menu/menu-types/vertical-menu.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/app-assets/css/core/colors/palette-gradient.css')); ?>">
     <!-- link(rel='stylesheet', type='text/css', href=app_assets_path+'/css'+rtl+'/pages/users.css')-->
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/public/dashboard/assets/css/style.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(url('/dashboard/assets/css/style.css')); ?>">
 
 
 <!-- END: Custom CSS-->

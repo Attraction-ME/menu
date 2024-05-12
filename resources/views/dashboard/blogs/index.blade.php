@@ -56,7 +56,7 @@
                                         <td>{{ $blog->title }}</td>
                                         <td>{!! $blog->details !!}</td>
                                         <td>
-                                            <img src="{{ url('public/blogs/' . $blog->image) }}" width="50" height="50" alt="">
+                                            <img src="{{ url('blogs/' . $blog->image) }}" width="50" height="50" alt="">
                                         </td>
 
                                         <td>{{ $blog->created_at->toDateString() }}</td>

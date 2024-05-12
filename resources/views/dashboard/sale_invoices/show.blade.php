@@ -52,7 +52,7 @@
                                     <span>{{ $sale_invoices->shops->name }}</span>
                                 </div>
                                 <div class="col-6 d-flex justify-content-end invoice-logo">
-                                    <img src="{{ url('public/shops/' . $sale_invoices->shops->image) }}"
+                                    <img src="{{ url('shops/' . $sale_invoices->shops->image) }}"
                                          alt="company-logo" height="46" width="164">
                                 </div>
                             </div>
