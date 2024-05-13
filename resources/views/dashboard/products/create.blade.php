@@ -74,14 +74,14 @@
                                                 <div class="col-md-6">
                                                     <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> Product Price</h4>
                                                     <div class="form-group">
-                                                        <input type="text" id="price" class="form-control border-primary" placeholder="Price" name="price">
+                                                        <input type="number" min="0" id="price" class="form-control border-primary" placeholder="Price" name="price">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> Product Sale</h4>
                                                     <div class="form-group">
-                                                        <input type="number" min='0' id="price" class="form-control border-primary" placeholder="%" name="sale">
+                                                        <input type="number" min='0' max='100' id="price" class="form-control border-primary" placeholder="%" name="sale">
                                                     </div>
                                                 </div>
 
@@ -89,7 +89,7 @@
                                                     <h4 class="form-section text-dark"><i class="feather icon-edit-1"></i> Product Category  </h4>
                                                     <select name="category_id" id="" class="custom-select border-primary">
                                                         @foreach ($categories as $category)
-                                                          <option value="{{ $category->id }}" >{{ $category->name}}</option>
+                                                            <option value="{{ $category->id }}" >{{ $category->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -175,6 +175,7 @@
 
 @section('scripts')
     <script>
+
         let mainOptions = $('#main-options'); 
         let extraOptions = $('#extra-options');
 
@@ -189,14 +190,14 @@
             <div class="col-md-6">
                 <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> ${type} Option Name </h4>
                 <div class="form-group">
-                    <input type="text" class="form-control border-primary" placeholder="name" name="option_name_${optionIndex}">
+                    <input type="text" class="form-control border-primary" placeholder="name" name="${ type.toLowerCase() }_option_name_${optionIndex}">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> ${type} Option Price</h4>
                 <div class="form-group">
-                    <input type="text"  class="form-control border-primary" placeholder="Price" name="option_price_${optionIndex}">
+                    <input type="number" min="0"  class="form-control border-primary" placeholder="Price" name="${ type.toLowerCase() }_option_price_${optionIndex}">
                 </div>
             </div>
         `)
@@ -204,15 +205,11 @@
         function addMainOption() {
             mainOptionsLength.val(mainOptionIndex)
             mainOptions.append(optionDiv(mainOptionIndex++ , 'Main'));
-            // console.log()
-            // alert('main');
         }
 
         function addExtraOption() {
             extraOptionsLength.val(extraOptionIndex)
             extraOptions.append(optionDiv(extraOptionIndex++ , 'Extra'));
-            // console.log()
-            // alert('extra')
         }
 
 

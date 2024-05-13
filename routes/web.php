@@ -5,13 +5,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckStatus;
-
-
-Auth::routes();
-
 use App\Events\OrderSaved;
 
-
+Auth::routes();
 
 //Route::get('/clear',function(){
 //    Artisan::call('cache:clear');
@@ -20,7 +16,9 @@ use App\Events\OrderSaved;
 //    dd('Done CC!!!');
 //});
 
-
+// Route::get('/test', function () {
+    // dd();
+// });
 
 Route::get('/', function () {
     return view('website.website');

@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Dollar;
-use App\Models\Image;
-use App\Models\Product;
 use App\Models\Shop;
-use App\Models\TableWaiter;
+use App\Models\Brand;
+use App\Models\Image;
+use App\Models\Dollar;
 use App\Models\Waiter;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\TableWaiter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 
 class ProductController extends Controller
@@ -261,39 +262,91 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $imageName = time() . '.' . $request->image_temp->extension();
-        $request->image_temp->move(public_path('products'), $imageName);
 
-       if(isset($request->sale) && $request->sale) {
-            $finalprice = $request->price -  ($request->price * ($request->sale / 100));
-        } else {
-            $finalprice = $request->price;
-        }
+        $request->validate([
+            'name' => ['required' , 'string' , 'max:255'],
+            'price' => ['required' , 'numeric' , 'min:0'],
+            'sale' => ['required' , 'numeric' , 'min:0' , 'max:100'],
+            'category_id' => ['required' , 'exists:categories,id'],
+            'details' => ['required' , 'string'],
+            'image_temp' => ['required' , 'image' , 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ]);
 
+        DB::transaction(function () use ($request) {
+            
+            $imageName = time() . rand(1000, 999999) . '.' . $request->image_temp->getClientOriginalExtension();
+            $request->image_temp->move(public_path('products'), $imageName);
 
-        $user = Auth::user()->id;
-        $shop = Shop::where('user_id', $user)->first();
-        $product = new Product;
-        $product->shop_id = $shop->id;
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->finalprice = $finalprice;
-        $product->sale = $request->sale;
-        $product->details = $request->details;
-        $product->image_temp = $imageName;
-        $product->category_id = $request->category_id;
-        $product->save();
-
-        if ($request->has('image')) {
-            foreach ($request->file('image') as $imagefile) {
-                $imageNamee = time() . rand(1, 50) . '.' . $imagefile->extension();
-                $imagefile->move(public_path('products'), $imageNamee);
-                $images = new Image();
-                $images->name = $imageNamee;
-                $images->product_id = $product->id;
-                $images->save();
+            if(isset($request->sale) && $request->sale) {
+                $finalprice = $request->price -  ($request->price * ($request->sale / 100));
+            } else {
+                $finalprice = $request->price;
             }
-        }
+
+            // create new product
+            $user = Auth::user()->id;
+            $shop = Shop::where('user_id', $user)->first();
+            $product = new Product;
+            $product->shop_id = $shop->id;
+            $product->name = $request->name;
+            $product->price = $request->price;
+            $product->finalprice = $finalprice;
+            $product->sale = $request->sale;
+            $product->details = $request->details;
+            $product->image_temp = $imageName;
+            $product->category_id = $request->category_id;
+            $product->save();
+
+            // adding main options to the product
+
+            if ( $request->main_options_length > 0 ) 
+            {
+                foreach( range(1, $request->main_options_length)  as $index => $value)
+                {
+
+                    $request->validate([
+                        "main_option_name_$value" => ['required' , 'string' , 'max:255'],
+                        "main_option_price_$value" => ['required' , 'numeric' , 'min:0'], 
+                    ]);
+
+                    $product->mainOptions()->create([
+                        'name' => $request["main_option_name_$value"],
+                        'price' => $request["main_option_price_$value"],
+                    ]);
+
+                }
+            }
+
+            // adding extra options to the product
+            
+            if ( $request->extra_options_length > 0 ) 
+            {
+                foreach( range(1, $request->extra_options_length)  as $index => $value)
+                {
+                    $request->validate([
+                        "extra_option_name_$value" => ['required' , 'string' , 'max:255'],
+                        "extra_option_price_$value" => ['required' , 'numeric' , 'min:0'],
+                    ]);
+                    $product->extraOptions()->create([
+                        'name' => $request["extra_option_name_$value"],
+                        'price' => $request["extra_option_price_$value"],
+                    ]);
+                }
+            }
+
+            // adding images to the product 
+
+            if ($request->has('image')) {
+                foreach ($request->file('image') as $imagefile) {
+                    $imageNamee = time() . rand(1, 50) . '.' . $imagefile->extension();
+                    $imagefile->move(public_path('products'), $imageNamee);
+                    $images = new Image();
+                    $images->name = $imageNamee;
+                    $images->product_id = $product->id;
+                    $images->save();
+                }
+            }
+        });
 
         return redirect()->route('products.index')->with('message', "Product Added Successfully");
     }
