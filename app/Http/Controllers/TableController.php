@@ -41,15 +41,15 @@ class TableController extends Controller
         $table->shop_id = $shop->id;
         $table->save();
 
-        $link = 'https://ordarme.com/tables/show/' . $table->id;
+        $link = env('APP_URL') . '/tables/show/' . $table->id;
         $qrCode = QrCode::size(300)->generate($link);
 
-         $imageName = time() . '_' . $table->id . '.svg';
-         file_put_contents(public_path('qr/' . $imageName), $qrCode);
-         $table->qrcode=$imageName;
-         $table->link = $link;
-         $table->save();
-         return redirect()->route('tables.index')->with('message' , "Table Added Successfully");
+        $imageName = time() . '_' . $table->id . '.svg';
+        file_put_contents(public_path('qr/' . $imageName), $qrCode);
+        $table->qrcode=$imageName;
+        $table->link = $link;
+        $table->save();
+        return redirect()->route('tables.index')->with('message' , "Table Added Successfully");
     }
 
     public function show($id)
@@ -66,7 +66,7 @@ class TableController extends Controller
 
         $shop = Shop::where('id', $table->shop_id)->firstOrFail();
         $products = Product::where('shop_id', $shop->id)->paginate(20);
-        $customUrl = 'https://ordarme.com/menu/' . $shop->slug;
+        $customUrl = env('APP_URL') . '/menu/' . $shop->slug;
         session(['table' => $table]);
         return redirect($customUrl)->with(compact( 'shop', 'products'));
     }
