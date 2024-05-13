@@ -61,7 +61,7 @@
                                         @csrf
 
                                         <div class="form-body">
-
+                                            
                                             <div class="row">
 
                                                 <div class="col-md-6">
@@ -77,10 +77,11 @@
                                                         <input type="text" id="price" class="form-control border-primary" placeholder="Price" name="price">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> Product Sale</h4>
                                                     <div class="form-group">
-                                                        <input type="text" id="price" class="form-control border-primary" placeholder="%" name="sale">
+                                                        <input type="number" min='0' id="price" class="form-control border-primary" placeholder="%" name="sale">
                                                     </div>
                                                 </div>
 
@@ -93,6 +94,34 @@
                                                     </select>
                                                 </div>
 
+                                                <div class="col-md-6">
+                                                    <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> Main Options </h4>
+                                                    <div class="form-group">
+                                                        <button class="form-control border-primary btn btn-primary text-white" type="button" onclick="addMainOption()" > Add New Main Option </button>
+                                                        <input type="hidden" class="form-control border-primary" id="main_options_length" name="main_options_length" value="0">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                </div>
+
+                                                <div class="row col-md-12" id="main-options">
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> Extra Options </h4>
+                                                    <div class="form-group">
+                                                        <button class="form-control border-primary btn btn-primary text-white"  type="button" onclick="addExtraOption()"> Add New Extra Option </button>
+                                                        <input type="hidden" class="form-control border-primary" id="extra_options_length" name="extra_options_length" value="0">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                </div>
+
+                                                <div class="row col-md-12" id="extra-options">
+                                                </div>
+
                                                 <div class=" col-md-12">
                                                     <h4 class="form-section text-dark"><i class="fa fa-photo"></i> Thumbnail Image (500*500)  </h4>
                                                     <label id="projectinput7" class="file center-block">
@@ -100,10 +129,8 @@
                                                         <span class="file-custom"></span>
                                                     </label>
                                                 </div>
-                                              
+                                                
                                             </div>
-                                           
-
                                             
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -112,6 +139,7 @@
                                                         <textarea type="text" id="productdetails" class="form-control border-primary"  name="details" rows="5"></textarea>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class=" col-md-12">
                                                     <h4 class="form-section text-dark"><i class="fa fa-photo"></i> Product Images (500*500)  </h4>
                                                     <label id="projectinput7" class="file center-block">
@@ -142,33 +170,75 @@
         </div>
     </div>
 
-
-
 @endsection
+
+
 @section('scripts')
     <script>
+        let mainOptions = $('#main-options'); 
+        let extraOptions = $('#extra-options');
+
+        let mainOptionsLength = $('#main_options_length');
+        let extraOptionsLength = $('#extra_options_length');
+
+        let mainOptionIndex = 1;
+        let extraOptionIndex = 1;
+
+        let optionDiv = (optionIndex , type ) => (
+        `
+            <div class="col-md-6">
+                <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> ${type} Option Name </h4>
+                <div class="form-group">
+                    <input type="text" class="form-control border-primary" placeholder="name" name="option_name_${optionIndex}">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i> ${type} Option Price</h4>
+                <div class="form-group">
+                    <input type="text"  class="form-control border-primary" placeholder="Price" name="option_price_${optionIndex}">
+                </div>
+            </div>
+        `)
+
+        function addMainOption() {
+            mainOptionsLength.val(mainOptionIndex)
+            mainOptions.append(optionDiv(mainOptionIndex++ , 'Main'));
+            // console.log()
+            // alert('main');
+        }
+
+        function addExtraOption() {
+            extraOptionsLength.val(extraOptionIndex)
+            extraOptions.append(optionDiv(extraOptionIndex++ , 'Extra'));
+            // console.log()
+            // alert('extra')
+        }
+
+
         $(document).ready(function () {
-            // Trigger the calculation when the pricedollar input changes
-            $('#dollar').on('input', function () {
-                // Get the value of pricedollar input
-                var pricedollar = $(this).val();
 
-                // Check if pricedollar is a valid number
-                if (!isNaN(pricedollar)) {
-                    // Get the dollar exchange rate from the server (you may need to modify the URL)
-                    $.get('/get-dollar-rate', function (data) {
-                        // Calculate the product price based on pricedollar and the dollar exchange rate
-                        var dollarRate = data.rate; // Replace 'rate' with the actual field name in your Dollar model
-                        var productPrice = pricedollar * dollarRate;
+            // // Trigger the calculation when the pricedollar input changes
+            // $('#dollar').on('input', function () {
+            //     // Get the value of pricedollar input
+            //     var pricedollar = $(this).val();
 
-                        // Update the value of the price input
-                        $('#price').val(productPrice.toFixed(2)); // Adjust the decimal places as needed
-                    });
-                } else {
-                    // If pricedollar is not a valid number, clear the value of the price input
-                    $('#price').val('');
-                }
-            });
+            //     // Check if pricedollar is a valid number
+            //     if (!isNaN(pricedollar)) {
+            //         // Get the dollar exchange rate from the server (you may need to modify the URL)
+            //         $.get('/get-dollar-rate', function (data) {
+            //             // Calculate the product price based on pricedollar and the dollar exchange rate
+            //             var dollarRate = data.rate; // Replace 'rate' with the actual field name in your Dollar model
+            //             var productPrice = pricedollar * dollarRate;
+
+            //             // Update the value of the price input
+            //             $('#price').val(productPrice.toFixed(2)); // Adjust the decimal places as needed
+            //         });
+            //     } else {
+            //         // If pricedollar is not a valid number, clear the value of the price input
+            //         $('#price').val('');
+            //     }
+            // });
         });
     </script>
 @endsection

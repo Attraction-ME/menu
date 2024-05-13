@@ -107,52 +107,52 @@
 <script>
     ClassicEditor
         .create( document.querySelector( '#faq' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#product' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#about' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 
 <script>
     ClassicEditor
         .create( document.querySelector( '#shop' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#productdetails' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#owner' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#blog' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        // .catch( error => {
+        //     console.error( error );
+        // } );
 </script>
 
 @yield('scripts')
