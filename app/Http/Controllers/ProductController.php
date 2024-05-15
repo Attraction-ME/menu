@@ -210,44 +210,54 @@ class ProductController extends Controller
     {
 
 //dd($request->shop_id);
+
+        $shop_id = $request->shop_id;
+        $shop = Shop::find($shop_id);
+
         if ($request->cat_id === 'all') {
-            $shop_id = $request->shop_id;
-            $products = Product::where('shop_id', $shop_id)->paginate(20);
+
+            $products = Product::where('shop_id', $shop_id)
+                ->with(['mainOptions', 'extraOptions'])
+                ->get();
             $category = json_decode('{"name": "All Categories"}', true);
+
         } else {
 
             $cat_id = $request->cat_id;
-            $shop_id = $request->shop_id;
             $category = Category::find($cat_id);
             $products = Product::where('category_id', $cat_id)
                 ->where('shop_id', $shop_id)
+                ->with(['mainOptions', 'extraOptions'])
                 ->get();
         }
 
+        $table = session('table');
+        $waiter = $table->waiters()->first();
+        $selectWaiter = session('selectWaiter');
 
-        // Build an array of product data
-        $productData = [];
+        // // Build an array of product data
+        // $productData = [];
 
+        // foreach ($products as $product) {
+        //     $productData[] = [
+        //         'id' => $product->id, // Include the product ID
+        //         'name' => $product->name,
+        //         'details' => $product->details,
+        //         'category' => $product->category->name,
+        //         'currency' => $product->shopproduct->currency->name,
+        //         'finalprice' => $product->finalprice,
+        //         'sale' => $product->sale,
+        //         'product_link' => route('product.show', $product->id),
+        //         'image_src' => url('/products/' . $product->image_temp),
+        //         'image_alt' => $product->name, // Set alt text as the product name, you can customize it
+        //         // Add other product data here...
+        //     ];
+        // }
 
-        foreach ($products as $product) {
-            $productData[] = [
-                'id' => $product->id, // Include the product ID
-                'name' => $product->name,
-                'details' => $product->details,
-                'category' => $product->category->name,
-                'currency' => $product->shopproduct->currency->name,
-                'finalprice' => $product->finalprice,
-                'sale' => $product->sale,
-                'product_link' => route('product.show', $product->id),
-                'image_src' => url('/products/' . $product->image_temp),
-                'image_alt' => $product->name, // Set alt text as the product name, you can customize it
-                // Add other product data here...
-            ];
-        }
-        return response()->json(['products' => $productData, 'category' => $category]);
+        return view('website.shop', compact('products', 'shop','table','selectWaiter','category') );
+
+        // return response()->json(['products' => $productData, 'category' => $category]);
     }
-
-
 
     public function create()
     {
