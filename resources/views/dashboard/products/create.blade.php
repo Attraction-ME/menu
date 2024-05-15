@@ -211,32 +211,7 @@
             extraOptionsLength.val(extraOptionIndex)
             extraOptions.append(optionDiv(extraOptionIndex++ , 'Extra'));
         }
-
-
-        $(document).ready(function () {
-
-            // // Trigger the calculation when the pricedollar input changes
-            // $('#dollar').on('input', function () {
-            //     // Get the value of pricedollar input
-            //     var pricedollar = $(this).val();
-
-            //     // Check if pricedollar is a valid number
-            //     if (!isNaN(pricedollar)) {
-            //         // Get the dollar exchange rate from the server (you may need to modify the URL)
-            //         $.get('/get-dollar-rate', function (data) {
-            //             // Calculate the product price based on pricedollar and the dollar exchange rate
-            //             var dollarRate = data.rate; // Replace 'rate' with the actual field name in your Dollar model
-            //             var productPrice = pricedollar * dollarRate;
-
-            //             // Update the value of the price input
-            //             $('#price').val(productPrice.toFixed(2)); // Adjust the decimal places as needed
-            //         });
-            //     } else {
-            //         // If pricedollar is not a valid number, clear the value of the price input
-            //         $('#price').val('');
-            //     }
-            // });
-        });
+        
     </script>
 @endsection
 

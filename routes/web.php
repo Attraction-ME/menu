@@ -35,7 +35,7 @@ Route::get('/error404', function () {
 
 Route::get('/cart', [App\Http\Controllers\ProductController::class,'cart'])->name('cart');
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'products'])->name('products');
-Route::get('add-to-cart/{id}', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('add.to.cart');
+// Route::get('add-to-cart/{id}', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('add.to.cart');
 Route::get('/get-subtotal', [App\Http\Controllers\ProductController::class, 'getSubtotal'])->name('cart.get-subtotal');
 
 Route::get('/add-to-cart/{id}', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('add.to.cart');
@@ -47,11 +47,11 @@ Route::get('/productByCategory', [App\Http\Controllers\ProductController::class,
 Route::post('/order/store', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 // shop
 Route::get('/tables/show/{id}', [App\Http\Controllers\TableController::class, 'show'])->name('tables.show');
-Route::get('/menu/{slug}', [App\Http\Controllers\ProductController::class, 'shop'])->name('website.shopp');
+Route::get('/menu/{slug}', [App\Http\Controllers\ProductController::class, 'shop'])->name('website.shop');
 Route::get('/{slug}', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.welcome');
 
 // search
-Route::post('/search', [App\Http\Controllers\SearchController::class, 'website_search'])->name('website.shop');
+Route::post('/search', [App\Http\Controllers\SearchController::class, 'website_search'])->name('website.search');
 Route::get('/searchResult', [App\Http\Controllers\SearchController::class, 'search'])->name('website.searchResult');
 
 // Single Product

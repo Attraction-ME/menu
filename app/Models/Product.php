@@ -10,6 +10,20 @@ class Product extends Model
     use HasFactory;
     protected $guarded =['id'];
 
+    protected $appends = ['hasMainOptions' , 'hasExtraOptions'];
+
+    // accessors & mutators
+
+    public function getHasMainOptionsAttribute()
+    {
+        return $this->mainOptions->count() > 0 ? true : false;
+    }
+
+    public function getHasExtraOptionsAttribute()
+    {
+        return $this->extraOptions->count() > 0 ? true : false;
+    }
+
 
     # Relations
     public function shopproduct(){

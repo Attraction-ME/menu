@@ -4,7 +4,6 @@
     <!-- Search Screen Start -->
 
     <section id="noresult-screen">
-
         <div class="container">
             @if (session('done'))
                 <div class="woocommerce-notices-wrapper">
@@ -62,13 +61,14 @@
             <div class="noresult-screen-details">
                 <div class="noresult-screen-details-bottom ">
                     <div class="noresult-screen-details-full">
-                        <ul class="nav nav-pills mb-3" id="no-result-tab" role="tablist">
+                        <ul class="nav nav-pills mb-3 d-flex flex-wrap align-items-center justify-content-center"
+                            id="no-result-tab" role="tablist" style="flex-wrap: wrap !important;">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active custom-home1-tab-btn category" id="mc-submit" value="all"
-                                    type="button" role="tab" aria-selected="true">All Meals</button>
+                                <button class="nav-link active custom-home1-tab-btn category m-2" id="mc-submit"
+                                    value="all" type="button" role="tab" aria-selected="true">All Meals</button>
                             </li>
                             @foreach ($shop->categories as $category)
-                                <li class="nav-item" role="presentation">
+                                <li class="nav-item m-2" role="presentation">
                                     <button class="nav-link custom-home1-tab-btn category" id="mc-submit"
                                         value="{{ $category->id }}" type="button" role="tab"
                                         aria-selected="false">{{ $category->name }}</button>
@@ -112,17 +112,30 @@
                                                             <div style="padding: 8px !important;"
                                                                 class="shoes-screen-second">
                                                                 <div class="cloth-txt1">
-                                                                    <span>{{ $product->finalprice }}
-                                                                        {{ $shop->currency->name }}</span>
+                                                                    @if (!$product->hasMainOptions)
+                                                                        <span>{{ $product->finalprice }}
+                                                                            {{ $shop->currency->name }}</span>
+                                                                    @endif
                                                                 </div>
+
                                                                 <div class="shoes-screen-second-full">
-                                                                    <button type="button"
-                                                                        data-product-id="{{ $product->id }}"
-                                                                        style="background-color: red !important;"
-                                                                        class="border-0 center align-content-center text-center add_cart ">
-                                                                        <i class="fa fa-plus"
-                                                                            style="color: white !important;"></i>
-                                                                    </button>
+                                                                    @if (!$product->hasMainOptions)
+                                                                        <button type="button"
+                                                                            data-product-id="{{ $product->id }}"
+                                                                            style="background-color: red !important;"
+                                                                            class="border-0 center align-content-center text-center add_cart ">
+                                                                            <i class="fa fa-plus"
+                                                                                style="color: white !important;"></i>
+                                                                        </button>
+                                                                    @else
+                                                                        <button type="button" data-bs-toggle="modal"
+                                                                            data-bs-target="#staticBackdrop{{ $product->id }}"
+                                                                            style="background-color: green !important;"
+                                                                            class="border-0 center align-content-center text-center ">
+                                                                            <i class="fa fa-plus"
+                                                                                style="color: white !important;"></i>
+                                                                        </button>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -237,8 +250,8 @@
                                                                                     <div class="cloths-second-sec-full">
                                                                                         <div class="cloths-second-wrapper">
                                                                                             <h1 class="clo-txt1">
-                                                                                                {{ $product->name }}</h1>
-
+                                                                                                {{ $product->name }}
+                                                                                            </h1>
                                                                                         </div>
                                                                                         <div class="single-cloth-border">
                                                                                         </div>
@@ -261,6 +274,73 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
+
+                                                                            {{-- start main options --}}
+                                                                            @if ( $product->hasMainOptions )
+                                                                                <div class="cloth-third-sec">
+                                                                                    <div class="container">
+                                                                                        <h2 class="d-none"> Main Options </h2>
+                                                                                        <div class="cloth-third-sec-full">
+                                                                                            <h3 class="des-txt1"> Main Options
+                                                                                            </h3>
+                                                                                            <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
+                                                                                                @foreach  ( $product->mainOptions as $option )
+                                                                                                    <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
+                                                                                                        <input class="form-check-input d-block" type="radio" name="main_option" checked id="flexRadioDefault_{{$option->id}}" value="{{ $option->id }}" >
+                                                                                                        <br>
+                                                                                                        <label class="form-check-label text-white d-block" for="flexRadioDefault_{{$option->id}}">
+                                                                                                            <p>
+                                                                                                                {{ $option->name }}
+                                                                                                            <p class="text-danger bold">
+                                                                                                                Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                            </p>
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                                
+                                                                                            </div>
+                                                                                            <div class="single-cloth-border">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endif
+
+                                                                            {{-- end main options --}}
+                                                                            
+                                                                            {{-- start extra options --}}
+
+                                                                            @if ( $product->hasExtraOptions )
+                                                                            <div class="cloth-third-sec">
+                                                                                <div class="container">
+                                                                                    <h2 class="d-none"> Extra Options </h2>
+                                                                                    <div class="cloth-third-sec-full">
+                                                                                        <h3 class="des-txt1"> Extra Options
+                                                                                        </h3>
+                                                                                        <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
+                                                                                            @foreach  ( $product->extraOptions as $option )
+                                                                                                <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
+                                                                                                    <input class="form-check-input d-block" type="checkbox" name="main_option" id="flexCheckboxDefault_{{$option->id}}" value="{{ $option->id }}" >
+                                                                                                    <br>
+                                                                                                    <label class="form-check-label text-white d-block" for="flexCheckboxDefault_{{$option->id}}">
+                                                                                                        <p>
+                                                                                                            {{ $option->name }}
+                                                                                                        <p class="text-danger bold">
+                                                                                                            Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                        </p>
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            @endforeach
+                                                                                            
+                                                                                        </div>
+                                                                                        <div class="single-cloth-border">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            @endif
+                                                                            {{-- end main options --}}
+
                                                                             <div class="cloth-third-sec">
                                                                                 <div class="container">
                                                                                     <div class="clothes-sixth-wrap">
@@ -459,12 +539,15 @@
 
     </div>
 
+    <div class="bg-success text-white p-2 rounded mx-auto" id="notify-cart" style="position:fixed; top : 8rem !important; right: 10px; display: none;">
+        Added To Cart Successfully
+    </div>
+
 @endsection
 @section('scripts')
 
     <script>
         $('.category').on('click', function() {
-
 
             // Remove the 'active' class from all category buttons
             $('.category').removeClass('active');
@@ -494,7 +577,6 @@
                     </div>
                     `);
                     $("#products").html(productsHtml);
-
 
                     var productsHtml = '';
 
@@ -781,182 +863,181 @@
                     const productCart = productcartRoute.replace(':productId', res.products[i].id);
 
                     htmlView += `
-                    <div style="background-color: #343537 !important;" class="shoes-screen-wrapper">
-                        <div class="shoes-screen-top">
-                            <div class="shoes-img wishlist-img">
-                                <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
-                                    <img style="height: 100px !important;" src="{{ url('products/${res.products[i].image_temp}') }}" alt="product">
-                                </a>
-                            </div>
+                                    <div style="background-color: #343537 !important;" class="shoes-screen-wrapper">
+                                        <div class="shoes-screen-top">
+                                            <div class="shoes-img wishlist-img">
+                                                <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
+                                                    <img style="height: 100px !important;" src="{{ url('products/${res.products[i].image_temp}') }}" alt="product">
+                                                </a>
+                                            </div>
 
-                        </div>
-                        <div class="shoes-screen-bottom">
-                            <div class="shoes-screen-bottom-full">
-                                <div class="shoes-screen-first">
-                                    <a type="button" href="#" class="border-0 " data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
-                                        <h3>${res.products[i].name}</h3>
-                                    </a>
-                                </div>
-                                <div style="padding: 8px !important;" class="shoes-screen-second">
-                                    <div class="cloth-txt1">
-                                        <span>${res.products[i].finalprice}{{ $shop->currency->name }}</span>
-                                    </div>
-                                    <div class="shoes-screen-second-full">
-                                        <button type="button" data-product-id="${res.products[i].id}" style="background-color: red !important;"  class="border-0 center align-content-center text-center add_cart" >
-                                            <i class="fa fa-plus" style="color: white !important;"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-        <div class="modal fade" style="top: 3% !important;" id="staticBackdroppp${res.products[i].id}"
-            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-dark">
-                        <h5 style="color: white !important;" class="modal-title" id="staticBackdropLabel">Details</h5>
-                        <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-dark">
-                        <section id="single-clothes-page">
-                            <div class="single-clothes-page-full">
-                                <div class="cloths-first-sec">
-                                    <div id="carouselExampleIndicators" class="carousel slide single-clothes-slider"
-                                        data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <div class="single-clothes-slide-img">
-                                                    <img style="height: 200px !important;"
-                                                        src="{{ url('products/${res.products[i].image_temp}') }}"
-                                                        alt="img">
+                                        </div>
+                                        <div class="shoes-screen-bottom">
+                                            <div class="shoes-screen-bottom-full">
+                                                <div class="shoes-screen-first">
+                                                    <a type="button" href="#" class="border-0 " data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
+                                                        <h3>${res.products[i].name}</h3>
+                                                    </a>
                                                 </div>
-
-                                            </div>
-
-                                        </div>
-                                        <button class="carousel-control-prev single-slider-btn-prev" type="button"
-                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                            <span>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <mask id="mask0_330_4105" style="mask-type:alpha"
-                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                                                        height="24">
-                                                        <rect width="24" height="24" fill="white" />
-                                                    </mask>
-                                                    <g mask="url(#mask0_330_4105)">
-                                                        <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <button class="carousel-control-next single-slider-btn-next" type="button"
-                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                            <span>
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <mask id="mask0_330_4109" style="mask-type:alpha"
-                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                                                        height="24">
-                                                        <rect width="24" height="24" fill="white" />
-                                                    </mask>
-                                                    <g mask="url(#mask0_330_4109)">
-                                                        <path d="M9 6L15 12L9 18" stroke="black" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="cloths-second-sec">
-                                    <div class="container">
-                                        <div class="cloths-second-sec-full">
-                                            <div class="cloths-second-wrapper">
-                                                <h1 class="clo-txt1">${res.products[i].name}</h1>
-
-                                            </div>
-                                            <div class="single-cloth-border"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cloth-third-sec">
-                                    <div class="container">
-                                        <h2 class="d-none">Clothse Details</h2>
-                                        <div class="cloth-third-sec-full">
-                                            <h3 class="des-txt1">Description</h3>
-                                            <div class="w-100">
-                                                <p class="des-txt2">
-                                                    ${res.products[i].details}
-                                                </p>
-                                            </div>
-                                            <div class="single-cloth-border"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cloth-third-sec">
-                                    <div class="container">
-                                        <div class="clothes-sixth-wrap">
-                                            <div class="clothes-sixth-full">
-                                                <div class="cloth-price-sec">
-                                                    <span class="price-sec1">Price:</span>
-                                                    <span
-                                                        class="price-sec2">${res.products[i].finalprice}{{ $shop->currency->name }}</span>
-                                                </div>
-                                                <div class="cloths-increment-sec">
-                                                    <div class="product-incre">
-                                                        <a href="javascript:void(0)" class="product__minuss sub">
-                                                            <span>
-                                                                <svg width="8" height="8" viewBox="0 0 8 2"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M1 1H7" stroke="#707070" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </a>
-                                                        <input name="quantity" type="text"
-                                                            class="w-100 product__input" value="1">
-                                                        <a href="javascript:void(0)" class="product__pluss add">
-                                                            <span>
-                                                                <svg width="8" height="8" viewBox="0 0 8 8"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M1 4H7" stroke="#707070" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                    <path d="M4 7V1" stroke="#707070" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </a>
+                                                <div style="padding: 8px !important;" class="shoes-screen-second">
+                                                    <div class="cloth-txt1">
+                                                        <span>${res.products[i].finalprice}{{ $shop->currency->name }}</span>
+                                                    </div>
+                                                    <div class="shoes-screen-second-full">
+                                                        <button type="button" data-product-id="${res.products[i].id}" style="background-color: red !important;"  class="border-0 center align-content-center text-center add_cart" >
+                                                            <i class="fa fa-plus" style="color: white !important;"></i>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="add-to-cart-cloth-btn text-center ">
-                                                <button class="th-btn add_cart w-100"
-                                                    data-product-id="${res.products[i].id}" type="button">Add To
-                                                    Cart</button>
+                                        </div>
+
+                                        <div class="modal fade" style="top: 3% !important;" id="staticBackdroppp${res.products[i].id}"
+                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-dark">
+                                                        <h5 style="color: white !important;" class="modal-title" id="staticBackdropLabel">Details</h5>
+                                                        <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body bg-dark">
+                                                        <section id="single-clothes-page">
+                                                            <div class="single-clothes-page-full">
+                                                                <div class="cloths-first-sec">
+                                                                    <div id="carouselExampleIndicators" class="carousel slide single-clothes-slider"
+                                                                        data-bs-ride="carousel">
+                                                                        <div class="carousel-inner">
+                                                                            <div class="carousel-item active">
+                                                                                <div class="single-clothes-slide-img">
+                                                                                    <img style="height: 200px !important;"
+                                                                                        src="{{ url('products/${res.products[i].image_temp}') }}"
+                                                                                        alt="img">
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <button class="carousel-control-prev single-slider-btn-prev" type="button"
+                                                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                                                            <span>
+                                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <mask id="mask0_330_4105" style="mask-type:alpha"
+                                                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                                                                                        height="24">
+                                                                                        <rect width="24" height="24" fill="white" />
+                                                                                    </mask>
+                                                                                    <g mask="url(#mask0_330_4105)">
+                                                                                        <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2"
+                                                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </span>
+                                                                        </button>
+                                                                        <button class="carousel-control-next single-slider-btn-next" type="button"
+                                                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                                                            <span>
+                                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                    <mask id="mask0_330_4109" style="mask-type:alpha"
+                                                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="24"
+                                                                                        height="24">
+                                                                                        <rect width="24" height="24" fill="white" />
+                                                                                    </mask>
+                                                                                    <g mask="url(#mask0_330_4109)">
+                                                                                        <path d="M9 6L15 12L9 18" stroke="black" stroke-width="2"
+                                                                                            stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    </g>
+                                                                                </svg>
+                                                                            </span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cloths-second-sec">
+                                                                    <div class="container">
+                                                                        <div class="cloths-second-sec-full">
+                                                                            <div class="cloths-second-wrapper">
+                                                                                <h1 class="clo-txt1">${res.products[i].name}</h1>
+
+                                                                            </div>
+                                                                            <div class="single-cloth-border"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cloth-third-sec">
+                                                                    <div class="container">
+                                                                        <h2 class="d-none">Clothse Details</h2>
+                                                                        <div class="cloth-third-sec-full">
+                                                                            <h3 class="des-txt1">Description</h3>
+                                                                            <div class="w-100">
+                                                                                <p class="des-txt2">
+                                                                                    ${res.products[i].details}
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="single-cloth-border"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="cloth-third-sec">
+                                                                    <div class="container">
+                                                                        <div class="clothes-sixth-wrap">
+                                                                            <div class="clothes-sixth-full">
+                                                                                <div class="cloth-price-sec">
+                                                                                    <span class="price-sec1">Price:</span>
+                                                                                    <span
+                                                                                        class="price-sec2">${res.products[i].finalprice}{{ $shop->currency->name }}</span>
+                                                                                </div>
+                                                                                <div class="cloths-increment-sec">
+                                                                                    <div class="product-incre">
+                                                                                        <a href="javascript:void(0)" class="product__minuss sub">
+                                                                                            <span>
+                                                                                                <svg width="8" height="8" viewBox="0 0 8 2"
+                                                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M1 1H7" stroke="#707070" stroke-width="2"
+                                                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                            </span>
+                                                                                        </a>
+                                                                                        <input name="quantity" type="text"
+                                                                                            class="w-100 product__input" value="1">
+                                                                                        <a href="javascript:void(0)" class="product__pluss add">
+                                                                                            <span>
+                                                                                                <svg width="8" height="8" viewBox="0 0 8 8"
+                                                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M1 4H7" stroke="#707070" stroke-width="2"
+                                                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                                                    </path>
+                                                                                                    <path d="M4 7V1" stroke="#707070" stroke-width="2"
+                                                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="add-to-cart-cloth-btn text-center ">
+                                                                                <button class="th-btn add_cart w-100"
+                                                                                    data-product-id="${res.products[i].id}" type="button">Add To
+                                                                                    Cart</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                                    </div>
 
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
-`;
+                    `;
                 }
 
                 $('.mycard').html(htmlView);
@@ -980,8 +1061,6 @@
                 });
 
             }
-
-
 
         }
     </script>
@@ -1022,38 +1101,37 @@
                                 const order = response.cart[key];
                                 const productId = key;
                                 $("#noticart").append(`
-    <div class="cart-without-promocode-first">
-        <div class="cart-without-promocode-first-full">
-            <div>
-                <div class="cart-without-img-sec">
-                    <img src="{{ url('/products') }}/${order.image}" alt="">
-                </div>
-            </div>
-            <div class="cart-without-content-sec">
-                <div class="cart-without-content-sec-full">
-                    <a data-id="${productId}" href="#" class="remove remove_from_cart_button remove-from-cart"><i
-                            class="far fa-times"></i></a>
-                    <p class="price-code-txt1">${order.name}</p>
-                    <p class="price-code-txt2"> ${order.quantity} × ${order.price} {{ $shop->currency->name }} </p>
-                </div>
-            </div>
-        </div>
-        <div class="cart-boder mt-16"></div>
-    </div>
-
-        `);
+                                    <div class="cart-without-promocode-first">
+                                        <div class="cart-without-promocode-first-full">
+                                            <div>
+                                                <div class="cart-without-img-sec">
+                                                    <img src="{{ url('/products') }}/${order.image}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="cart-without-content-sec">
+                                                <div class="cart-without-content-sec-full">
+                                                    <a data-id="${productId}" href="#" class="remove remove_from_cart_button remove-from-cart"><i
+                                                            class="far fa-times"></i></a>
+                                                    <p class="price-code-txt1">${order.name}</p>
+                                                    <p class="price-code-txt2"> ${order.quantity} × ${order.price} {{ $shop->currency->name }} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-boder mt-16"></div>
+                                    </div>
+                                `);
                             }
                             $("#orderCount").text(response.cartLength);
 
                         }
 
-
-
                         // Fetch and update the subtotal
                         deleteOrder();
                         updateSubtotal();
                         $('.modal').modal('hide');
-                        alert(response.success); // or display a success message in your UI
+                        $('#notify-cart').show();
+                        $('#notify-cart').fadeOut( 6000 );
+                        // alert(response.success); // or display a success message in your UI
 
 
                     },
@@ -1063,10 +1141,6 @@
                     }
                 });
             });
-
-
-
-
 
             function deleteOrder() {
                 $(".remove-from-cart").click(function(ev) {
@@ -1085,7 +1159,6 @@
                                 $("#noticart").html("");
                                 $("#orderCount").text(0);
 
-
                                 const notificationCount = response.cartLength;
 
                                 if (response.cartLength > 0) {
@@ -1093,25 +1166,25 @@
                                         const order = response.cart[key];
                                         const productId = key;
                                         $("#noticart").append(`
-    <div class="cart-without-promocode-first">
-        <div class="cart-without-promocode-first-full">
-            <div>
-                <div class="cart-without-img-sec">
-                    <img src="{{ url('/products') }}/${order.image}" alt="">
-                </div>
-            </div>
-            <div class="cart-without-content-sec">
-                <div class="cart-without-content-sec-full">
-                    <a data-id="${productId}" href="#" class="remove remove_from_cart_button remove-from-cart"><i
-                            class="far fa-times"></i></a>
-                    <p class="price-code-txt1">${order.name}</p>
-                    <p class="price-code-txt2"> ${order.quantity} × ${order.price} {{ $shop->currency->name }} </p>
-                </div>
-            </div>
-        </div>
-        <div class="cart-boder mt-16"></div>
-    </div>
-                            `);
+                                            <div class="cart-without-promocode-first">
+                                                <div class="cart-without-promocode-first-full">
+                                                    <div>
+                                                        <div class="cart-without-img-sec">
+                                                            <img src="{{ url('/products') }}/${order.image}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="cart-without-content-sec">
+                                                        <div class="cart-without-content-sec-full">
+                                                            <a data-id="${productId}" href="#" class="remove remove_from_cart_button remove-from-cart"><i
+                                                                    class="far fa-times"></i></a>
+                                                            <p class="price-code-txt1">${order.name}</p>
+                                                            <p class="price-code-txt2"> ${order.quantity} × ${order.price} {{ $shop->currency->name }} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-boder mt-16"></div>
+                                            </div>
+                                        `);
                                     }
                                     $("#orderCount").text(response.cartLength);
                                 }
@@ -1119,8 +1192,6 @@
                                 // Fetch and update the subtotal
                                 updateSubtotal();
                                 deleteOrder();
-
-
                             }
                         });
                     }
@@ -1136,7 +1207,6 @@
                     success: function(response) {
                         $('#subtotal').text(response.subtotal + ' ' + ' {{ $shop->currency->name }}');
                         $('#subtotal2').text(response.subtotal + ' ' + ' {{ $shop->currency->name }}');
-
                     },
                     error: function(error) {
                         console.error('Error fetching subtotal:', error);
