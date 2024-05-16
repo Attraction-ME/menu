@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" dir="rtl">
 <head>
     <meta charset="utf-8" />
     <title>ordarme</title>
@@ -9,8 +9,10 @@
     <meta content="" name="author" />
 
     <!--[if lt IE 9]>
-    <script src="{{url('website/owner/js/html5shiv.js')}}"></script>
+
     <![endif]-->
+
+    <script src="{{url('website/owner/js/html5shiv.js')}}"></script>
 
     <!-- CSS Files
 ================================================== -->
@@ -62,8 +64,8 @@
                             <!-- logo begin -->
                             <div id="logo">
                                 <a href="index.html">
-                                    <img alt="" class="logo" src="{{url('website/owner//images/logo-light.png')}}" />
-                                    <img alt="" class="logo-2" src="{{url('website/owner//images/logo.png')}}" />
+                                    <img alt="" class="logo" src="{{url('website/owner/images/logo-light.png')}}" />
+                                    <img alt="" class="logo-2" src="{{url('website/owner/images/logo.png')}}" />
                                 </a>
                             </div>
                             <!-- logo close -->
@@ -72,45 +74,45 @@
                             <!-- mainmenu begin -->
                             <ul id="mainmenu">
                                 <li>
-                                    <a href="index.html">Home<span></span></a>
-                                    <ul>
+                                    <a href="#Home">Home<span></span></a>
+                                    {{-- <ul>
                                         <li><a href="index.html">Homepage 1</a></li>
                                         <li><a href="index-2.html">Homepage 2</a></li>
                                         <li><a href="index-3.html">Homepage 3</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="#">Company<span></span></a>
-                                    <ul>
+                                    <a href="#About">About Us<span></span></a>
+                                    {{-- <ul>
                                         <li><a href="about.html">About Us</a></li>
                                         <li><a href="jobs.html">Jobs</a></li>
                                         <li><a href="contact.html">Contact</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="#">Products<span></span></a>
-                                    <ul>
+                                    <a href="#Product">Products<span></span></a>
+                                    {{-- <ul>
                                         <li><a href="features.html">Features</a></li>
                                         <li><a href="pricing.html">Pricing</a></li>
                                         <li><a href="reviews.html">Reviews</a></li>
                                         <li><a href="download.html">Download</a></li>
                                         <li><a href="video-tutorial.html">Video Tutorial</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="#">Pages<span></span></a>
-                                    <ul>
+                                    <a href="#Page">Pages<span></span></a>
+                                    {{-- <ul>
                                         <li><a href="blog.html">Blog</a></li>
                                         <li><a href="gallery.html">Gallery</a></li>
                                         <li><a href="login.html">Login</a></li>
                                         <li><a href="login-2.html">Login 2</a></li>
                                         <li><a href="register.html">Register</a></li>
                                         <li><a href="contact.html">Contact Us</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                                 <li>
-                                    <a href="#">Elements<span></span></a>
-                                    <ul>
+                                    <a href="#Element">Elements<span></span></a>
+                                    {{-- <ul>
                                         <li><a href="icons-font-awesome.html">Font Awesome Icons</a></li>
                                         <li><a href="icons-elegant.html">Elegant Icons</a></li>
                                         <li><a href="icons-etline.html">Etline Icons</a></li>
@@ -122,7 +124,7 @@
                                         <li><a href="timeline.html">Timeline</a></li>
                                         <li><a href="tooltips.html">Tooltips</a></li>
                                         <li><a href="counters.html">Counters</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
                             </ul>
                         </div>
@@ -140,7 +142,7 @@
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
 
-        <section aria-label="section" data-bgimage="url({{url('website/owner//images/background/1.jpg')}}) top" class="text-light">
+        <section aria-label="section" dir="ltr"  id="Home" data-bgimage="url({{url('website/owner/images/background/1.jpg')}}) top" class="text-light">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
@@ -163,13 +165,13 @@
                     </div>
 
                     <div class="col-lg-6 offset-lg-1 text-center wow fadeInLeft" data-wow-delay=".5s">
-                        <img src="{{url('website/owner//images/misc/1.png')}}" class="img-fluid" alt="" />
+                        <img src="{{url('website/owner/images/misc/01.png')}}" class="img-fluid" alt="" />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="section-highlight" data-bgcolor="#f0f4fd">
+        <section id="About" data-bgcolor="#f0f4fd" >
             <div class="container">
 
                 <div class="text-center">
@@ -245,11 +247,11 @@
             </div>
         </section>
 
-        <section id="section-banner">
+        <section id="Product" >
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 d-none d-lg-block d-xl-block text-center wow fadeInRight" data-wow-delay="0s">
-                        <img class="relative img-fluid" src="{{url('website/owner//images/misc/5.png')}}" alt="" />
+                        <img class="relative img-fluid" src="{{url('website/owner/images/misc/5.png')}}" alt="" />
                     </div>
 
                     <div class="col-lg-5 offset-md-1 wow fadeInLeft" data-wow-delay="0s">
@@ -283,7 +285,7 @@
         </section>
 
         <!-- section begin -->
-        <section data-bgcolor="#f0f4fd">
+        <section data-bgcolor="#f0f4fd" id="Page">
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
@@ -503,7 +505,8 @@
         </section>
         <!-- section close -->
 
-        <section id="section-testimonial">
+
+        <section id="Element" dir="ltr" >
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -688,12 +691,12 @@
                         <span class="p-title">Download</span><br>
                         <h2>Available on iOS and Android</h2>
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem.</p>
-                        <a href="download.html"><img src="{{url('website/owner//images/misc/download-appstore.png')}}" class="img-fluid" alt="download"></a>&nbsp;
-                        <a href="download.html"><img src="{{url('website/owner//images/misc/download-playstore.png')}}" class="img-fluid" alt="download"></a>
+                        <a href="download.html"><img src="{{url('website/owner/images/misc/download-appstore.png')}}" class="img-fluid" alt="download"></a>&nbsp;
+                        <a href="download.html"><img src="{{url('website/owner/images/misc/download-playstore.png')}}" class="img-fluid" alt="download"></a>
                     </div>
 
                     <div class="col-md-6 text-center">
-                        <img src="{{url('website/owner//images/misc/2.png')}}" class="img-fluid" alt="">
+                        <img src="{{url('website/owner/images/misc/2.png')}}" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -709,7 +712,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="widget">
-                        <a href="index.html"><img alt="" class="logo" src="{{url('website/owner//images/logo.png')}}"></a>
+                        <a href="index.html"><img alt="" class="logo" src="{{url('website/owner/images/logo.png')}}"></a>
                     </div>
                 </div>
 
