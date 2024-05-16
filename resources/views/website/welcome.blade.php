@@ -31,54 +31,51 @@
     <link rel="stylesheet" href="{{url('website/assets/css/fontawesome.min.css')}}">
 </head>
 <body style="background-image: url('{{url('website/welcome.jpeg')}}') !important;background-size: cover;">
-<div class="site-content">
-    <!-- Preloader Start -->
-    <div class="loader-mask">
-        <div class="circle">
-        </div>
-    </div>
-
- <section id="finger-print-sec">
-        <div class="container">
-            <div class="finger-print-sec-full">
-                <form class="form" action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @method('get')
-                <div class="finger-top text-center">
-                    <img style="height: 70px !important;" src="{{ url('shops/' . $shop->logo) }}" alt="Pizzan">
-                </div>
-                <div class="finger-bottom">
-                    @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                @if(session('done'))
-                <div class="woocommerce-notices-wrapper bg-success">
-                    <div class="woocommerce-message">
-                        {{ session('done') }}
-                    </div>
-                </div>
-            @endif
-                </div>
-                <div class="finger-print-sec-btn">
-
-                    <div class="finger-print-sec-btn-wrapp">
-                        <p class="">{{$shop->slug}}</p>
-                        
-                        <div style="width: 100%" class="print-continue-btn">
-                            <button >Make an Order</button>
-                        </div>
-                    </div>
-                </div>
-                </form>
+    <div class="site-content">
+        <!-- Preloader Start -->
+        <div class="loader-mask">
+            <div class="circle">
             </div>
         </div>
-    </section>
 
+        <section id="finger-print-sec">
+            <div class="container">
+                <div class="finger-print-sec-full">
+                    <form class="form" action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('get')
+                    <div class="finger-top text-center">
+                        <img style="height: 70px !important;" src="{{ url('shops/' . $shop->logo) }}" alt="Pizzan">
+                    </div>
+                    <div class="finger-bottom">
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if(session('done'))
+                    <div class="woocommerce-notices-wrapper bg-success">
+                        <div class="woocommerce-message">
+                            {{ session('done') }}
+                        </div>
+                    </div>
+                @endif
+                    </div>
+                    <div class="finger-print-sec-btn">
 
-
-
+                        <div class="finger-print-sec-btn-wrapp">
+                            <p class="">{{$shop->slug}}</p>
+                            
+                            <div style="width: 100%" class="print-continue-btn">
+                                <button >Make an Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
 
 
 

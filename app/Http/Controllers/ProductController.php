@@ -158,30 +158,48 @@ class ProductController extends Controller
         return view('website.main', compact('categories'));
     }
 
-    public function shop($slug)
+    public function shop($slug = null)
     {
 
-        if(session('table') == null){
-            return view('website.error');
-        }
-        // Assuming the 'slug' field is used for the shop's slug
-        $shop = Shop::where('slug', $slug)->firstOrFail();
-        $table = session('table');
-        $waiters = $table->waiters;
-        return view('website.welcome', compact( 'shop','table','waiters'));
+        if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
+            $user = auth()->user();
+            $shop = $user->shops[0];
+            $table = $shop->tables[0];
 
+        } else if ( session('table') == null ){
 
-    }
-    public function welcome(Request $request , $slug)
-    {
-        if(session('table') == null){
             return view('website.error');
+
+        } else {
+            
+            $table = session('table');
+            $shop = Shop::where('slug', $slug)->firstOrFail();
         }
         
         // Assuming the 'slug' field is used for the shop's slug
-        $shop = Shop::where('slug', $slug)->firstOrFail();
+        $waiters = $table->waiters;
+        return view('website.welcome', compact( 'shop','table','waiters'));
+    }
+
+    public function welcome( $slug = null )
+    {
+        if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
+            $user = auth()->user();
+            $shop = $user->shops[0];
+            $table = $shop->tables[0];
+
+        } else if ( session('table') == null ){
+
+            return view('website.error');
+
+        } else {
+            
+            $table = session('table');
+            $shop = Shop::where('slug', $slug)->firstOrFail();
+        }
+        
+        // Assuming the 'slug' field is used for the shop's slug
         $products = Product::where('shop_id', $shop->id)->with(['mainOptions', 'extraOptions'])->get();
-        $table = session('table');
         $waiter = $table->waiters()->first();
         session()->put('selectWaiter', $waiter);
         $selectWaiter = session('selectWaiter');

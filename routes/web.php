@@ -24,9 +24,9 @@ Route::get('/', function () {
     return view('website.website');
 });
 
-Route::get('/menu', function () {
-    return view('website.error');
-});
+// Route::get('/menu', function () {
+//     return view('website.error');
+// });
 
 // Error 404
 Route::get('/error404', function () {
@@ -47,8 +47,8 @@ Route::get('/productByCategory', [App\Http\Controllers\ProductController::class,
 Route::post('/order/store', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 // shop
 Route::get('/tables/show/{id}', [App\Http\Controllers\TableController::class, 'show'])->name('tables.show');
-Route::get('/menu/{slug}', [App\Http\Controllers\ProductController::class, 'shop'])->name('website.shop');
-Route::get('/{slug}', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.welcome');
+Route::get('/menu/{slug?}', [App\Http\Controllers\ProductController::class, 'shop'])->name('website.shop');
+Route::get('/{slug?}', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.welcome');
 
 // search
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'website_search'])->name('website.search');
@@ -79,40 +79,38 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
     Route::get('/manager/dashboard', [HomeController::class, 'managerDashboard'])->name('manager.dashboard');
 
-    // Dashboard owners
-    Route::get('/dashboard/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
-    Route::get('/dashboard/shop/create', [App\Http\Controllers\ShopController::class, 'create'])->name('shop.create');
-    Route::post('/dashboard/shop/store', [App\Http\Controllers\ShopController::class, 'store'])->name('shop.store');
-    Route::get('/dashboard/shop/edit/{id}', [App\Http\Controllers\ShopController::class, 'edit'])->name('shop.edit');
-    Route::put('/dashboard/shop/update/{id}', [App\Http\Controllers\ShopController::class, 'update'])->name('shop.update');
-    Route::delete('/dashboard/shop/destroy/{id}', [App\Http\Controllers\ShopController::class, 'destroy'])->name('shop.destroy');
+    Route::prefix('/dashboard')->group(function () {
+        // Dashboard owners
+        Route::get('/shop', [App\Http\Controllers\ShopController::class, 'index'])->name('shop.index');
+        Route::get('/shop/create', [App\Http\Controllers\ShopController::class, 'create'])->name('shop.create');
+        Route::post('/shop/store', [App\Http\Controllers\ShopController::class, 'store'])->name('shop.store');
+        Route::get('/shop/edit/{id}', [App\Http\Controllers\ShopController::class, 'edit'])->name('shop.edit');
+        Route::put('/shop/update/{id}', [App\Http\Controllers\ShopController::class, 'update'])->name('shop.update');
+        Route::delete('/shop/destroy/{id}', [App\Http\Controllers\ShopController::class, 'destroy'])->name('shop.destroy');
 
-    Route::get('/dashboard/currency', [App\Http\Controllers\CurrencyController::class, 'index'])->name('currency.index');
-    Route::get('/dashboard/currency/create', [App\Http\Controllers\CurrencyController::class, 'create'])->name('currency.create');
-    Route::post('/dashboard/currency/store', [App\Http\Controllers\CurrencyController::class, 'store'])->name('currency.store');
-    Route::get('/dashboard/currency/edit/{id}', [App\Http\Controllers\CurrencyController::class, 'edit'])->name('currency.edit');
-    Route::put('/dashboard/currency/update/{id}', [App\Http\Controllers\CurrencyController::class, 'update'])->name('currency.update');
-    Route::delete('/dashboard/currency/destroy/{id}', [App\Http\Controllers\CurrencyController::class, 'destroy'])->name('currency.destroy');
+        Route::get('/currency', [App\Http\Controllers\CurrencyController::class, 'index'])->name('currency.index');
+        Route::get('/currency/create', [App\Http\Controllers\CurrencyController::class, 'create'])->name('currency.create');
+        Route::post('/currency/store', [App\Http\Controllers\CurrencyController::class, 'store'])->name('currency.store');
+        Route::get('/currency/edit/{id}', [App\Http\Controllers\CurrencyController::class, 'edit'])->name('currency.edit');
+        Route::put('/currency/update/{id}', [App\Http\Controllers\CurrencyController::class, 'update'])->name('currency.update');
+        Route::delete('/currency/destroy/{id}', [App\Http\Controllers\CurrencyController::class, 'destroy'])->name('currency.destroy');
 
+        // Dashboard owners
+        Route::get('/owners', [App\Http\Controllers\OwnerController::class, 'index'])->name('owners.index');
+        Route::get('/owners/create', [App\Http\Controllers\OwnerController::class, 'create'])->name('owners.create');
+        Route::post('/owners/store', [App\Http\Controllers\OwnerController::class, 'store'])->name('owners.store');
+        Route::get('/owners/edit/{id}', [App\Http\Controllers\OwnerController::class, 'edit'])->name('owners.edit');
+        Route::put('/owners/update/{id}', [App\Http\Controllers\OwnerController::class, 'update'])->name('owners.update');
+        Route::delete('/owners/destroy/{id}', [App\Http\Controllers\OwnerController::class, 'destroy'])->name('owners.destroy');
 
-
-    // Dashboard owners
-    Route::get('/dashboard/owners', [App\Http\Controllers\OwnerController::class, 'index'])->name('owners.index');
-    Route::get('/dashboard/owners/create', [App\Http\Controllers\OwnerController::class, 'create'])->name('owners.create');
-    Route::post('/dashboard/owners/store', [App\Http\Controllers\OwnerController::class, 'store'])->name('owners.store');
-    Route::get('/dashboard/owners/edit/{id}', [App\Http\Controllers\OwnerController::class, 'edit'])->name('owners.edit');
-    Route::put('/dashboard/owners/update/{id}', [App\Http\Controllers\OwnerController::class, 'update'])->name('owners.update');
-    Route::delete('/dashboard/owners/destroy/{id}', [App\Http\Controllers\OwnerController::class, 'destroy'])->name('owners.destroy');
-
-    // Dashboard Blogs
-    Route::get('/dashboard/blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs.index');
-    Route::get('/dashboard/blogs/create', [App\Http\Controllers\BlogController::class, 'create'])->name('blogs.create');
-    Route::post('/dashboard/blogs/store', [App\Http\Controllers\BlogController::class, 'store'])->name('blogs.store');
-    Route::get('/dashboard/blogs/edit/{id}', [App\Http\Controllers\BlogController::class, 'edit'])->name('blogs.edit');
-    Route::put('/dashboard/blogs/update/{id}', [App\Http\Controllers\BlogController::class, 'update'])->name('blogs.update');
-    Route::delete('/dashboard/blogs/destroy/{id}', [App\Http\Controllers\BlogController::class, 'destroy'])->name('blogs.destroy');
-
-
+        // Dashboard Blogs
+        Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs.index');
+        Route::get('/blogs/create', [App\Http\Controllers\BlogController::class, 'create'])->name('blogs.create');
+        Route::post('/blogs/store', [App\Http\Controllers\BlogController::class, 'store'])->name('blogs.store');
+        Route::get('/blogs/edit/{id}', [App\Http\Controllers\BlogController::class, 'edit'])->name('blogs.edit');
+        Route::put('/blogs/update/{id}', [App\Http\Controllers\BlogController::class, 'update'])->name('blogs.update');
+        Route::delete('/blogs/destroy/{id}', [App\Http\Controllers\BlogController::class, 'destroy'])->name('blogs.destroy');
+    });
 });
 ######################################################################################################
 

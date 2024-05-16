@@ -58,11 +58,11 @@ class TableController extends Controller
         session()->forget('table');
         session()->forget('selectWaiter');
 
-
         $table = Table::find($id);
-           if($table == null){
-               return view('website.error');
-           }
+
+        if($table == null){
+            return view('website.error');
+        }
 
         $shop = Shop::where('id', $table->shop_id)->firstOrFail();
         $products = Product::where('shop_id', $shop->id)->paginate(20);
