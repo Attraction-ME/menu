@@ -854,7 +854,7 @@
             resetCallback: function () { newTyped(); }
         });
     });
-</script> edit
+</script>
 
 </body>
 </html>
