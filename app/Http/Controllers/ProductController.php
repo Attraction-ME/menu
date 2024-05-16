@@ -10,6 +10,7 @@ use App\Models\Waiter;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\TableWaiter;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,11 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class ProductController extends Controller
 {
+
+    public function __construct( public ProductService $productService ) 
+    {
+
+    }
 
     public function cart()
     {
@@ -91,15 +97,15 @@ class ProductController extends Controller
     }
 
     public function getSubtotal(Request $request)
-{
-    $total = 0;
+    {
+        $total = 0;
 
-    foreach ((array) session('cart') as $id => $details) {
-        $total += $details['price'] * $details['quantity'];
+        foreach ((array) session('cart') as $id => $details) {
+            $total += $details['price'] * $details['quantity'];
+        }
+
+        return response()->json(['subtotal' => $total]);
     }
-
-    return response()->json(['subtotal' => $total]);
-}
 
 
     public function updateCart(Request $request)
@@ -152,40 +158,52 @@ class ProductController extends Controller
         return view('website.main', compact('categories'));
     }
 
-    public function shop($slug)
+    public function shop($slug = null)
     {
 
+        if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
+            $user = auth()->user();
+            $shop = $user->shops[0];
+            $table = $shop->tables[0];
 
-        if(session('table') == null){
+        } else if ( session('table') == null ){
+
             return view('website.error');
 
+        } else {
+            
+            $table = session('table');
+            $shop = Shop::where('slug', $slug)->firstOrFail();
         }
+        
         // Assuming the 'slug' field is used for the shop's slug
-        $shop = Shop::where('slug', $slug)->firstOrFail();
-        $table = session('table');
         $waiters = $table->waiters;
         return view('website.welcome', compact( 'shop','table','waiters'));
-
-
     }
-    public function welcome(Request $request , $slug)
+
+    public function welcome( $slug = null )
     {
+        if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
+            $user = auth()->user();
+            $shop = $user->shops[0];
+            $table = $shop->tables[0];
 
+        } else if ( session('table') == null ){
 
-
-        if(session('table') == null){
             return view('website.error');
 
+        } else {
+            
+            $table = session('table');
+            $shop = Shop::where('slug', $slug)->firstOrFail();
         }
-       
+        
         // Assuming the 'slug' field is used for the shop's slug
-        $shop = Shop::where('slug', $slug)->firstOrFail();
-        $products = Product::where('shop_id', $shop->id)->get();
-        $table = session('table');
-        $waiter = Waiter::find($table->waiters[0]->id);
+        $products = Product::where('shop_id', $shop->id)->with(['mainOptions', 'extraOptions'])->get();
+        $waiter = $table->waiters()->first();
         session()->put('selectWaiter', $waiter);
         $selectWaiter = session('selectWaiter');
-   
+
         return view('website.shop', compact('products', 'shop','table','selectWaiter'));
     }
 
@@ -210,44 +228,54 @@ class ProductController extends Controller
     {
 
 //dd($request->shop_id);
+
+        $shop_id = $request->shop_id;
+        $shop = Shop::find($shop_id);
+
         if ($request->cat_id === 'all') {
-            $shop_id = $request->shop_id;
-            $products = Product::where('shop_id', $shop_id)->paginate(20);
+
+            $products = Product::where('shop_id', $shop_id)
+                ->with(['mainOptions', 'extraOptions'])
+                ->get();
             $category = json_decode('{"name": "All Categories"}', true);
+
         } else {
 
             $cat_id = $request->cat_id;
-            $shop_id = $request->shop_id;
             $category = Category::find($cat_id);
             $products = Product::where('category_id', $cat_id)
                 ->where('shop_id', $shop_id)
+                ->with(['mainOptions', 'extraOptions'])
                 ->get();
         }
 
+        $table = session('table');
+        $waiter = $table->waiters()->first();
+        $selectWaiter = session('selectWaiter');
 
-        // Build an array of product data
-        $productData = [];
+        // // Build an array of product data
+        // $productData = [];
 
+        // foreach ($products as $product) {
+        //     $productData[] = [
+        //         'id' => $product->id, // Include the product ID
+        //         'name' => $product->name,
+        //         'details' => $product->details,
+        //         'category' => $product->category->name,
+        //         'currency' => $product->shopproduct->currency->name,
+        //         'finalprice' => $product->finalprice,
+        //         'sale' => $product->sale,
+        //         'product_link' => route('product.show', $product->id),
+        //         'image_src' => url('/products/' . $product->image_temp),
+        //         'image_alt' => $product->name, // Set alt text as the product name, you can customize it
+        //         // Add other product data here...
+        //     ];
+        // }
 
-        foreach ($products as $product) {
-            $productData[] = [
-                'id' => $product->id, // Include the product ID
-                'name' => $product->name,
-                'details' => $product->details,
-                'category' => $product->category->name,
-                'currency' => $product->shopproduct->currency->name,
-                'finalprice' => $product->finalprice,
-                'sale' => $product->sale,
-                'product_link' => route('product.show', $product->id),
-                'image_src' => url('/products/' . $product->image_temp),
-                'image_alt' => $product->name, // Set alt text as the product name, you can customize it
-                // Add other product data here...
-            ];
-        }
-        return response()->json(['products' => $productData, 'category' => $category]);
+        return view('website.shop', compact('products', 'shop','table','selectWaiter','category') );
+
+        // return response()->json(['products' => $productData, 'category' => $category]);
     }
-
-
 
     public function create()
     {
@@ -297,42 +325,9 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->save();
 
-            // adding main options to the product
+            $this->productService->addNewMainOptions( $request , $product );
 
-            if ( $request->main_options_length > 0 ) 
-            {
-                foreach( range(1, $request->main_options_length)  as $index => $value)
-                {
-
-                    $request->validate([
-                        "main_option_name_$value" => ['required' , 'string' , 'max:255'],
-                        "main_option_price_$value" => ['required' , 'numeric' , 'min:0'], 
-                    ]);
-
-                    $product->mainOptions()->create([
-                        'name' => $request["main_option_name_$value"],
-                        'price' => $request["main_option_price_$value"],
-                    ]);
-
-                }
-            }
-
-            // adding extra options to the product
-            
-            if ( $request->extra_options_length > 0 ) 
-            {
-                foreach( range(1, $request->extra_options_length)  as $index => $value)
-                {
-                    $request->validate([
-                        "extra_option_name_$value" => ['required' , 'string' , 'max:255'],
-                        "extra_option_price_$value" => ['required' , 'numeric' , 'min:0'],
-                    ]);
-                    $product->extraOptions()->create([
-                        'name' => $request["extra_option_name_$value"],
-                        'price' => $request["extra_option_price_$value"],
-                    ]);
-                }
-            }
+            $this->productService->addNewExtraOptions( $request , $product );
 
             // adding images to the product 
 
@@ -354,69 +349,80 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::find($id)->load('mainOptions', 'extraOptions');
         $user = Auth::user()->id;
         $shop = Shop::where('user_id', $user)->first();
         $categories = Category::where('shop_id',$shop->id)->get();
         $images = Image::where('product_id', $id)->get();
-
 
         return view('dashboard.products.edit', compact('categories', 'product', 'images'));
     }
 
     public function update(Request $request, $id)
     {
-
-
-
-
+        $request->validate([
+            'name' => ['required' , 'string' , 'max:255'],
+            'price' => ['required' , 'numeric' , 'min:0'],
+            'sale' => ['required' , 'numeric' , 'min:0' , 'max:100'],
+            'category_id' => ['required' , 'exists:categories,id'],
+            'details' => ['required' , 'string'],
+            'image_temp' => ['nullable' , 'image' , 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ]);
 
         $product = Product::findOrFail($id);
 
-        // Update the main image if provided
-        if ($request->has('image_temp')) {
-            $imageName = time() . '.' . $request->image_temp->extension();
-            $request->image_temp->move(public_path('products'), $imageName);
-        }else{
-            $imageName = $product->image_temp;
-        }
+        DB::transaction(function () use ($request , $product) {
 
-        $finalprice = $request->price -  ($request->price * ($request->sale / 100));
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->finalprice = $finalprice;
-        $product->sale = $request->sale;
-        $product->details = $request->details;
-        $product->image_temp = $imageName;
-        $product->category_id = $request->category_id;
-        $product->save();
+            $this->productService->updateMainOptions( $request , $product );
 
+            $this->productService->updateExtraOptions( $request , $product );
 
-
-        if ($request->has('delete_images')) {
-            foreach ($request->delete_images as $delete_image) {
-                $id = intval($delete_image);
-                $images =  Image::find($id);
-                $oldImagesPath = public_path('products/').$images->name ;
-                File::delete($oldImagesPath);
-                $images->delete();
+            // Update the main image if provided
+            if ($request->has('image_temp')) {
+                $imageName = time() . '.' . $request->image_temp->extension();
+                $request->image_temp->move( public_path('products'), $imageName );
+            } else {
+                $imageName = $product->image_temp;
             }
-        }
 
+            $finalprice = $request->price -  ($request->price * ($request->sale / 100));
+            $product->name = $request->name;
+            $product->price = $request->price;
+            $product->finalprice = $finalprice;
+            $product->sale = $request->sale;
+            $product->details = $request->details;
+            $product->image_temp = $imageName;
+            $product->category_id = $request->category_id;
+            $product->save();
 
-        if ($request->has('images')) {
-            foreach ($request->images as $imagefile) {
+            $this->productService->addNewMainOptions( $request , $product );
 
-                $imageNamee = time() . rand(1, 100) . '.' . $imagefile->extension();
-                $imagefile->move(public_path('products'), $imageNamee);
+            $this->productService->addNewExtraOptions( $request , $product );
 
-                $images = new Image();
-                $images->name = $imageNamee;
-                $images->product_id = $product->id;
-                $images->save();
+            if ($request->has('delete_images')) {
+                foreach ($request->delete_images as $delete_image) {
+                    $id = intval($delete_image);
+                    $images =  Image::find($id);
+                    $oldImagesPath = public_path('products/').$images->name ;
+                    File::delete($oldImagesPath);
+                    $images->delete();
+                }
             }
-        }
 
+            if ($request->has('images')) {
+                foreach ($request->images as $imagefile) {
+
+                    $imageNamee = time() . rand(1, 100) . '.' . $imagefile->extension();
+                    $imagefile->move(public_path('products'), $imageNamee);
+
+                    $images = new Image();
+                    $images->name = $imageNamee;
+                    $images->product_id = $product->id;
+                    $images->save();
+                }
+            }
+
+    });
 
         return redirect()->route('products.index')->with('message', "Product updated Successfully");
     }

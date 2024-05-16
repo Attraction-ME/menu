@@ -68,11 +68,11 @@
                                         <td>
 
                                             <a href="{{ route('products.edit', $product->id) }}"  class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o "></i></a>
-                                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#danger{{$product->id}}"> <i class="fa fa-trash"></i> </button>
+                                            {{-- <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#danger{{$product->id}}"> <i class="fa fa-trash"></i> </button> --}}
                                         </td>
                                     </tr>
                                     <!-- Modal -->
-                                    <div class="modal fade text-left" id="danger{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
+                                    {{-- <div class="modal fade text-left" id="danger{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10" aria-hidden="true">
                                         <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
@@ -98,7 +98,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div> --}}
 
                                     @endforeach
 

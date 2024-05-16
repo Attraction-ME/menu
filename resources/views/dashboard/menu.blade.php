@@ -12,13 +12,20 @@
 
                     </i><span class="menu-title" data-i18n="Dashboard">Resturant Items</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="{{ url('/dashboard/products') }}">Products</a>
+                    <li>
+                        <a class="menu-item" href="{{ url('/dashboard/products') }}">Products</a>
                     </li>
-                    <li class=""><a class="menu-item" href="{{ url('/dashboard/categories') }}">Categories</a>
+                    <li class="">
+                        <a class="menu-item" href="{{ url('/dashboard/categories') }}">Categories</a>
                     </li>
-                    <li class=""><a class="menu-item" href="{{ url('/dashboard/tables') }}">Tables</a>
+                    <li class="">
+                        <a class="menu-item" href="{{ url('/dashboard/tables') }}">Tables</a>
                     </li>
-                    <li class=""><a class="menu-item" href="{{ url('/dashboard/waiters') }}">Waiters</a>
+                    <li class="">
+                        <a class="menu-item" href="{{ url('/dashboard/waiters') }}">Waiters</a>
+                    </li>
+                    <li class="">
+                        <a class="menu-item" href="{{ url('/menu') }}">My Menu</a>
                     </li>
                 </ul>
             </li>

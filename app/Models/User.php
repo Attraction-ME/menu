@@ -12,9 +12,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
-
-    
-
     public function shops()
     {
         return $this->hasMany(Shop::class);

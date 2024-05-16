@@ -52,19 +52,19 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-       if(!$request->table_id  || !$request->product_id  ){
-        return redirect()->back()->with('message' , "You Must Choise Order");
-       }
-       if($request->waiter_id == 0 ){
-        return redirect()->back()->with('message' , "You Must Choise Waiter");
-       }
+        if (!$request->table_id  || !$request->product_id) {
+            return redirect()->back()->with('message', "You Must Choise Order");
+        }
+        if ($request->waiter_id == 0) {
+            return redirect()->back()->with('message', "You Must Choise Waiter");
+        }
 
-    $table = Table::find($request->table_id);
-    $link = $table->link;
-    $shop = Shop::find($request->shop_id);
+        $table = Table::find($request->table_id);
+        $link = $table->link;
+        $shop = Shop::find($request->shop_id);
 
-       $latitude = $request->input('latitude');
-       $longitude = $request->input('longitude');
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
 
         // Restaurant's coordinates
         $restaurantLatitude = $shop->latitude;
@@ -78,7 +78,7 @@ class OrderController extends Controller
 
         // Check if the client is within the allowed distance
         if ($distance > $maxDistance) {
-            return redirect()->back()->with('message' , "You Are Too Far From The Restaurant to Place An Order Check Your GPS Location");
+            return redirect()->back()->with('message', "You Are Too Far From The Restaurant to Place An Order Check Your GPS Location");
         }
 
         // store the order in the database
@@ -87,9 +87,9 @@ class OrderController extends Controller
         $order->shop_id  = $request->shop_id;
         $order->waiter_id  = $request->waiter_id;
         $order->total  = $request->total;
-        $order->status  = 0 ;
+        $order->status  = 0;
         $order->save();
-        foreach ($request->product_id  as $key=> $id ) {
+        foreach ($request->product_id  as $key => $id) {
 
             $order_details = new OrderDetails();
             $order_details->order_id  = $order->id;
@@ -103,7 +103,7 @@ class OrderController extends Controller
 
         session()->forget('cart');
         session()->forget('selectWaiter');
-        return redirect()->route('website.shopp',$shop->slug)->with('done', 'Order Added Successfully');
+        return redirect()->route('website.shop', $shop->slug)->with('done', 'Order Added Successfully');
     }
     private function calculateDistance($lat1, $lon1, $lat2, $lon2)
     {
@@ -126,14 +126,14 @@ class OrderController extends Controller
     }
 
     public function checkNewOrders($shop_id)
-{
-    $newOrdersCount = Order::where('shop_id', $shop_id)
-        ->where('status', 0) // Assuming 'status 0' represents new orders
-        ->with('table')
-        ->get();
+    {
+        $newOrdersCount = Order::where('shop_id', $shop_id)
+            ->where('status', 0) // Assuming 'status 0' represents new orders
+            ->with('table')
+            ->get();
 
-    return response()->json(['newOrdersCount' => $newOrdersCount]);
-}
+        return response()->json(['newOrdersCount' => $newOrdersCount]);
+    }
 
     /**
      * Display the specified resource.
@@ -143,20 +143,20 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order_details = OrderDetails::where('order_id', $id)->get();
         $productss = Product::where('shop_id', $order->shop_id)->get();
-        return view('dashboard.orders.create', compact('order' , 'order_details' ,'productss'));
+        return view('dashboard.orders.create', compact('order', 'order_details', 'productss'));
     }
 
     public function showacceptedOrder($id)
     {
         $order = Order::find($id);
         $order_details = OrderDetails::where('order_id', $id)->get();
-        return view('dashboard.orders.showAcceptedOrder', compact('order' , 'order_details' ));
+        return view('dashboard.orders.showAcceptedOrder', compact('order', 'order_details'));
     }
 
     public function getPrice(Request $request)
     {
-//        dd($request);
-        $data['AllPrices'] = Product::where('id',$request->product_id)->get(["price"]);
+        //        dd($request);
+        $data['AllPrices'] = Product::where('id', $request->product_id)->get(["price"]);
         return response()->json($data);
     }
 
