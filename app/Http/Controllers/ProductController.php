@@ -164,7 +164,7 @@ class ProductController extends Controller
         if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
             $user = auth()->user();
             $shop = $user->shops[0];
-            $table = $shop->tables[0];
+            $table = $shop->tabels[0];
 
         } else if ( session('table') == null ){
 
@@ -181,25 +181,42 @@ class ProductController extends Controller
         return view('website.welcome', compact( 'shop','table','waiters'));
     }
 
-    public function welcome( $slug = null )
+    public function welcome( Request $request, $slug = null )
     {
+        $search = $request->input('keyword');
+
         if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
             $user = auth()->user();
             $shop = $user->shops[0];
-            $table = $shop->tables[0];
 
-        } else if ( session('table') == null ){
+        } else if ( $request->has('shop_id') ){
 
-            return view('website.error');
+            $shop_id = $request->input('shop_id');
+            $shop = Shop::find( $shop_id );
 
         } else {
-            
-            $table = session('table');
+        
             $shop = Shop::where('slug', $slug)->firstOrFail();
+
         }
+
+        if ( $request->has('keyword') ){
+
+            $keyword = $request->input('keyword');
+            $products = Product::where('shop_id', $shop->id)
+                            ->ofNameOrDescribtion( $keyword )
+                            ->with(['mainOptions', 'extraOptions'])->get();
+
+        } else {
+        
+            $products = Product::where('shop_id', $shop->id)->with([ 'mainOptions' , 'extraOptions' ])->get();
+
+        }
+
+        $table = session('table') ?? $shop->tabels[0] ;
         
         // Assuming the 'slug' field is used for the shop's slug
-        $products = Product::where('shop_id', $shop->id)->with(['mainOptions', 'extraOptions'])->get();
+
         $waiter = $table->waiters()->first();
         session()->put('selectWaiter', $waiter);
         $selectWaiter = session('selectWaiter');

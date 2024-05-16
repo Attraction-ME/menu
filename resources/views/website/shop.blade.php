@@ -20,7 +20,7 @@
                     @csrf
                     @method('GET')
                     <div class="input-group search-page-searchbar ">
-                        <span style="    height: 30px;border-radius: 0;" class="input-group-text search-iconn">
+                        <span style="    height: 30px;border-radius: 0;" class="input-group-text search-iconn" id="products-search-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -380,6 +380,7 @@
                                                                                                     </a>
                                                                                                     <input name="quantity"
                                                                                                         type="text"
+                                                                                                        id="product-quantity-modal-{{ $index }}"
                                                                                                         class="w-100 product__input"
                                                                                                         value="1">
                                                                                                     <a href="javascript:void(0)"
@@ -558,6 +559,7 @@
 
         let productsCount = {!! count($products) !!}
 
+        // work here
         let calculateProductTotalPrice = (index) => {
                 setTimeout(() => {
                     let total = 0;
@@ -567,6 +569,7 @@
                     $(`input[name=extra_option_${index}][type=checkbox]:checked`).each(function() {
                         total = total + parseInt($(this).val());
                     })
+                    total = total * parseInt($(`#product-quantity-modal-${index}`).val());
                     $(`#product-total-price-modal-${index}`).text(total);
                 }, 300 ) ; 
             } 
@@ -574,6 +577,10 @@
         for (let index = 0; index < productsCount; index++) {
             
             $(`input[name=main_option_${index}][type=radio]`).change(function() {
+                return calculateProductTotalPrice(index)
+            })
+
+            $(`#product-quantity-modal-${index}`).change(function() {
                 return calculateProductTotalPrice(index)
             })
 
@@ -587,514 +594,26 @@
 
         $('.category').on('click', function() {
 
-            // Remove the 'active' class from all category buttons
-            $('.category').removeClass('active');
-
-            // Add the 'active' class to the clicked category button
-            $(this).addClass('active');
-
-
-            var cat_id = this.value;
-            var shop_id = $('#shopId').val();
+            var cat_id = encodeURI( this.value );
+            var shop_id = encodeURI( $('#shopId').val() );
 
             window.location.replace("{{ url('productByCategory') }}" + `?cat_id=${cat_id}&shop_id=${shop_id}`);
 
-            $.ajax({
-                // url: "{{ url('productByCategory') }}",
-                // type: "GET",
-                // data: {
-                //     cat_id: cat_id,
-                //     shop_id: shop_id,
-                //     _token: '{{ csrf_token() }}'
-                // },
-                // dataType: 'json',
-                // success: function(result) {
-
-                //     var category = result.category;
-                //     $("#cat_name").html(`
-                //         <div class="th-menu">
-                //             <h2>${category.name}</h2>
-                //         </div>
-                //     `);
-                //     $("#products").html(productsHtml);
-
-                //     var productsHtml = '';
-
-                //     if (result.products.length === 0) {
-                //         $("#products").css({
-                //             'display': 'block',
-                //             "text-align": "center"
-                //         });
-                //         productsHtml = `
-                //     <h2 style="color:white;">Coming Soon!</h2>
-                //     `;
-
-                //     } else {
-                //         $("#products").css({
-                //             'display': '',
-                //             "text-align": ""
-                //         });
-                //         $.each(result.products, function(key, value) {
-                //             var productDiv = `
-                //                                 <div style="background-color: #343537 !important;" class="shoes-screen-wrapper">
-                //                                     <div class="shoes-screen-top">
-                //                                         <div class="shoes-img wishlist-img">
-                //                                             <a type="button" href="#" class="border-0" data-bs-toggle="modal"
-                //                                                 data-bs-target="#staticBackdropp${value.id}">
-                //                                                 <img style="height: 100px !important;" src="${value.image_src}" alt="${value.image_alt}">
-                //                                             </a>
-                //                                         </div>
-
-                //                                     </div>
-                //                                     <div class="shoes-screen-bottom">
-                //                                         <div class="shoes-screen-bottom-full">
-                //                                             <div class="shoes-screen-first">
-                //                                                 <a type="button" href="#" class="border-0 " data-bs-toggle="modal"
-                //                                                     data-bs-target="#staticBackdropp${value.id}">
-                //                                                     <h3>${value.name}</h3>
-                //                                                 </a>
-                //                                             </div>
-                //                                             <div style="padding: 8px !important;" class="shoes-screen-second">
-                //                                                 <div class="cloth-txt1">
-                //                                                     <span>${value.finalprice} ${value.currency}</span>
-                //                                                 </div>
-                //                                                 <div class="shoes-screen-second-full">
-                //                                                     <button type="button" data-product-id="${value.id}"
-                //                                                         style="background-color: red !important;"
-                //                                                         class="border-0 center align-content-center text-center add_cart">
-                //                                                         <i class="fa fa-plus" style="color: white !important;"></i>
-                //                                                     </button>
-                //                                                 </div>
-                //                                             </div>
-                //                                         </div>
-                //                                     </div>
-
-                //                                     <div class="modal fade" style="top: 3% !important;" id="staticBackdropp${value.id}"
-                //                                         data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                //                                         aria-hidden="true">
-                //                                         <div class="modal-dialog">
-                //                                             <div class="modal-content">
-                //                                                 <div class="modal-header bg-dark">
-                //                                                     <h5 style="color: white !important;" class="modal-title" id="staticBackdropLabel">Details
-                //                                                     </h5>
-                //                                                     <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
-                //                                                         aria-label="Close"></button>
-                //                                                 </div>
-                //                                                 <div class="modal-body bg-dark">
-                //                                                     <section id="single-clothes-page">
-                //                                                         <div class="single-clothes-page-full">
-                //                                                             <div class="cloths-first-sec">
-                //                                                                 <div id="carouselExampleIndicators" class="carousel slide single-clothes-slider"
-                //                                                                     data-bs-ride="carousel">
-                //                                                                     <div class="carousel-inner">
-                //                                                                         <div class="carousel-item active">
-                //                                                                             <div class="single-clothes-slide-img">
-                //                                                                                 <img style="height: 200px !important;" src="${value.image_src}"
-                //                                                                                     alt="img">
-                //                                                                             </div>
-
-                //                                                                         </div>
-
-                //                                                                     </div>
-                //                                                                     <button class="carousel-control-prev single-slider-btn-prev" type="button"
-                //                                                                         data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                //                                                                         <span>
-                //                                                                             <svg width="24" height="24" viewBox="0 0 24 24"
-                //                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                //                                                                                 <mask id="mask0_330_4105" style="mask-type:alpha"
-                //                                                                                     maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                //                                                                                     height="24">
-                //                                                                                     <rect width="24" height="24" fill="white" />
-                //                                                                                 </mask>
-                //                                                                                 <g mask="url(#mask0_330_4105)">
-                //                                                                                     <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2"
-                //                                                                                         stroke-linecap="round" stroke-linejoin="round" />
-                //                                                                                 </g>
-                //                                                                             </svg>
-                //                                                                         </span>
-                //                                                                     </button>
-                //                                                                     <button class="carousel-control-next single-slider-btn-next" type="button"
-                //                                                                         data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                //                                                                         <span>
-                //                                                                             <svg width="24" height="24" viewBox="0 0 24 24"
-                //                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                //                                                                                 <mask id="mask0_330_4109" style="mask-type:alpha"
-                //                                                                                     maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                //                                                                                     height="24">
-                //                                                                                     <rect width="24" height="24" fill="white" />
-                //                                                                                 </mask>
-                //                                                                                 <g mask="url(#mask0_330_4109)">
-                //                                                                                     <path d="M9 6L15 12L9 18" stroke="black" stroke-width="2"
-                //                                                                                         stroke-linecap="round" stroke-linejoin="round" />
-                //                                                                                 </g>
-                //                                                                             </svg>
-                //                                                                         </span>
-                //                                                                     </button>
-                //                                                                 </div>
-                //                                                             </div>
-                //                                                             <div class="cloths-second-sec">
-                //                                                                 <div class="container">
-                //                                                                     <div class="cloths-second-sec-full">
-                //                                                                         <div class="cloths-second-wrapper">
-                //                                                                             <h1 class="clo-txt1">${value.name}</h1>
-
-                //                                                                         </div>
-                //                                                                         <div class="single-cloth-border"></div>
-                //                                                                     </div>
-                //                                                                 </div>
-                //                                                             </div>
-                //                                                             <div class="cloth-third-sec">
-                //                                                                 <div class="container">
-                //                                                                     <h2 class="d-none">Clothse Details</h2>
-                //                                                                     <div class="cloth-third-sec-full">
-                //                                                                         <h3 class="des-txt1">Description</h3>
-                //                                                                         <div class="w-100">
-                //                                                                             <p class="des-txt2">
-                //                                                                                 ${value.details}
-                //                                                                             </p>
-                //                                                                         </div>
-                //                                                                         <div class="single-cloth-border"></div>
-                //                                                                     </div>
-                //                                                                 </div>
-                //                                                             </div>
-                //                                                             <div class="cloth-third-sec">
-                //                                                                 <div class="container">
-                //                                                                     <div class="clothes-sixth-wrap">
-                //                                                                         <div class="clothes-sixth-full">
-                //                                                                             <div class="cloth-price-sec">
-                //                                                                                 <span class="price-sec1">Price:</span>
-                //                                                                                 <span class="price-sec2">${value.finalprice}
-                //                                                                                     ${value.currency}</span>
-                //                                                                             </div>
-                //                                                                             <div class="cloths-increment-sec">
-                //                                                                                 <div class="product-incre">
-                //                                                                                     <a href="javascript:void(0)" class="product__minus sub">
-                //                                                                                         <span>
-                //                                                                                             <svg width="8" height="8" viewBox="0 0 8 2"
-                //                                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                //                                                                                                 <path d="M1 1H7" stroke="#707070" stroke-width="2"
-                //                                                                                                     stroke-linecap="round"
-                //                                                                                                     stroke-linejoin="round"></path>
-                //                                                                                             </svg>
-                //                                                                                         </span>
-                //                                                                                     </a>
-                //                                                                                     <input name="quantity" type="text"
-                //                                                                                         class="w-100 product__input" value="1">
-                //                                                                                     <a href="javascript:void(0)" class="product__plus add">
-                //                                                                                         <span>
-                //                                                                                             <svg width="8" height="8" viewBox="0 0 8 8"
-                //                                                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                //                                                                                                 <path d="M1 4H7" stroke="#707070" stroke-width="2"
-                //                                                                                                     stroke-linecap="round"
-                //                                                                                                     stroke-linejoin="round"></path>
-                //                                                                                                 <path d="M4 7V1" stroke="#707070" stroke-width="2"
-                //                                                                                                     stroke-linecap="round"
-                //                                                                                                     stroke-linejoin="round"></path>
-                //                                                                                             </svg>
-                //                                                                                         </span>
-                //                                                                                     </a>
-                //                                                                                 </div>
-                //                                                                             </div>
-                //                                                                         </div>
-                //                                                                         <div class="add-to-cart-cloth-btn text-center ">
-                //                                                                             <button class="th-btn add_cart w-100" data-product-id="${value.id}"
-                //                                                                                 type="button">Add To Cart</button>
-                //                                                                         </div>
-                //                                                                     </div>
-                //                                                                 </div>
-                //                                                             </div>
-                //                                                         </div>
-                //                                                     </section>
-                //                                                 </div>
-
-                //                                             </div>
-                //                                         </div>
-                //                                     </div>
-                //                                 </div>
-                //                             </div>
-                //                         `;
-                //             productsHtml += productDiv;
-                //         });
-                //     }
-
-                //     $("#products").html(productsHtml);
-                //     $('.product__plus').on("click", function(e) {
-                //         e.preventDefault();
-                //         var $qty = $(this).siblings(".product__input");
-                //         var currentVal = parseInt($qty.val(), 10);
-                //         if (!isNaN(currentVal)) {
-                //             $qty.val(currentVal + 1);
-                //         }
-                //     });
-
-                //     $('.product__minus').on("click", function(e) {
-                //         e.preventDefault();
-                //         var $qty = $(this).siblings(".product__input");
-                //         var currentVal = parseInt($qty.val(), 10);
-                //         if (!isNaN(currentVal) && currentVal > 1) {
-                //             $qty.val(currentVal - 1);
-                //         }
-                //     });
-                // }
-            });
         });
     </script>
 
     <script>
-        var debounceTimer;
 
-        $('#search').on('keyup', function() {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(search, 300);
-        });
-        search();
+        $('#products-search-icon').on('click', function() {
 
 
-        function search() {
+            var keyword = encodeURI( $('#search').val() );
+            var shop_id = encodeURI( $('#search_shop').val() );
 
-            var keyword = $('#search').val();
-            var shop_id = $('#search_shop').val();
-            if (keyword.trim() === '') {
-                // Clear the table when the keyword is empty
-                $('.mycard').html('');
-                return;
-            }
+            window.location.replace("{{ route('website.search.result') }}" + `?keyword=${keyword}&shop_id=${shop_id}`);
 
+        })
 
-
-            $.post('{{ route('website.search') }}', {
-
-                    _token: '{{ csrf_token() }}',
-                    keyword: keyword,
-                    shop_id: shop_id,
-
-                },
-
-                function(data) {
-
-                    table_post_row(data);
-
-                });
-        }
-
-        const productShowRoute = "{{ route('product.show', ':productId') }}";
-        const productcartRoute = "{{ route('add.to.cart', ':productId') }}";
-
-        // table row with ajax
-        function table_post_row(res) {
-            let htmlView = '';
-
-            if (res.products.length <= 0) {
-                $('.mycard').html(
-                    `<h5 style="color: red;text-align: center;padding-top: 10px;" class="product-detail col-12">No Data.</h5>`
-                );
-            } else {
-
-                for (let i = 0; i < res.products.length; i++) {
-                    const productLink = productShowRoute.replace(':productId', res.products[i].id);
-                    const productCart = productcartRoute.replace(':productId', res.products[i].id);
-
-                    htmlView += `
-                                    <div style="background-color: #343537 !important;" class="shoes-screen-wrapper">
-                                        <div class="shoes-screen-top">
-                                            <div class="shoes-img wishlist-img">
-                                                <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
-                                                    <img style="height: 100px !important;" src="{{ url('products/${res.products[i].image_temp}') }}" alt="product">
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                        <div class="shoes-screen-bottom">
-                                            <div class="shoes-screen-bottom-full">
-                                                <div class="shoes-screen-first">
-                                                    <a type="button" href="#" class="border-0 " data-bs-toggle="modal" data-bs-target="#staticBackdroppp${res.products[i].id}">
-                                                        <h3>${res.products[i].name}</h3>
-                                                    </a>
-                                                </div>
-                                                <div style="padding: 8px !important;" class="shoes-screen-second">
-                                                    <div class="cloth-txt1">
-                                                        <span>${res.products[i].finalprice}{{ $shop->currency->name }}</span>
-                                                    </div>
-                                                    <div class="shoes-screen-second-full">
-                                                        <button type="button" data-product-id="${res.products[i].id}" style="background-color: red !important;"  class="border-0 center align-content-center text-center add_cart" >
-                                                            <i class="fa fa-plus" style="color: white !important;"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal fade" style="top: 3% !important;" id="staticBackdroppp${res.products[i].id}"
-                                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-dark">
-                                                        <h5 style="color: white !important;" class="modal-title" id="staticBackdropLabel">Details</h5>
-                                                        <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body bg-dark">
-                                                        <section id="single-clothes-page">
-                                                            <div class="single-clothes-page-full">
-                                                                <div class="cloths-first-sec">
-                                                                    <div id="carouselExampleIndicators" class="carousel slide single-clothes-slider"
-                                                                        data-bs-ride="carousel">
-                                                                        <div class="carousel-inner">
-                                                                            <div class="carousel-item active">
-                                                                                <div class="single-clothes-slide-img">
-                                                                                    <img style="height: 200px !important;"
-                                                                                        src="{{ url('products/${res.products[i].image_temp}') }}"
-                                                                                        alt="img">
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <button class="carousel-control-prev single-slider-btn-prev" type="button"
-                                                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                                                            <span>
-                                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <mask id="mask0_330_4105" style="mask-type:alpha"
-                                                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                                                                                        height="24">
-                                                                                        <rect width="24" height="24" fill="white" />
-                                                                                    </mask>
-                                                                                    <g mask="url(#mask0_330_4105)">
-                                                                                        <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2"
-                                                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                                                    </g>
-                                                                                </svg>
-                                                                            </span>
-                                                                        </button>
-                                                                        <button class="carousel-control-next single-slider-btn-next" type="button"
-                                                                            data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                                                            <span>
-                                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                    <mask id="mask0_330_4109" style="mask-type:alpha"
-                                                                                        maskUnits="userSpaceOnUse" x="0" y="0" width="24"
-                                                                                        height="24">
-                                                                                        <rect width="24" height="24" fill="white" />
-                                                                                    </mask>
-                                                                                    <g mask="url(#mask0_330_4109)">
-                                                                                        <path d="M9 6L15 12L9 18" stroke="black" stroke-width="2"
-                                                                                            stroke-linecap="round" stroke-linejoin="round" />
-                                                                                    </g>
-                                                                                </svg>
-                                                                            </span>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cloths-second-sec">
-                                                                    <div class="container">
-                                                                        <div class="cloths-second-sec-full">
-                                                                            <div class="cloths-second-wrapper">
-                                                                                <h1 class="clo-txt1">${res.products[i].name}</h1>
-
-                                                                            </div>
-                                                                            <div class="single-cloth-border"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cloth-third-sec">
-                                                                    <div class="container">
-                                                                        <h2 class="d-none">Clothse Details</h2>
-                                                                        <div class="cloth-third-sec-full">
-                                                                            <h3 class="des-txt1">Description</h3>
-                                                                            <div class="w-100">
-                                                                                <p class="des-txt2">
-                                                                                    ${res.products[i].details}
-                                                                                </p>
-                                                                            </div>
-                                                                            <div class="single-cloth-border"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="cloth-third-sec">
-                                                                    <div class="container">
-                                                                        <div class="clothes-sixth-wrap">
-                                                                            <div class="clothes-sixth-full">
-                                                                                <div class="cloth-price-sec">
-                                                                                    <span class="price-sec1">Price:</span>
-                                                                                    <span
-                                                                                        class="price-sec2">${res.products[i].finalprice}{{ $shop->currency->name }}</span>
-                                                                                </div>
-                                                                                <div class="cloths-increment-sec">
-                                                                                    <div class="product-incre">
-                                                                                        <a href="javascript:void(0)" class="product__minuss sub">
-                                                                                            <span>
-                                                                                                <svg width="8" height="8" viewBox="0 0 8 2"
-                                                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path d="M1 1H7" stroke="#707070" stroke-width="2"
-                                                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                                                    </path>
-                                                                                                </svg>
-                                                                                            </span>
-                                                                                        </a>
-                                                                                        <input name="quantity" type="text"
-                                                                                            class="w-100 product__input" value="1">
-                                                                                        <a href="javascript:void(0)" class="product__pluss add">
-                                                                                            <span>
-                                                                                                <svg width="8" height="8" viewBox="0 0 8 8"
-                                                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path d="M1 4H7" stroke="#707070" stroke-width="2"
-                                                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                                                    </path>
-                                                                                                    <path d="M4 7V1" stroke="#707070" stroke-width="2"
-                                                                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                                                                    </path>
-                                                                                                </svg>
-                                                                                            </span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="add-to-cart-cloth-btn text-center ">
-                                                                                <button class="th-btn add_cart w-100"
-                                                                                    data-product-id="${res.products[i].id}" type="button">
-                                                                                    Add To Cart</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </section>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-
-                    `;
-                }
-
-                $('.mycard').html(htmlView);
-
-                $('.product__pluss').on("click", function(e) {
-                    e.preventDefault();
-                    var $qty = $(this).siblings(".product__input");
-                    var currentVal = parseInt($qty.val(), 10);
-                    if (!isNaN(currentVal)) {
-                        $qty.val(currentVal + 1);
-                    }
-                });
-
-                $('.product__minuss').on("click", function(e) {
-                    e.preventDefault();
-                    var $qty = $(this).siblings(".product__input");
-                    var currentVal = parseInt($qty.val(), 10);
-                    if (!isNaN(currentVal) && currentVal > 1) {
-                        $qty.val(currentVal - 1);
-                    }
-                });
-
-            }
-
-        }
     </script>
     <script>
         // Update the existing script to handle the "Add to Cart" button click

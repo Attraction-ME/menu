@@ -24,6 +24,14 @@ class Product extends Model
         return $this->extraOptions->count() > 0 ? true : false;
     }
 
+    #  scopes
+
+    public function scopeOfNameOrDescribtion( $query , $keyword )
+    {
+        return $query->where('name', 'like' , '%' . $keyword . '%')
+                    ->orWhere('details', 'like' , '%' . $keyword . '%');
+    }
+
 
     # Relations
     public function shopproduct(){

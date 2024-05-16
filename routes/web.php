@@ -49,6 +49,7 @@ Route::post('/order/store', [App\Http\Controllers\OrderController::class, 'store
 Route::get('/tables/show/{id}', [App\Http\Controllers\TableController::class, 'show'])->name('tables.show');
 Route::get('/menu/{slug?}', [App\Http\Controllers\ProductController::class, 'shop'])->name('website.shop');
 Route::get('/{slug?}', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.welcome');
+Route::get('/search-result', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.search.result');
 
 // search
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'website_search'])->name('website.search');
