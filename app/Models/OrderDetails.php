@@ -22,8 +22,8 @@ class OrderDetails extends Model
 
     public function extraOptions()
     {
-        if ( $this->extra_option_ids == true ) {
-            $extra_option_ids = json_decode($this->extra_option_ids);
+        $extra_option_ids = json_decode($this->extra_option_ids);
+        if ( is_array( $extra_option_ids ) ) {
             return ExtraOption::whereIn('id' , $extra_option_ids )->get();
         }
     }
