@@ -175,7 +175,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `order_details` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -184,14 +184,16 @@ CREATE TABLE `order_details` (
   `quantity` double NOT NULL,
   `price` double NOT NULL,
   `total` double NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `main_option_id` bigint unsigned DEFAULT NULL,
+  `extra_option_ids` text,
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `orders` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -209,7 +211,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`waiter_id`) REFERENCES `waiters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `owners` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -593,18 +595,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2024_01_29_095933_create_waiters_table', 3);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2024_05_13_064936_create_main_options_table', 4),
-(5, '2024_05_13_065746_create_extra_options_table', 5);
+(5, '2024_05_13_065746_create_extra_options_table', 5),
+(9, '2024_05_19_093832_add_two_columns_to_order_datials_table', 6);
 
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`) VALUES
-(65, 36, 699, 1, 74, 74, '2024-05-12 11:20:00', '2024-05-12 11:20:00');
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`) VALUES
-(68, 37, 690, 1, 89, 89, '2024-05-12 11:20:25', '2024-05-12 11:20:25');
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`) VALUES
-(69, 37, 691, 1, 89, 89, '2024-05-12 11:20:25', '2024-05-12 11:20:25');
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`) VALUES
-(72, 38, 690, 1, 89, 89, '2024-05-12 12:56:43', '2024-05-12 12:56:43'),
-(73, 38, 691, 1, 89, 89, '2024-05-12 12:56:43', '2024-05-12 12:56:43'),
-(74, 39, 691, 1, 89, 89, '2024-05-12 12:58:07', '2024-05-12 12:58:07');
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`, `main_option_id`, `extra_option_ids`) VALUES
+(65, 36, 699, 1, 74, 74, '2024-05-12 11:20:00', '2024-05-12 11:20:00', NULL, NULL);
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`, `main_option_id`, `extra_option_ids`) VALUES
+(68, 37, 690, 1, 89, 89, '2024-05-12 11:20:25', '2024-05-12 11:20:25', NULL, NULL);
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`, `main_option_id`, `extra_option_ids`) VALUES
+(69, 37, 691, 1, 89, 89, '2024-05-12 11:20:25', '2024-05-12 11:20:25', NULL, NULL);
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`, `main_option_id`, `extra_option_ids`) VALUES
+(72, 38, 690, 1, 89, 89, '2024-05-12 12:56:43', '2024-05-12 12:56:43', NULL, NULL),
+(73, 38, 691, 1, 89, 89, '2024-05-12 12:56:43', '2024-05-12 12:56:43', NULL, NULL),
+(96, 53, 690, 1, 29, 29, '2024-05-19 12:48:14', '2024-05-19 12:48:14', 3, '[\"4\"]'),
+(97, 53, 693, 1, 100, 100, '2024-05-19 12:48:14', '2024-05-19 12:48:14', NULL, 'null'),
+(98, 53, 695, 1, 45, 45, '2024-05-19 12:48:14', '2024-05-19 12:48:14', NULL, 'null');
 
 INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
 (36, 17, 1, 74, 13, 3, '2024-05-12 11:19:32', '2024-05-12 11:20:00');
@@ -613,7 +618,8 @@ INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id
 INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
 (38, 17, 1, 178, 13, 3, '2024-05-12 12:55:19', '2024-05-12 12:56:43');
 INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
-(39, 17, 0, 89, 13, 3, '2024-05-12 12:58:07', '2024-05-12 12:58:07');
+(39, 17, 1, 0, 13, 3, '2024-05-12 12:58:07', '2024-05-19 10:00:20'),
+(53, 17, 0, 174, 13, 3, '2024-05-19 12:48:14', '2024-05-19 12:48:14');
 
 
 

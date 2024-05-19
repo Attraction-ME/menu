@@ -142,18 +142,18 @@
 
     <script>
         // Get client's location
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                function(position) {
-                    // Assuming you have an order form with relevant inputs
-                    document.getElementById('latitude').value = position.coords.latitude;
-                    document.getElementById('longitude').value = position.coords.longitude;
-                },
-                function(error) {
-                    alert('Error getting location: ' + error.message);
-                }
-            );
-        }
+        // if ('geolocation' in navigator) {
+        //     navigator.geolocation.getCurrentPosition(
+        //         function(position) {
+        //             // Assuming you have an order form with relevant inputs
+        //             document.getElementById('latitude').value = position.coords.latitude;
+        //             document.getElementById('longitude').value = position.coords.longitude;
+        //         },
+        //         function(error) {
+        //             alert('Error getting location: ' + error.message);
+        //         }
+        //     );
+        // }
     </script>
 
     <script type="text/javascript">

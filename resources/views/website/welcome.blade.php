@@ -49,7 +49,7 @@
 
             @if (session('error') || session('done'))
 
-                <div class="finger-bottom">
+                <div class="finger-bottom mx-auto"   style="width: fit-content">
                     @if (session('error'))
                         <div class="alert alert-danger text-center">
                             {{ session('error') }}
@@ -74,7 +74,7 @@
 
             <div class="splitor"></div>
 
-            <p class="text-center text-white display-3 bg-theme mx-auto p-3 rounded" style="width: fit-content">{{$shop->slug}}</p>
+            <p class="text-center text-white display-6 bg-theme mx-auto p-3 rounded" style="width: 50%">{{$shop->slug}}</p>
 
             <div class="splitor"></div>
 
