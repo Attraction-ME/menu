@@ -28,8 +28,10 @@ class Product extends Model
 
     public function scopeOfNameOrDescribtion( $query , $keyword )
     {
-        return $query->where('name', 'like' , '%' . $keyword . '%')
+        return $query->when($keyword , function( $query ) use ($keyword){
+                    $query->where('name', 'like' , '%' . $keyword . '%')
                     ->orWhere('details', 'like' , '%' . $keyword . '%');
+        });
     }
 
 

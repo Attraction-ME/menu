@@ -41,15 +41,15 @@ Route::get('/get-subtotal', [App\Http\Controllers\ProductController::class, 'get
 Route::get('/add-to-cart/{id}', [App\Http\Controllers\ProductController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('/update-cart', [App\Http\Controllers\ProductController::class, 'updateCart'])->name('update.cart');
 Route::delete('/remove-from-cart', [App\Http\Controllers\ProductController::class, 'remove'])->name('remove.from.cart');
-Route::get('/productByCategory', [App\Http\Controllers\ProductController::class, 'productByCategory'])->name('product.category');
+Route::get('/productByCategory', [App\Http\Controllers\ProductController::class, 'welcome'])->name('product.category');
 
 
 Route::post('/order/store', [App\Http\Controllers\OrderController::class, 'store'])->name('order.store');
 // shop
 Route::get('/tables/show/{id}', [App\Http\Controllers\TableController::class, 'show'])->name('tables.show');
 Route::get('/menu/{slug?}', [App\Http\Controllers\ProductController::class, 'shop'])->name('website.shop');
-Route::get('/{slug?}', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.welcome');
 Route::get('/search-result', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.search.result');
+Route::get('/shop/{slug?}', [App\Http\Controllers\ProductController::class, 'welcome'])->name('website.welcome');
 
 // search
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'website_search'])->name('website.search');

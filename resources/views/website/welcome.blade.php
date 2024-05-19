@@ -51,14 +51,14 @@
 
                 <div class="finger-bottom">
                     @if (session('error'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger text-center">
                             {{ session('error') }}
                         </div>
                         <div class="splitor"></div>
                     @endif
                     @if(session('done'))
                         <div class="woocommerce-notices-wrapper bg-success">
-                            <div class="woocommerce-message">
+                            <div class="woocommerce-message text-center">
                                 {{ session('done') }}
                             </div>
                         </div>

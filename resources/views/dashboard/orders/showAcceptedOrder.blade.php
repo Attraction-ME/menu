@@ -84,9 +84,10 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Items</th>
                                         <th scope="col">Quantity</th>
+                                        <th scope="col">Main Option</th>
+                                        <th scope="col">Extra Options</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Subtotal</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -95,6 +96,16 @@
                                             <td>{{ $key +1 }}</td>
                                             <td>{{ $order_detail->order_product->name }}</td>
                                             <td>{{ $order_detail->quantity }}</td>
+                                            <td>{{ $order_detail?->mainOption?->name ?? '---' }}</td>
+                                            <td>
+                                                @if ($order_detail?->extraOptions != false )
+                                                    @foreach($order_detail?->extraOptions as $extraOption)
+                                                        <p>{{ $extraOption?->name }}</p>
+                                                    @endforeach
+                                                @else 
+                                                    ---
+                                                @endif
+                                            </td>
                                             <td>{{ $order_detail->price }} {{$order->shop_order->currency->name}}</td>
                                             <td>{{ $order_detail->total }} {{$order->shop_order->currency->name}}</td>
 

@@ -33,7 +33,7 @@ class Shop extends Model
     {
         return $this->hasMany(Order::class);
     }
-    public function tabels()
+    public function tables()
     {
         return $this->hasMany(Table::class);
     }

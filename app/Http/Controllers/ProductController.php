@@ -9,6 +9,8 @@ use App\Models\Dollar;
 use App\Models\Waiter;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ExtraOption;
+use App\Models\MainOption;
 use App\Models\TableWaiter;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -31,13 +33,10 @@ class ProductController extends Controller
 
     public function cart()
     {
-        if(session('table') == null){
+        if( session('table') == null || session('selectWaiter') == null){
             return view('website.error');
         }
-        
-        if(session('selectWaiter') == null){
-            return view('website.error');
-        }
+
         $table = session('table');
         $shop = Shop::find($table->shop_id);
         $selectWaiter = session('selectWaiter');
@@ -57,7 +56,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $shop = Shop::find($product->shop_id);
 
-
         $cart = session()->get('cart', []);
 
         if (count($cart) > 0) {
@@ -74,25 +72,21 @@ class ProductController extends Controller
             }
         }
 
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "quantity" => $request->quantity,
-                "price" => $product->finalprice,
-                "image" => $product->image_temp,
-                "shop_id" => $product->shop_id,
-                "shop_name" => $shop->name,
-            ];
-        }
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => $request->quantity,
+            "price" =>  $request->totalPrice ?? $product->finalprice,
+            "image" => $product->image_temp,
+            "mainOptionId" => $request->mainOptionId,
+            "extraOptionIds" => $request->extraOptionIds,
+            "shop_id" => $product->shop_id,
+            "shop_name" => $shop->name,
+        ];
 
         session()->put('cart', $cart);
         $cartLength = count($cart);
 
-
-            return response()->json(['success' => 'Product added to cart successfully!','cart'=>$cart,'cartLength' => $cartLength]);
-
+        return response()->json(['success' => 'Product added to cart successfully!', 'cart'=>$cart , 'cartLength' => $cartLength]);
 
     }
 
@@ -164,7 +158,7 @@ class ProductController extends Controller
         if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
             $user = auth()->user();
             $shop = $user->shops[0];
-            $table = $shop->tabels[0];
+            $table = $shop->tables[0];
 
         } else if ( session('table') == null ){
 
@@ -183,7 +177,7 @@ class ProductController extends Controller
 
     public function welcome( Request $request, $slug = null )
     {
-        $search = $request->input('keyword');
+        $shop_id = $request->input('shop_id');
 
         if ( auth()->check() && auth()->user()->type == 'super-admin' && $slug == null) {
             $user = auth()->user();
@@ -191,7 +185,6 @@ class ProductController extends Controller
 
         } else if ( $request->has('shop_id') ){
 
-            $shop_id = $request->input('shop_id');
             $shop = Shop::find( $shop_id );
 
         } else {
@@ -200,28 +193,43 @@ class ProductController extends Controller
 
         }
 
-        if ( $request->has('keyword') ){
+        if ( $request->has('keyword') ) {
 
             $keyword = $request->input('keyword');
+
             $products = Product::where('shop_id', $shop->id)
                             ->ofNameOrDescribtion( $keyword )
                             ->with(['mainOptions', 'extraOptions'])->get();
 
-        } else {
+        $category = json_decode('{"name": "All Categories"}', true);
+
+
+        } else if ( $request->has('cat_id') && $request->cat_id !== 'all' ) {
         
+            $cat_id = $request->cat_id;
+
+            $category = Category::findOrFail($cat_id);
+
+            $products = Product::where('category_id', $cat_id)
+                ->where('shop_id', $shop_id)
+                ->with(['mainOptions', 'extraOptions'])
+                ->get();
+
+        } else {
+
             $products = Product::where('shop_id', $shop->id)->with([ 'mainOptions' , 'extraOptions' ])->get();
+            $category = json_decode('{"name": "All Categories"}', true);
 
         }
 
-        $table = session('table') ?? $shop->tabels[0] ;
+        $table = session('table') ?? $shop->tables[0] ;
         
-        // Assuming the 'slug' field is used for the shop's slug
+        $selectWaiter = $table->waiters()->first();
+        
+        session()->put('table', $table);
+        session()->put('selectWaiter', $selectWaiter);
 
-        $waiter = $table->waiters()->first();
-        session()->put('selectWaiter', $waiter);
-        $selectWaiter = session('selectWaiter');
-
-        return view('website.shop', compact('products', 'shop','table','selectWaiter'));
+        return view('website.shop', compact('products', 'shop','table','selectWaiter' , 'category'));
     }
 
 
@@ -237,61 +245,6 @@ class ProductController extends Controller
         $products = Product::where('category_id', $category->id)->paginate(24);
 
         return view('website.categories', compact('products', 'category'));
-    }
-
-
-
-    public function productByCategory(Request $request)
-    {
-
-//dd($request->shop_id);
-
-        $shop_id = $request->shop_id;
-        $shop = Shop::find($shop_id);
-
-        if ($request->cat_id === 'all') {
-
-            $products = Product::where('shop_id', $shop_id)
-                ->with(['mainOptions', 'extraOptions'])
-                ->get();
-            $category = json_decode('{"name": "All Categories"}', true);
-
-        } else {
-
-            $cat_id = $request->cat_id;
-            $category = Category::find($cat_id);
-            $products = Product::where('category_id', $cat_id)
-                ->where('shop_id', $shop_id)
-                ->with(['mainOptions', 'extraOptions'])
-                ->get();
-        }
-
-        $table = session('table');
-        $waiter = $table->waiters()->first();
-        $selectWaiter = session('selectWaiter');
-
-        // // Build an array of product data
-        // $productData = [];
-
-        // foreach ($products as $product) {
-        //     $productData[] = [
-        //         'id' => $product->id, // Include the product ID
-        //         'name' => $product->name,
-        //         'details' => $product->details,
-        //         'category' => $product->category->name,
-        //         'currency' => $product->shopproduct->currency->name,
-        //         'finalprice' => $product->finalprice,
-        //         'sale' => $product->sale,
-        //         'product_link' => route('product.show', $product->id),
-        //         'image_src' => url('/products/' . $product->image_temp),
-        //         'image_alt' => $product->name, // Set alt text as the product name, you can customize it
-        //         // Add other product data here...
-        //     ];
-        // }
-
-        return view('website.shop', compact('products', 'shop','table','selectWaiter','category') );
-
-        // return response()->json(['products' => $productData, 'category' => $category]);
     }
 
     public function create()

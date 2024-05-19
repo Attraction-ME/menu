@@ -9,6 +9,8 @@ class OrderDetails extends Model
 {
     use HasFactory;
     protected $guarded =['id'];
+    protected $appends = ['extraOptions'];
+    protected $with = ['mainOption']; 
 
     public function orderr(){
         return $this->belongsTo(Order::class, 'order_id');
@@ -16,5 +18,24 @@ class OrderDetails extends Model
 
     public function order_product(){
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function extraOptions()
+    {
+        if (is_null($this->extra_option_ids)) {
+            return [];
+        }
+        $extra_option_ids = json_decode($this->extra_option_ids);
+        return ExtraOption::whereIn('id' , $extra_option_ids )->get();
+    }
+
+    public function getExtraOptionsAttribute()
+    {
+        return $this->extraOptions();
+    }
+
+    public function mainOption()
+    {
+        return $this->belongsTo(MainOption::class, 'main_option_id', 'id');
     }
 }

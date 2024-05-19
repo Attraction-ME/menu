@@ -30,7 +30,8 @@
                         </button>
 
                         <input style="height: 30px !important;" type="text" id="search" name="keyword"
-                            placeholder="Search..." autocomplete="off" class="form-control search-text">
+                            placeholder="Search..." autocomplete="on" class="form-control search-text">
+
                         <input type="hidden" name="shop_id" value="{{ $shop->id }}" id="search_shop">
 
                     </div>
@@ -286,7 +287,7 @@
                                                                                             <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
                                                                                                 @foreach  ( $product->mainOptions as $option )
                                                                                                     <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
-                                                                                                        <input class="form-check-input d-block radio-modal-{{ $index }}" type="radio" name="main_option_{{ $index }}" id="flexRadioDefault_{{ $option->id }}" value="{{ $option->price }}" >
+                                                                                                        <input class="form-check-input d-block radio-modal-{{ $index }}" type="radio" data-option-id="{{ $option->id }}" name="main_option_{{ $index }}" id="flexRadioDefault_{{ $option->id }}" value="{{ $option->price }}" >
                                                                                                         <br>
                                                                                                         <label class="form-check-label text-white d-block" for="flexRadioDefault_{{$option->id}}">
                                                                                                             <p>
@@ -319,7 +320,7 @@
                                                                                             <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
                                                                                                 @foreach  ( $product->extraOptions as $option )
                                                                                                     <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
-                                                                                                        <input class="form-check-input d-block checkbox-modal-{{ $index }}" type="checkbox" name="extra_option_{{ $index }}" id="flexCheckboxDefault_{{$option->id}}" value="{{ $option->price }}" >
+                                                                                                        <input class="form-check-input d-block checkbox-modal-{{ $index }}" type="checkbox" data-option-id="{{ $option->id }}" name="extra_option_{{ $index }}" id="flexCheckboxDefault_{{$option->id}}" value="{{ $option->price }}" >
                                                                                                         <br>
                                                                                                         <label class="form-check-label text-white d-block" for="flexCheckboxDefault_{{$option->id}}">
                                                                                                             <p>
@@ -353,6 +354,7 @@
                                                                                                 @else 
                                                                                                     <span
                                                                                                         class="price-sec2"> 
+                                                                                                        <span id="product-total-quantity-modal-{{ $index }}">  </span>
                                                                                                         <span id="product-total-price-modal-{{ $index }}">  </span>
                                                                                                         {{ $shop->currency->name }} </span>
                                                                                                 @endif
@@ -361,7 +363,7 @@
                                                                                                 class="cloths-increment-sec">
                                                                                                 <div class="product-incre">
                                                                                                     <a href="javascript:void(0)"
-                                                                                                        class="product__minus sub">
+                                                                                                        class="product__minus sub product-quantity-minus-modal-{{ $index }}">
                                                                                                         <span>
                                                                                                             <svg width="8"
                                                                                                                 height="8"
@@ -381,10 +383,10 @@
                                                                                                     <input name="quantity"
                                                                                                         type="text"
                                                                                                         id="product-quantity-modal-{{ $index }}"
-                                                                                                        class="w-100 product__input"
+                                                                                                        class="w-100 product__input "
                                                                                                         value="1">
                                                                                                     <a href="javascript:void(0)"
-                                                                                                        class="product__plus add">
+                                                                                                        class="product__plus add product-quantity-plus-modal-{{ $index }}">
                                                                                                         <span>
                                                                                                             <svg width="8"
                                                                                                                 height="8"
@@ -416,6 +418,7 @@
                                                                                             <button
                                                                                                 class="th-btn add_cart w-100"
                                                                                                 data-product-id="{{ $product->id }}"
+                                                                                                data-index = "{{ $index }}"
                                                                                                 type="button">
                                                                                                 Add To Cart
                                                                                             </button>
@@ -564,14 +567,19 @@
                 setTimeout(() => {
                     let total = 0;
                     let mainPrice = $(`input[name=main_option_${index}][type=radio]:checked`).val();
-                    // console.log()
-                    total = total + parseInt(mainPrice);
-                    $(`input[name=extra_option_${index}][type=checkbox]:checked`).each(function() {
-                        total = total + parseInt($(this).val());
-                    })
-                    total = total * parseInt($(`#product-quantity-modal-${index}`).val());
+                    if ( mainPrice == null || mainPrice == undefined  )
+                    {
+                        $total = '';
+                    } else {
+                        total = total + parseInt(mainPrice);
+                        $(`input[name=extra_option_${index}][type=checkbox]:checked`).each(function() {
+                            total = total + parseInt($(this).val());
+                        })
+                        let quantity = parseInt($(`#product-quantity-modal-${index}`).val());
+                        $(`#product-total-quantity-modal-${index}`).text(`${quantity} *`);
+                    }
                     $(`#product-total-price-modal-${index}`).text(total);
-                }, 300 ) ; 
+                }, 100 ) ; 
             } 
 
         for (let index = 0; index < productsCount; index++) {
@@ -580,7 +588,11 @@
                 return calculateProductTotalPrice(index)
             })
 
-            $(`#product-quantity-modal-${index}`).change(function() {
+            $(`.product-quantity-plus-modal-${index}`).click(function() {
+                return calculateProductTotalPrice(index)
+            })
+
+            $(`.product-quantity-minus-modal-${index}`).click(function() {
                 return calculateProductTotalPrice(index)
             })
 
@@ -604,17 +616,20 @@
 
     <script>
 
-        $('#products-search-icon').on('click', function() {
+        $('#products-search-icon').on('click' , function() {
 
+            var keyword = $('#search').val() ;
+            var shop_id = $('#search_shop').val() ;
 
-            var keyword = encodeURI( $('#search').val() );
-            var shop_id = encodeURI( $('#search_shop').val() );
+            var routePath = {!! json_encode(route('website.search.result')) !!};
+            var queryString = `?keyword=${keyword}&shop_id=${shop_id}`; 
 
-            window.location.replace("{{ route('website.search.result') }}" + `?keyword=${keyword}&shop_id=${shop_id}`);
+            window.location.replace( encodeURI (routePath + queryString) );
 
         })
 
     </script>
+
     <script>
         // Update the existing script to handle the "Add to Cart" button click
         $(document).ready(function() {
@@ -625,9 +640,21 @@
                 e.preventDefault();
 
                 var productId = $(this).data('product-id');
+                var index = $(this).data('index');
+
+                var mainOptionId = $(`input[name=main_option_${index}][type=radio]:checked`).data('option-id') ?? null;
+                
+                var extraOptionIds = [];
+
+                $(`input[name=extra_option_${index}][type=checkbox]:checked`).each(function () { 
+                    extraOptionIds.push( $(this).data('option-id') );
+                })
+
                 // Find the nearest .qty-input relative to the clicked button
                 var qtyInput = $(this).closest('.add-to-cart-cloth-btn').siblings('.clothes-sixth-full')
                     .find('.product__input');
+
+                var totalPrice = $(`#product-total-price-modal-${index}`).text() ?? null;
 
                 // Access the value of qtyInput
                 var quantity = qtyInput.val();
@@ -639,10 +666,14 @@
                     url: '/add-to-cart/' + productId,
                     method: 'GET',
                     data: {
+                        mainOptionId: mainOptionId,
+                        extraOptionIds: extraOptionIds,
                         quantity: quantity,
+                        totalPrice : totalPrice,
                         _token: '{{ csrf_token() }}'
                     },
                     dataType: 'json',
+
                     success: function(response) {
 
                         $("#noticart").html("");
@@ -673,7 +704,6 @@
                                 `);
                             }
                             $("#orderCount").text(response.cartLength);
-
                         }
 
                         // Fetch and update the subtotal
@@ -751,7 +781,7 @@
             // Function to update the subtotal dynamically
             function updateSubtotal() {
                 $.ajax({
-                    url: '{{ route('cart.get-subtotal') }}', // Replace with the actual route to fetch the subtotal
+                    url: "{{ route('cart.get-subtotal') }}", // Replace with the actual route to fetch the subtotal
                     method: 'GET',
                     dataType: 'json',
                     success: function(response) {

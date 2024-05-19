@@ -11,6 +11,7 @@ use App\Events\OrderPlaced;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use App\Events\NewOrderEvent;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
@@ -60,46 +61,49 @@ class OrderController extends Controller
         }
 
         $table = Table::find($request->table_id);
-        $link = $table->link;
+        // $link = $table->link;
         $shop = Shop::find($request->shop_id);
 
-        $latitude = $request->input('latitude');
-        $longitude = $request->input('longitude');
+        // $latitude = $request->input('latitude');
+        // $longitude = $request->input('longitude');
 
-        // Restaurant's coordinates
-        $restaurantLatitude = $shop->latitude;
-        $restaurantLongitude = $shop->longitude;
+        // // Restaurant's coordinates
+        // $restaurantLatitude = $shop->latitude;
+        // $restaurantLongitude = $shop->longitude;
 
-        // Calculate distance using Haversine formula
-        $distance = $this->calculateDistance($latitude, $longitude, $restaurantLatitude, $restaurantLongitude);
+        // // Calculate distance using Haversine formula
+        // $distance = $this->calculateDistance($latitude, $longitude, $restaurantLatitude, $restaurantLongitude);
 
-        // Set a maximum allowed distance (adjust as needed)
-        $maxDistance = 1; // Example maximum distance in kilometers
+        // // Set a maximum allowed distance (adjust as needed)
+        // $maxDistance = 1; // Example maximum distance in kilometers
 
-        // Check if the client is within the allowed distance
-        if ($distance > $maxDistance) {
-            return redirect()->back()->with('message', "You Are Too Far From The Restaurant to Place An Order Check Your GPS Location");
-        }
+        // // Check if the client is within the allowed distance
+        // if ($distance > $maxDistance) {
+        //     return redirect()->back()->with('message', "You Are Too Far From The Restaurant to Place An Order Check Your GPS Location");
+        // }
 
-        // store the order in the database
-        $order = new Order();
-        $order->table_id  = $request->table_id;
-        $order->shop_id  = $request->shop_id;
-        $order->waiter_id  = $request->waiter_id;
-        $order->total  = $request->total;
-        $order->status  = 0;
-        $order->save();
-        foreach ($request->product_id  as $key => $id) {
+        DB::transaction(function () use ($request, $shop) {
+            // store the order in the database
+            $order = new Order();
+            $order->table_id  = $request->table_id;
+            $order->shop_id  = $request->shop_id;
+            $order->waiter_id  = $request->waiter_id;
+            $order->total  = $request->total;
+            $order->status  = 0;
+            $order->save();
 
-            $order_details = new OrderDetails();
-            $order_details->order_id  = $order->id;
-            $order_details->product_id  = $id;
-            $order_details->quantity  = $request->quantity[$key];
-            $order_details->price  = $request->price[$key];
-            $order_details->total = $request->subtotal[$key];
-            $order_details->save();
-        }
-
+            foreach ($request->product_id  as $key => $id) {  // $key is index of product in cart and $id is id of product
+                $order_details = new OrderDetails();
+                $order_details->order_id  = $order->id;
+                $order_details->product_id  = $id;
+                $order_details->quantity  = $request->quantity[$key];
+                $order_details->price  = $request->price[$key];
+                $order_details->total = $request->subtotal[$key];
+                $order_details->main_option_id  = $request->main_option_id[$key] ;
+                $order_details->extra_option_ids  = $request->extra_option_ids[$key];
+                $order_details->save();
+            }
+        });
 
         session()->forget('cart');
         session()->forget('selectWaiter');
@@ -141,7 +145,7 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
-        $order_details = OrderDetails::where('order_id', $id)->get();
+        $order_details = $order->order_details;
         $productss = Product::where('shop_id', $order->shop_id)->get();
         return view('dashboard.orders.create', compact('order', 'order_details', 'productss'));
     }
@@ -149,7 +153,7 @@ class OrderController extends Controller
     public function showacceptedOrder($id)
     {
         $order = Order::find($id);
-        $order_details = OrderDetails::where('order_id', $id)->get();
+        $order_details = $order->order_details;
         return view('dashboard.orders.showAcceptedOrder', compact('order', 'order_details'));
     }
 

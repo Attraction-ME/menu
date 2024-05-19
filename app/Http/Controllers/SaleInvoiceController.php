@@ -42,16 +42,12 @@ class SaleInvoiceController extends Controller
         $order->status = 1;
         $order->save();
 
-        OrderDetails::where('order_id', $request->order_id)->delete();
+
     
         if ( isset($request->product_id) ) {
 
-            foreach ($request->input('product_id') as $key => $class) {
-                $orderDetails = OrderDetails::where('order_id',$request->order_id)->updateOrCreate(
-                    [
-                        'order_id' => $order->id,
-                        'product_id' => $class,
-                    ],
+            foreach ($request->input('product_id') as $key => $id) {
+                $orderDetails = OrderDetails::where('order_id',$request->order_id)->where('product_id' , $id)->update(
                     [
                         'quantity' => $request->quantity[$key],
                         'price' => $request->price[$key],
@@ -59,7 +55,6 @@ class SaleInvoiceController extends Controller
                     ]
                 );
             }
-            
         }
         return redirect()->route('acceptedOrder.index')->with('message' , "Order Approved Successfully");
     }
