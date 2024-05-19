@@ -99,8 +99,8 @@ class OrderController extends Controller
                 $order_details->quantity  = $request->quantity[$key];
                 $order_details->price  = $request->price[$key];
                 $order_details->total = $request->subtotal[$key];
-                $order_details->main_option_id  = $request->main_option_id[$key] ;
-                $order_details->extra_option_ids  = $request->extra_option_ids[$key];
+                $order_details->main_option_id  = $request->main_option_id[$key]  ?? null;
+                $order_details->extra_option_ids  = $request->extra_option_ids[$key] ?? null;
                 $order_details->save();
             }
         });
