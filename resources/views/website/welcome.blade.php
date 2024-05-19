@@ -74,7 +74,7 @@
 
             <div class="splitor"></div>
 
-            <p class="text-center text-white display-1 bg-theme mx-auto p-3 rounded" style="width: fit-content">{{$shop->slug}}</p>
+            <p class="text-center text-white display-3 bg-theme mx-auto p-3 rounded" style="width: fit-content">{{$shop->slug}}</p>
 
             <div class="splitor"></div>
 
