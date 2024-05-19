@@ -62,33 +62,33 @@
             success: function (response) {
                 $("#noti").html("");
 
-    const notificationCount = response.newOrdersCount.length;
-    $("#orderCountt").text(0);
-    $("#orderCount").text("0 NEW");
+                const notificationCount = response.newOrdersCount.length;
+                $("#orderCountt").text(0);
+                $("#orderCount").text("0 NEW");
 
-    if (response.newOrdersCount.length > 0) {
-        document.getElementById('notificationSound').play();
-        response.newOrdersCount.forEach(function(order) {
-            const formattedDateTime = new Date(order.created_at).toLocaleString();
+                if (response.newOrdersCount.length > 0) {
+                    document.getElementById('notificationSound').play();
+                    response.newOrdersCount.forEach(function(order) {
+                        const formattedDateTime = new Date(order.created_at).toLocaleString();
 
-            $("#noti").prepend(`
-                <a href="{{ route('orders.show', '') }}/${order.id}">
-                    <div class="media">
-                        <div class="media-left align-self-center"><i class="feather icon-plus-square icon-bg-circle bg-cyan"></i></div>
-                        <div class="media-body">
-                            <h6 class="media-heading">You have a new order!</h6>
-                            <p class="notification-text font-small-3 text-muted">Table: ${order.table.name}, Total: ${order.total} $</p>
-                            <small><time class="media-meta text-muted" datetime="${order.created_at}">${formattedDateTime}</time></small>
-                        </div>
-                    </div>
-                </a>
-            `);
-        });
-        $("#orderCountt").text(notificationCount);
-        $("#orderCount").text(notificationCount + "NEW");
+                        $("#noti").prepend(`
+                            <a href="{{ route('orders.show', '') }}/${order.id}">
+                                <div class="media">
+                                    <div class="media-left align-self-center"><i class="feather icon-plus-square icon-bg-circle bg-cyan"></i></div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">You have a new order!</h6>
+                                        <p class="notification-text font-small-3 text-muted">Table: ${order.table.name}, Total: ${order.total} $</p>
+                                        <small><time class="media-meta text-muted" datetime="${order.created_at}">${formattedDateTime}</time></small>
+                                    </div>
+                                </div>
+                            </a>
+                        `);
+                    });
+                    $("#orderCountt").text(notificationCount);
+                    $("#orderCount").text(notificationCount + "NEW");
 
-    }
-},
+                }
+            },
 
             error: function (error) {
                 console.error('Error checking for new orders:', error);
