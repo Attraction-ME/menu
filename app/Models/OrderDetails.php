@@ -22,11 +22,10 @@ class OrderDetails extends Model
 
     public function extraOptions()
     {
-        if (is_null($this->extra_option_ids)) {
-            return [];
+        if ( $this->extra_option_ids == true ) {
+            $extra_option_ids = json_decode($this->extra_option_ids);
+            return ExtraOption::whereIn('id' , $extra_option_ids )->get();
         }
-        $extra_option_ids = json_decode($this->extra_option_ids);
-        return ExtraOption::whereIn('id' , $extra_option_ids )->get();
     }
 
     public function getExtraOptionsAttribute()
