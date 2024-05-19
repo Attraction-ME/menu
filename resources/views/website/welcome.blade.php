@@ -29,54 +29,66 @@
 
     <!-- Fontawesome Icon -->
     <link rel="stylesheet" href="{{url('website/assets/css/fontawesome.min.css')}}">
-</head>
-<body style="background-image: url('{{url('website/welcome.jpeg')}}') !important;background-size: cover;">
-    <div class="site-content">
-        <!-- Preloader Start -->
-        <div class="loader-mask">
-            <div class="circle">
-            </div>
-        </div>
 
-        <section id="finger-print-sec">
-            <div class="container">
-                <div class="finger-print-sec-full">
-                    <form class="form" action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        @method('get')
-                    <div class="finger-top text-center">
-                        <img style="height: 70px !important;" src="{{ url('shops/' . $shop->logo) }}" alt="Pizzan">
-                    </div>
-                    <div class="finger-bottom">
-                        @if (session('error'))
+    <style>
+        .splitor {  
+            height: 10vh;
+            width: 100%;
+            margin: 0 auto;
+        }
+    </style>
+    
+</head>
+
+<body style="background-image: url('{{url('website/welcome.jpeg')}}') !important;background-size: cover;" >
+
+    <div class="mx-auto d-flex align-items-center justify-content-center flex-column" 
+        style="min-height: 100vh; min-width: 100vw; position : fixed ; top : 0 ; left : 0;" >
+        
+        <div class="container">
+
+            @if (session('error') || session('done'))
+
+                <div class="finger-bottom">
+                    @if (session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
                         </div>
+                        <div class="splitor"></div>
                     @endif
                     @if(session('done'))
-                    <div class="woocommerce-notices-wrapper bg-success">
-                        <div class="woocommerce-message">
-                            {{ session('done') }}
-                        </div>
-                    </div>
-                @endif
-                    </div>
-                    <div class="finger-print-sec-btn">
-
-                        <div class="finger-print-sec-btn-wrapp">
-                            <p class="">{{$shop->slug}}</p>
-                            
-                            <div style="width: 100%" class="print-continue-btn">
-                                <button >Make an Order</button>
+                        <div class="woocommerce-notices-wrapper bg-success">
+                            <div class="woocommerce-message">
+                                {{ session('done') }}
                             </div>
                         </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
 
+                        <div class="splitor"></div>
+                    @endif
+                </div>
+            @endif
+
+            <div class="finger-top text-center  ">
+                <img style="height: 70px !important;" src="{{ url('shops/' . $shop->logo) }}" alt="Pizzan">
+            </div>
+
+            <div class="splitor"></div>
+
+            <p class="text-center text-white display-1 bg-theme mx-auto p-3 rounded" style="width: fit-content">{{$shop->slug}}</p>
+
+            <div class="splitor"></div>
+
+            <form class="form " 
+                action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('get')
+                <div style="width: 100%" class="print-continue-btn">
+                    <button >Make an Order</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
 
 
     <script src="{{url('website/new/assets/js/jquery-min-3.6.0.js')}}"></script>
