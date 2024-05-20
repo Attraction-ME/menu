@@ -31,20 +31,20 @@
     <link rel="stylesheet" href="{{url('website/assets/css/fontawesome.min.css')}}">
 
     <style>
-        .splitor {  
+        .splitor {
             height: 10vh;
             width: 100%;
             margin: 0 auto;
         }
     </style>
-    
+
 </head>
 
 <body style="background-image: url('{{url('website/welcome.jpeg')}}') !important;background-size: cover;" >
 
-    <div class="mx-auto d-flex align-items-center justify-content-center flex-column" 
+    <div class="mx-auto d-flex align-items-center justify-content-center flex-column"
         style="min-height: 100vh; min-width: 100vw; position : fixed ; top : 0 ; left : 0;" >
-        
+
         <div class="container">
 
             @if (session('error') || session('done'))
@@ -74,12 +74,12 @@
 
             <div class="splitor"></div>
 
-            <p class="text-center text-white display-6 bg-theme mx-auto p-3 rounded" style="width: 50%">{{$shop->slug}}</p>
+            <p class="text-center text-white display-6 bg-theme mx-auto p-3 rounded " style="width: 50%;  font-weight: bold;">{{$shop->slug}}</p>
 
             <div class="splitor"></div>
 
-            <form class="form " 
-                action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data">
+            <form class="form "
+                action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data" style="padding-top: 60px;">
                 @csrf
                 @method('get')
                 <div style="width: 100%" class="print-continue-btn">
