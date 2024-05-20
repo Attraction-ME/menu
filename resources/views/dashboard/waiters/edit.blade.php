@@ -58,10 +58,10 @@
                                         </div>
                                     @endif
                                     @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                     <form class="form" action="{{ route('waiters.update', $waiter->id) }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
@@ -95,7 +95,7 @@
 
                                                         <div class="form-check form-check-inline ">
                                                            <label class="text-dark font-weight-bold">Tabel : {{$table->name}}</label>
-                                                           <input  type="checkbox" value="{{$table->id}}" id="userinput1" class="form-control border-primary"  name="tables[]" @foreach($table->waiters as $waiter_id) {{$waiter->id == $waiter_id->id ? 'checked' : ''}} @endforeach>
+                                                           <input  type="checkbox" value="{{$table->id}}" id="userinput1" class="form-control border-primary"  name="tables[]" @foreach($table->waiters as $waiter_id) {{$waiter->id == $waiter_id->id ? 'checked' : ''}} {{ $waiter->id != $waiter_id->id ? 'disabled' : '' }} @endforeach>
                                                         </div>
                                                         @endforeach
 
