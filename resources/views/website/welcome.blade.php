@@ -32,7 +32,7 @@
 
     <style>
         .splitor {
-            height: 10vh;
+            height: 40px;
             width: 100%;
             margin: 0 auto;
         }
@@ -45,16 +45,15 @@
     <div class="mx-auto d-flex align-items-center justify-content-center flex-column"
         style="min-height: 100vh; min-width: 100vw; position : fixed ; top : 0 ; left : 0;" >
 
-        <div class="container">
+        <div class="container" style="position: relative; min-height: 100vh;">
 
             @if (session('error') || session('done'))
 
-                <div class="finger-bottom mx-auto"   style="width: fit-content">
+                <div class=" mx-auto"   style="width: fit-content">
                     @if (session('error'))
                         <div class="alert alert-danger text-center">
                             {{ session('error') }}
                         </div>
-                        <div class="splitor"></div>
                     @endif
                     @if(session('done'))
                         <div class="woocommerce-notices-wrapper bg-success">
@@ -62,8 +61,6 @@
                                 {{ session('done') }}
                             </div>
                         </div>
-
-                        <div class="splitor"></div>
                     @endif
                 </div>
             @endif
@@ -74,18 +71,24 @@
 
             <div class="splitor"></div>
 
-            <p class="text-center text-white display-6 bg-theme mx-auto p-3 rounded " style="width: 50%;  font-weight: bold;">{{$shop->slug}}</p>
+            <p class="text-center text-white display-6 mx-auto p-3 rounded " style="background-color: red ; width: 100%;  font-weight: bold;">{{ strtoupper($shop->slug) }}</p>
 
             <div class="splitor"></div>
 
-            <form class="form "
-                action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data" style="padding-top: 60px;">
-                @csrf
-                @method('get')
-                <div style="width: 100%" class="print-continue-btn">
-                    <button >Make an Order</button>
-                </div>
-            </form>
+            <div class=" mx-auto d-flex align-items-center justify-content-center" style=" width: 87vw; position: absolute; bottom: 20px; " >
+
+                <form class="form " 
+                    action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data" 
+                    >
+                    @csrf
+                    @method('get')
+                    <div style="width: 100%" class="print-continue-btn "
+                    style="position: absolute; bottom: 0px; width: fit-content ; margin: 0 auto !important ; padding: 10px "
+                    >
+                        <button >Make An Order</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>
