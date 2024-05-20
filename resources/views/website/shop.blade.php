@@ -294,7 +294,7 @@
                                                                                                                 {{ $option->name }}
                                                                                                                 <br>
                                                                                                                 <span class="text-danger bold">
-                                                                                                                    Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                                    {{ $option->price }}  {{ $shop->currency->name }}
                                                                                                                 </span>
                                                                                                             </p>
                                                                                                         </label>
@@ -330,7 +330,7 @@
                                                                                                                 {{ $option->name }}
                                                                                                                 <br>
                                                                                                                 <span class="text-danger bold">
-                                                                                                                    Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                                    {{ $option->price }}  {{ $shop->currency->name }}
                                                                                                                 </span>
                                                                                                             </p>
                                                                                                         </label>

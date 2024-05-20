@@ -144,12 +144,12 @@
 
                                                     <div class=" col-md-2 col-sm-3 mb-1">
                                                         <label>Main Option</label>
-                                                        <p class="subtotal border border-secondary rounded" style="padding: 10px">{{ $order_detail->mainOption->name ?? "---"}}</p>
+                                                        <p class="subtotal rounded" style="padding: 10px ; border : 5px solid #aaaaaa">{{ $order_detail->mainOption->name ?? "---"}}</p>
                                                     </div>
                                                     
                                                     <div class=" col-md-2 col-sm-3 mb-1">
                                                         <label>Extra Option</label>
-                                                        <p class="subtotal border border-secondary rounded" style="padding: 10px">
+                                                        <p class="subtotal rounded" style="padding: 10px ; border : 5px solid #aaaaaa">
                                                             @if( isset($order_detail->extraOptions) )
                                                                 @foreach($order_detail->extraOptions as $extraOption ) {{ $extraOption->name  }} <br> @endforeach
                                                             @else
