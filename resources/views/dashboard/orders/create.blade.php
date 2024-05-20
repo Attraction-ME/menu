@@ -138,6 +138,22 @@
                                                     </div>
 
                                                     <div class=" col-md-2 col-sm-3 mb-1">
+                                                        <label>Main Option</label>
+                                                        <p class="subtotal border border-secondary rounded" style="padding: 5px">{{ $order_detail->mainOption->name ?? "---"}}</p>
+                                                    </div>
+                                                    
+                                                    <div class=" col-md-2 col-sm-3 mb-1">
+                                                        <label>Extra Option</label>
+                                                        <p class="subtotal border border-secondary rounded" style="padding: 5px">
+                                                            @if( isset($order_detail->extraOptions) )
+                                                                @foreach($order_detail->extraOptions as $extraOption ) {{ $extraOption->name  }} <br> @endforeach
+                                                            @else
+                                                                ---
+                                                            @endif    
+                                                        </p>
+                                                    </div>
+
+                                                    <div class=" col-md-2 col-sm-3 mb-1">
 
                                                         <button id="" class="removeInvoiceBtn btn btn-danger mt-2"
                                                             type="button"><i class="fa fa-trash-o"></i></button>
@@ -197,20 +213,20 @@
 
             $("#addInvoiceBtn").click(function() {
 
-                $("#addtoorder").append(`   <div class="d-flex flex-wrap">
+                $("#addtoorder").append(`   
+                                            <div class="d-flex flex-wrap">
                                                 <div class="col-sm-4 col-md-4 mb-2">
                                                     <label>Item</label>
                                                     <select name="product_id[]" id="" class="select2 form-control class">
-                                                        <option value="" >Select Product</option>
-                                                    @foreach ($productss as $product)
-                <option value="{{ $product->id }}" >{{ $product->name }}</option>
-
+                                                        <option value="">Select Product</option>
+                                                        @foreach ($productss as $product)
+                                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
                                                         @endforeach
-                </select>
-            </div>
-            <div class="col-sm-2 col-md-2 mb-1">
-                <label>Amount</label>
-                <input class="form-control quantityy" type="number" name="quantity[]" value="1">
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 mb-1">
+                                                    <label>Amount</label>
+                                                    <input class="form-control quantityy" type="number" name="quantity[]" value="1">
                                                 </div>
                                                 <div class="col-sm-2 col-md-2 mb-1">
                                                     <label>Price</label>
@@ -218,20 +234,19 @@
                                                 </div>
                                                 <div class="col-sm-2 col-md-2 mb-1">
                                                     <label>SubTotal</label>
-                                                    <input type="number" id="" class="form-control subtotal" name="subtotal[]" value="" readonly>
+                                                    <input type="number" id="" class="form-control subtotal" name="subtotal[]" value=""
+                                                        readonly>
                                                 </div>
-
                                                 <div class="col-sm-2 col-md-2 mb-1">
-
-                                                        <button id="" class="removeInvoiceBtn btn btn-danger mt-2" type="button"><i class="fa fa-trash-o"></i></button>
+                                                    <button id="" class="removeInvoiceBtn btn btn-danger mt-2" type="button"><i
+                                                            class="fa fa-trash-o"></i></button>
                                                 </div>
                                             </div>
-`);
+                                    `);
 
                 $('.class').select2();
 
                 $('.class').on('change', function() {
-
 
                     var product_id = this.value;
                     var request_price_input = $(this).parent().parent().find('.request_price');
@@ -273,10 +288,7 @@
 
                     });
 
-
-
                     $(".quantityy").on('change', function() {
-
 
                         var quan = $(this).val();
                         var price = parseFloat($(this).closest('.d-flex').find(
@@ -292,12 +304,8 @@
                             $(".total").val(temp);
                         });
 
-
-
-
                     });
                     $(".request_price").on('change', function() {
-
 
                         var price = $(this).val();
                         var quan = parseFloat($(this).closest('.d-flex').find('.quantityy')
@@ -314,12 +322,7 @@
                             $(".total").val(temp - disc);
                         });
 
-
-
-
                     });
-
-
 
                 });
 
@@ -389,8 +392,6 @@
                 });
 
                 $(".quantityy").on('change', function() {
-
-
                     var quan = $(this).val();
                     var price = parseFloat($(this).closest('.d-flex').find('.request_price').val());
                     parseFloat($(this).closest('.d-flex').find('.subtotal').val(quan * price));
@@ -402,13 +403,7 @@
                         $(".ordertotal").val(temp);
                         $(".total").val(temp);
                     });
-
-
-
-
                 });
-
-
             });
 
             $(".removeInvoiceBtn").click(function() {
@@ -453,9 +448,6 @@
                     $(".total").val(temp - disc);
                 });
 
-
-
-
             });
 
             $(".request_price").on('change', function() {
@@ -473,10 +465,6 @@
                     $(".ordertotal").val(temp);
                     $(".total").val(temp - disc);
                 });
-
-
-
-
             });
 
 

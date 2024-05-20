@@ -78,7 +78,9 @@ class ProductController extends Controller
             "price" =>  $request->totalPrice ?? $product->finalprice,
             "image" => $product->image_temp,
             "mainOptionId" => $request->mainOptionId,
+            "mainOptionName" => $request->mainOptionName,
             "extraOptionIds" => $request->extraOptionIds,
+            "extraOptionNames" => $request->extraOptionNames,
             "shop_id" => $product->shop_id,
             "shop_name" => $shop->name,
         ];

@@ -287,7 +287,8 @@
                                                                                             <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
                                                                                                 @foreach  ( $product->mainOptions as $option )
                                                                                                     <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
-                                                                                                        <input class="form-check-input d-block radio-modal-{{ $index }}" type="radio" data-option-id="{{ $option->id }}" name="main_option_{{ $index }}" id="flexRadioDefault_{{ $option->id }}" value="{{ $option->price }}" >
+                                                                                                        <input class="form-check-input d-block radio-modal-{{ $index }}" type="radio" data-option-id="{{ $option->id }}"  data-option-name="{{ $option->name }}"
+                                                                                                        name="main_option_{{ $index }}" id="flexRadioDefault_{{ $option->id }}" value="{{ $option->price }}" >
                                                                                                         <br>
                                                                                                         <label class="form-check-label text-white d-block" for="flexRadioDefault_{{$option->id}}">
                                                                                                             <p>
@@ -320,7 +321,8 @@
                                                                                             <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
                                                                                                 @foreach  ( $product->extraOptions as $option )
                                                                                                     <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
-                                                                                                        <input class="form-check-input d-block checkbox-modal-{{ $index }}" type="checkbox" data-option-id="{{ $option->id }}" name="extra_option_{{ $index }}" id="flexCheckboxDefault_{{$option->id}}" value="{{ $option->price }}" >
+                                                                                                        <input class="form-check-input d-block checkbox-modal-{{ $index }}" type="checkbox" data-option-id="{{ $option->id }}" data-option-name="{{ $option->name }}" 
+                                                                                                        name="extra_option_{{ $index }}" id="flexCheckboxDefault_{{$option->id}}" value="{{ $option->price }}" >
                                                                                                         <br>
                                                                                                         <label class="form-check-label text-white d-block" for="flexCheckboxDefault_{{$option->id}}">
                                                                                                             <p>
@@ -643,11 +645,14 @@
                 var index = $(this).data('index');
 
                 var mainOptionId = $(`input[name=main_option_${index}][type=radio]:checked`).data('option-id') ?? null;
+                var mainOptionName = $(`input[name=main_option_${index}][type=radio]:checked`).data('option-name') ?? null;
                 
                 var extraOptionIds = [];
+                var extraOptionNames = [];
 
                 $(`input[name=extra_option_${index}][type=checkbox]:checked`).each(function () { 
                     extraOptionIds.push( $(this).data('option-id') );
+                    extraOptionNames.push( $(this).data('option-name') );
                 })
 
                 // Find the nearest .qty-input relative to the clicked button
@@ -667,7 +672,9 @@
                     method: 'GET',
                     data: {
                         mainOptionId: mainOptionId,
+                        mainOptionName: mainOptionName,
                         extraOptionIds: extraOptionIds,
+                        extraOptionNames: extraOptionNames,
                         quantity: quantity,
                         totalPrice : totalPrice,
                         _token: '{{ csrf_token() }}'

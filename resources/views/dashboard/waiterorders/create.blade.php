@@ -138,6 +138,22 @@
                                                     </div>
 
                                                     <div class=" col-md-2 col-sm-3 mb-1">
+                                                        <label>Main Option</label>
+                                                        <p class="subtotal border border-secondary rounded" style="padding: 5px">{{ $order_detail->mainOption->name ?? "---"}}</p>
+                                                    </div>
+                                                    
+                                                    <div class=" col-md-2 col-sm-3 mb-1">
+                                                        <label>Extra Option</label>
+                                                        <p class="subtotal border border-secondary rounded" style="padding: 5px">
+                                                            @if( isset($order_detail->extraOptions) )
+                                                                @foreach($order_detail->extraOptions as $extraOption ) {{ $extraOption->name  }} <br> @endforeach
+                                                            @else
+                                                                ---
+                                                            @endif    
+                                                        </p>
+                                                    </div>
+
+                                                    <div class=" col-md-2 col-sm-3 mb-1">
 
                                                         <button id="" class="removeInvoiceBtn btn btn-danger mt-2"
                                                             type="button"><i class="fa fa-trash-o"></i></button>
@@ -187,7 +203,6 @@
 
         </div>
     </div>
-
 
 @endsection
 
@@ -274,7 +289,6 @@
                     });
 
                     $(".quantityy").on('change', function() {
-
 
                         var quan = $(this).val();
                         var price = parseFloat($(this).closest('.d-flex').find(

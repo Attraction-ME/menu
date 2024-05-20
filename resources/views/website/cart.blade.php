@@ -2,7 +2,7 @@
 @section('title', 'cart')
 @section('body')
 
-    <div class="th-cart-wrapper  space-top space-extra-bottom bg-light">
+    <div class="th-cart-wrapper  space-top space-extra-bottom bg-light" style="width: fit-content !important; margin: 0 auto !important;">
         <div class="container">
 
             @if (session('success'))
@@ -28,6 +28,8 @@
                         <tr>
                             <th class="cart-col-image">Image</th>
                             <th class="cart-col-productname">Product Name</th>
+                            <th class="cart-col-price">Main Option</th>
+                            <th class="cart-col-price">Extra Options</th>
                             <th class="cart-col-price">Price</th>
                             <th class="cart-col-quantity">Quantity</th>
                             <th class="cart-col-total">Total</th>
@@ -68,6 +70,20 @@
                                     </td>
                                     <td data-title="Name">
                                         <a class="cart-productname" href="#">{{ $details['name'] }}</a>
+                                    </td>
+                                    <td data-title="Main-Option">
+                                        <a class="cart-productname" href="#">{{ $details['mainOptionName'] ?? "---" }}</a>
+                                    </td>
+                                    <td data-title="Extra-Options">
+                                        <a class="cart-productname" href="#">
+                                            @if ( isset ($details['extraOptionNames']) )
+                                                @foreach ($details['extraOptionNames'] as $extraOptionName)
+                                                    {{ $extraOptionName }} <br>
+                                                @endforeach
+                                            @else
+                                                ---
+                                            @endif
+                                        </a>
                                     </td>
                                     <td data-title="Price">
                                         <span class="amount"><bdi>{{ $details['price'] }}

@@ -1,14 +1,14 @@
-<body style="background-color: #1D1D1B !important;">
-<div class="site-content">
+<body style="background-color: #1D1D1B !important; ">
+<div class="site-content " style="width: fit-content !important ; " >
     <!-- Preloader Start -->
-    <div class="loader-mask">
+    <div class="loader-mask" >
         <div class="circle">
         </div>
     </div>
     <!-- Preloader End -->
     <!-- Header Start -->
-    <header id="top-navbar" class="top-navbar">
-        <div class="container">
+    <header id="top-navbar" class="top-navbar"  >
+        <div class="container" >
             <div class="top-navbar_full">
                 <!-- <div class="back-btn">
                     <a href="#offcanvasExample" data-bs-toggle="offcanvas">

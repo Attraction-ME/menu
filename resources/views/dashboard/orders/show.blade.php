@@ -103,6 +103,8 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Items</th>
                                         <th scope="col">Quantity</th>
+                                        <th scope="col">Main Option</th>
+                                        <th scope="col">Extra Options</th>                                        
                                         <th scope="col">Price</th>
                                         <th scope="col">Total</th>
 
@@ -114,7 +116,17 @@
                                             <td>{{ $key +1 }}</td>
                                             <td>{{ $order_detail->order_product->name }}</td>
                                             <td>{{ $order_detail->quantity }}</td>
+                                            <td>
+                                                @if ($order_detail?->extraOptions != false)
+                                                    @foreach ($order_detail?->extraOptions as $extraOption)
+                                                        <p>{{ $extraOption?->name }}</p>
+                                                    @endforeach
+                                                @else
+                                                    ---
+                                                @endif
+                                            </td>
                                             <td class="font-weight-bold">{{ $order_detail->price }}</td>
+
                                             <td class="font-weight-bold">{{ $order_detail->total }}</td>
 
                                         </tr>
