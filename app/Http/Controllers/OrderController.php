@@ -54,15 +54,15 @@ class OrderController extends Controller
     {
 
         if (!$request->table_id  || !$request->product_id) {
-            return redirect()->back()->with('message', "You Must Choise Order");
+            return redirect()->back()->with('message', "You Must Choose Order");
         }
         if ($request->waiter_id == 0) {
-            return redirect()->back()->with('message', "You Must Choise Waiter");
+            return redirect()->back()->with('message', "You Must Choose Waiter");
         }
 
         $table = Table::find($request->table_id);
-        // $link = $table->link;
         $shop = Shop::find($request->shop_id);
+        // $link = $table->link;
 
         // $latitude = $request->input('latitude');
         // $longitude = $request->input('longitude');
@@ -111,22 +111,22 @@ class OrderController extends Controller
     }
     private function calculateDistance($lat1, $lon1, $lat2, $lon2)
     {
-        $earthRadius = 6371; // in kilometers
+        // $earthRadius = 6371; // in kilometers
 
-        $lat1 = deg2rad($lat1);
-        $lon1 = deg2rad($lon1);
-        $lat2 = deg2rad($lat2);
-        $lon2 = deg2rad($lon2);
+        // $lat1 = deg2rad($lat1);
+        // $lon1 = deg2rad($lon1);
+        // $lat2 = deg2rad($lat2);
+        // $lon2 = deg2rad($lon2);
 
-        $dlat = $lat2 - $lat1;
-        $dlon = $lon2 - $lon1;
+        // $dlat = $lat2 - $lat1;
+        // $dlon = $lon2 - $lon1;
 
-        $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin($dlon / 2) * sin($dlon / 2);
-        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        // $a = sin($dlat / 2) * sin($dlat / 2) + cos($lat1) * cos($lat2) * sin($dlon / 2) * sin($dlon / 2);
+        // $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 
-        $distance = $earthRadius * $c;
+        // $distance = $earthRadius * $c;
 
-        return $distance;
+        // return $distance;
     }
 
     public function checkNewOrders($shop_id)
