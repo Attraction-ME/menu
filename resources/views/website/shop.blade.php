@@ -712,7 +712,7 @@
                         $('.modal').modal('hide');
                         // alert(response.success); // or display a success message in your UI
                         $('#notify-cart').show();
-                        $('#notify-cart').fadeOut( 6000 );
+                        $('#notify-cart').fadeOut( 500 );
                     },
 
                     error: function(error) {
