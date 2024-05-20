@@ -45,7 +45,7 @@
     <div class="mx-auto d-flex align-items-center justify-content-center flex-column"
         style="min-height: 100vh; min-width: 100vw; position : fixed ; top : 0 ; left : 0;" >
 
-        <div class="container" style="position: relative; min-height: 100vh;">
+        <div class="container " style="position: relative; min-height: 100vh; max-width: 80vw; padding: 10px !important; margin: 0 !important;">
 
             @if (session('error') || session('done'))
 
@@ -75,15 +75,15 @@
 
             <div class="splitor"></div>
 
-            <div class=" mx-auto d-flex align-items-center justify-content-center" style=" width: 87vw; position: absolute; bottom: 20px; " >
+            <div class=" mx-auto p-0" style=" width: 100%; position: absolute; bottom: 20px; left:0; margin: 0 auto !important ; padding: 0px !important; " >
 
                 <form class="form " 
                     action="{{ route('website.welcome', $shop->slug) }}" method="post" enctype="multipart/form-data" 
                     >
                     @csrf
                     @method('get')
-                    <div style="width: 100%" class="print-continue-btn "
-                    style="position: absolute; bottom: 0px; width: fit-content ; margin: 0 auto !important ; padding: 10px "
+                    <div class="print-continue-btn "
+                    style=" min-width: 100% ; margin: 0 auto !important ; padding: 0px !important;  "
                     >
                         <button >Make An Order</button>
                     </div>
