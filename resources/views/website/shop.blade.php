@@ -286,15 +286,16 @@
                                                                                             </h3>
                                                                                             <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
                                                                                                 @foreach  ( $product->mainOptions as $option )
-                                                                                                    <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
-                                                                                                        <input class="form-check-input d-block radio-modal-{{ $index }}" type="radio" data-option-id="{{ $option->id }}"  data-option-name="{{ $option->name }}"
+                                                                                                    <div class="form-check d-flex flex-wrap flex-column bg-white m-2 p-1 rounded" style="background-color: #eeeeee !important;" >
+                                                                                                        <input class="form-check-input d-block radio-modal-{{ $index }} d-inline" type="radio" data-option-id="{{ $option->id }}"  data-option-name="{{ $option->name }}"
                                                                                                         name="main_option_{{ $index }}" id="flexRadioDefault_{{ $option->id }}" value="{{ $option->price }}" >
-                                                                                                        <br>
-                                                                                                        <label class="form-check-label text-white d-block" for="flexRadioDefault_{{$option->id}}">
-                                                                                                            <p>
+                                                                                                        <label class="form-check-label text-white d-block m-0" for="flexRadioDefault_{{$option->id}}">
+                                                                                                            <p class="m-0">
                                                                                                                 {{ $option->name }}
-                                                                                                            <p class="text-danger bold">
-                                                                                                                Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                                <br>
+                                                                                                                <span class="text-danger bold">
+                                                                                                                    Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                                </span>
                                                                                                             </p>
                                                                                                         </label>
                                                                                                     </div>
@@ -318,17 +319,19 @@
                                                                                         <div class="cloth-third-sec-full">
                                                                                             <h3 class="des-txt1"> Extra Options
                                                                                             </h3>
-                                                                                            <div class="w-100 d-flex flex-wrap align-items-center justify-content-center ">
+                                                                                            <div class="w-100 d-flex flex-wrap align-items-center justify-content-center " >
                                                                                                 @foreach  ( $product->extraOptions as $option )
-                                                                                                    <div class="form-check d-flex flex-wrap flex-column bg-white m-2 px-2 rounded">
-                                                                                                        <input class="form-check-input d-block checkbox-modal-{{ $index }}" type="checkbox" data-option-id="{{ $option->id }}" data-option-name="{{ $option->name }}" 
+                                                                                                    <div class="form-check d-flex flex-wrap flex-column bg-white m-2 p-1 rounded" style="background-color: #eeeeee !important;">
+                                                                                                        <input class="form-check-input d-block checkbox-modal-{{ $index }} d-inline" type="checkbox" 
+                                                                                                            data-option-id="{{ $option->id }}" data-option-name="{{ $option->name }}" 
                                                                                                         name="extra_option_{{ $index }}" id="flexCheckboxDefault_{{$option->id}}" value="{{ $option->price }}" >
-                                                                                                        <br>
-                                                                                                        <label class="form-check-label text-white d-block" for="flexCheckboxDefault_{{$option->id}}">
-                                                                                                            <p>
+                                                                                                        <label class="form-check-label text-white d-block m-0" for="flexCheckboxDefault_{{$option->id}}">
+                                                                                                            <p class="m-0">
                                                                                                                 {{ $option->name }}
-                                                                                                            <p class="text-danger bold">
-                                                                                                                Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                                <br>
+                                                                                                                <span class="text-danger bold">
+                                                                                                                    Price : {{ $option->price }}  {{ $shop->currency->name }}
+                                                                                                                </span>
                                                                                                             </p>
                                                                                                         </label>
                                                                                                     </div>

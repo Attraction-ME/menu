@@ -136,27 +136,26 @@
                                                         <input type="number" id="" class="form-control subtotal"
                                                             name="subtotal[]" value="{{ $order_detail->total }}" readonly>
                                                     </div>
+                                                    
+                                                    <div class=" col-md-2 col-sm-3 mb-1">
+                                                        <button id="" class="removeInvoiceBtn btn btn-danger mt-2"
+                                                            type="button"><i class="fa fa-trash-o"></i></button>
+                                                    </div>
 
                                                     <div class=" col-md-2 col-sm-3 mb-1">
                                                         <label>Main Option</label>
-                                                        <p class="subtotal border border-secondary rounded" style="padding: 5px">{{ $order_detail->mainOption->name ?? "---"}}</p>
+                                                        <p class="subtotal border border-secondary rounded" style="padding: 10px">{{ $order_detail->mainOption->name ?? "---"}}</p>
                                                     </div>
                                                     
                                                     <div class=" col-md-2 col-sm-3 mb-1">
                                                         <label>Extra Option</label>
-                                                        <p class="subtotal border border-secondary rounded" style="padding: 5px">
+                                                        <p class="subtotal border border-secondary rounded" style="padding: 10px">
                                                             @if( isset($order_detail->extraOptions) )
                                                                 @foreach($order_detail->extraOptions as $extraOption ) {{ $extraOption->name  }} <br> @endforeach
                                                             @else
                                                                 ---
                                                             @endif    
                                                         </p>
-                                                    </div>
-
-                                                    <div class=" col-md-2 col-sm-3 mb-1">
-
-                                                        <button id="" class="removeInvoiceBtn btn btn-danger mt-2"
-                                                            type="button"><i class="fa fa-trash-o"></i></button>
                                                     </div>
                                                 </div>
                                             @endforeach
