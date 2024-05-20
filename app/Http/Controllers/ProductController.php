@@ -198,6 +198,7 @@ class ProductController extends Controller
             $keyword = $request->input('keyword');
 
             $products = Product::where('shop_id', $shop->id)
+                            ->where('is_available', 1)
                             ->ofNameOrDescribtion( $keyword )
                             ->with(['mainOptions', 'extraOptions'])->get();
 
@@ -212,12 +213,16 @@ class ProductController extends Controller
 
             $products = Product::where('category_id', $cat_id)
                 ->where('shop_id', $shop_id)
+                ->where('is_available', 1)
                 ->with(['mainOptions', 'extraOptions'])
                 ->get();
 
         } else {
 
-            $products = Product::where('shop_id', $shop->id)->with([ 'mainOptions' , 'extraOptions' ])->get();
+            $products = Product::where('shop_id', $shop->id)
+            ->where('is_available', 1)
+            ->with([ 'mainOptions' , 'extraOptions' ])
+            ->get();
             $category = json_decode('{"name": "All Categories"}', true);
 
         }
@@ -330,12 +335,15 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request['is_available'] = $request->is_available == true ? 1 : 0;
+
         $request->validate([
             'name' => ['required' , 'string' , 'max:255'],
             'price' => ['required' , 'numeric' , 'min:0'],
             'sale' => ['required' , 'numeric' , 'min:0' , 'max:100'],
             'category_id' => ['required' , 'exists:categories,id'],
             'details' => ['required' , 'string'],
+            'is_available' => ['required' , 'numeric' , 'min:0 , max:1'],
             'image_temp' => ['nullable' , 'image' , 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
@@ -361,6 +369,7 @@ class ProductController extends Controller
             $product->finalprice = $finalprice;
             $product->sale = $request->sale;
             $product->details = $request->details;
+            $product->is_available = $request->is_available;
             $product->image_temp = $imageName;
             $product->category_id = $request->category_id;
             $product->save();

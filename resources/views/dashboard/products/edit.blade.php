@@ -235,6 +235,16 @@
                                                 <div class="row col-md-12" id="extra-options">
                                                 </div>
 
+                                                <div class="col-md-6">
+                                                    <h4 class="form-section text-dark"><i class="feather icon-edit-2"></i>
+                                                        Is Available ? </h4>
+                                                    <div class="form-group">
+                                                        <input type="checkbox" class="form-control border-primary"
+                                                            id="product_is_available" name="is_available"
+                                                            {{ $product->is_available ? 'checked' : '' }}>
+                                                    </div>
+                                                </div>
+
                                                 <div class=" col-md-12">
                                                     <h4 class="form-section text-dark"><i class="fa fa-photo"></i>
                                                         Thumbnail Image </h4>

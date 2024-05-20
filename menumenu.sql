@@ -175,7 +175,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `order_details` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -193,7 +193,7 @@ CREATE TABLE `order_details` (
   KEY `product_id` (`product_id`),
   CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `orders` (
   `id` bigint NOT NULL AUTO_INCREMENT,
@@ -211,7 +211,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`waiter_id`) REFERENCES `waiters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `owners` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -266,6 +266,7 @@ CREATE TABLE `products` (
   `shop_id` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_available` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `products_cat_id_foreign` (`category_id`),
   KEY `products_shop_id_foreign` (`shop_id`),
@@ -424,7 +425,7 @@ CREATE TABLE `table_waiter` (
   KEY `table_waiters_waiter_id_foreign` (`waiter_id`),
   CONSTRAINT `table_waiters_table_id_foreign` FOREIGN KEY (`table_id`) REFERENCES `tables` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `table_waiters_waiter_id_foreign` FOREIGN KEY (`waiter_id`) REFERENCES `waiters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `tables` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -524,13 +525,13 @@ INSERT INTO `customers` (`id`, `name`, `email`, `password`, `created_at`, `updat
 
 
 INSERT INTO `extra_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(2, 690, 'extra ', 130, '2024-05-14 06:46:37', '2024-05-14 07:25:51');
+(2, 690, 'extra', 130, '2024-05-14 06:46:37', '2024-05-20 08:34:08');
 INSERT INTO `extra_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(3, 690, 'extra 3 ', 14, '2024-05-14 06:46:37', '2024-05-14 07:25:51');
+(3, 690, 'extra 3', 14, '2024-05-14 06:46:37', '2024-05-20 08:34:08');
 INSERT INTO `extra_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(4, 690, 'extra 4', 15, '2024-05-14 06:46:37', '2024-05-14 07:25:51');
+(4, 690, 'extra 4', 15, '2024-05-14 06:46:37', '2024-05-20 08:34:08');
 INSERT INTO `extra_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(5, 690, 'extra 5', 16, '2024-05-14 06:46:37', '2024-05-14 07:25:51'),
+(5, 690, 'extra 5', 16, '2024-05-14 06:46:37', '2024-05-20 08:34:08'),
 (6, 691, 'extra 5', 16, '2024-05-14 06:46:37', '2024-05-14 07:25:51'),
 (7, 691, 'extra 4', 15, '2024-05-14 06:46:37', '2024-05-14 07:25:51'),
 (8, 691, 'extra 3 ', 14, '2024-05-14 06:46:37', '2024-05-14 07:25:51'),
@@ -579,9 +580,9 @@ INSERT INTO `images` (`id`, `name`, `product_id`, `created_at`, `updated_at`) VA
 
 
 INSERT INTO `main_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(2, 690, 'main 1 edited 2', 140, '2024-05-14 06:46:37', '2024-05-14 07:25:51');
+(2, 690, 'main 1 edited 2', 140, '2024-05-14 06:46:37', '2024-05-20 08:34:08');
 INSERT INTO `main_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
-(3, 690, 'main 2', 14, '2024-05-14 06:46:37', '2024-05-14 07:25:51');
+(3, 690, 'main 2', 14, '2024-05-14 06:46:37', '2024-05-20 08:34:08');
 INSERT INTO `main_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
 (4, 691, 'main 2', 14, '2024-05-14 06:46:37', '2024-05-14 07:25:51');
 INSERT INTO `main_options` (`id`, `product_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
@@ -596,7 +597,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2024_05_13_064936_create_main_options_table', 4),
 (5, '2024_05_13_065746_create_extra_options_table', 5),
-(9, '2024_05_19_093832_add_two_columns_to_order_datials_table', 6);
+(9, '2024_05_19_093832_add_two_columns_to_order_datials_table', 6),
+(10, '2024_05_20_075147_add_is_available_to_products_table', 7);
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`, `main_option_id`, `extra_option_ids`) VALUES
 (65, 36, 699, 1, 74, 74, '2024-05-12 11:20:00', '2024-05-12 11:20:00', NULL, NULL);
@@ -607,9 +609,12 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `total`, `created_at`, `updated_at`, `main_option_id`, `extra_option_ids`) VALUES
 (72, 38, 690, 1, 89, 89, '2024-05-12 12:56:43', '2024-05-12 12:56:43', NULL, NULL),
 (73, 38, 691, 1, 89, 89, '2024-05-12 12:56:43', '2024-05-12 12:56:43', NULL, NULL),
-(96, 53, 690, 1, 29, 29, '2024-05-19 12:48:14', '2024-05-19 12:48:14', 3, '[\"4\"]'),
-(97, 53, 693, 1, 100, 100, '2024-05-19 12:48:14', '2024-05-19 12:48:14', NULL, 'null'),
-(98, 53, 695, 1, 45, 45, '2024-05-19 12:48:14', '2024-05-19 12:48:14', NULL, 'null');
+(99, 54, 693, 1, 100, 100, '2024-05-19 12:58:07', '2024-05-20 07:12:28', NULL, 'null'),
+(100, 54, 695, 1, 45, 45, '2024-05-19 12:58:07', '2024-05-20 07:12:28', NULL, 'null'),
+(101, 54, 694, 1, 89, 89, '2024-05-19 12:58:07', '2024-05-20 07:12:28', NULL, 'null'),
+(102, 55, 690, 2, 44, 88, '2024-05-20 07:28:14', '2024-05-20 07:32:01', 3, '[\"3\",\"5\"]'),
+(103, 55, 691, 2, 43, 86, '2024-05-20 07:28:14', '2024-05-20 07:32:01', 4, '[\"7\",\"8\"]'),
+(104, 55, 693, 1, 100, 100, '2024-05-20 07:28:14', '2024-05-20 07:32:01', NULL, 'null');
 
 INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
 (36, 17, 1, 74, 13, 3, '2024-05-12 11:19:32', '2024-05-12 11:20:00');
@@ -619,7 +624,8 @@ INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id
 (38, 17, 1, 178, 13, 3, '2024-05-12 12:55:19', '2024-05-12 12:56:43');
 INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
 (39, 17, 1, 0, 13, 3, '2024-05-12 12:58:07', '2024-05-19 10:00:20'),
-(53, 17, 0, 174, 13, 3, '2024-05-19 12:48:14', '2024-05-19 12:48:14');
+(54, 17, 1, 234, 13, 3, '2024-05-19 12:58:07', '2024-05-20 07:12:28'),
+(55, 17, 1, 274, 13, 3, '2024-05-20 07:28:14', '2024-05-20 07:32:01');
 
 
 
@@ -629,52 +635,52 @@ INSERT INTO `orders` (`id`, `table_id`, `status`, `total`, `shop_id`, `waiter_id
 
 
 
-INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`) VALUES
-(673, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-08 23:05:03');
-INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`) VALUES
-(674, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34');
-INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`) VALUES
-(675, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34');
-INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`) VALUES
-(676, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(677, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(678, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(679, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(680, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(681, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(682, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(683, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(684, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(685, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(686, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(687, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(688, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34'),
-(690, 'Big Chicken Sandwich', '89.00', '89.00', 0, '<p>Chicken slices with lettuce, onion slices, tomatoes, topped with Texas sauce</p>', '1707654556.jpg', 69, 13, '2024-02-11 22:29:16', '2024-05-14 07:25:51'),
-(691, 'Chicken Roll Sandwich', '89.00', '89.00', NULL, '<p>Chicken, pickled cucumber, garlic dip</p>', '1707654679.jpg', 69, 13, '2024-02-11 22:31:19', '2024-02-11 22:31:19'),
-(692, 'Crispy Ranch Sandwich', '74.00', '74.00', NULL, '<p>Crispy chicken piece with lettuce, tomatoes, topped with ranch and cheddar cheese</p>', '1707654775.jpg', 69, 13, '2024-02-11 22:32:55', '2024-02-11 22:32:55'),
-(693, 'Crunchy Cheese Chicken Sandwich', '100.00', '100.00', NULL, '<p>2 mozzarella sticks pieces, chicken, lettuce, tomato, cheese slice, ranch sauce</p>', '1707654875.jpg', 69, 13, '2024-02-11 22:34:35', '2024-02-11 22:34:35'),
-(694, 'Golden Roll Sandwich', '89.00', '89.00', NULL, '<p>Enjoy our golden panne, lettuce, tomatoes, covered with ranch sauce</p>', '1707655091.jpg', 69, 13, '2024-02-11 22:38:11', '2024-02-11 22:38:11'),
-(695, 'Original Chicken Shawerma Sandwich', '45.00', '45.00', NULL, '<p>Chicken, pickled cucumber, garlic dip</p>', '1707655256.jpg', 69, 13, '2024-02-11 22:40:56', '2024-02-11 22:40:56'),
-(696, 'Royal Chicken Sandwich', '112.00', '112.00', NULL, '<p>Chicken Shawerma with tomatoes, lettuce and fresh onion slices covered with delicious garlic dip sauce</p>', '1707655344.jpg', 69, 13, '2024-02-11 22:42:24', '2024-02-11 22:42:24'),
-(697, 'Super Chicken Sandwich', '89.00', '89.00', NULL, '<p>Chicken mixed with grilled peppers and onions topped with our special cheese and ranch sauce</p>', '1707655442.jpg', 69, 13, '2024-02-11 22:44:02', '2024-02-11 22:44:02'),
-(698, 'Chicken Fattah', '74.00', '74.00', NULL, '<p>Chicken , rice, croutons, sauce, garlic dip</p>', '1707655559.jpg', 74, 13, '2024-02-11 22:45:59', '2024-02-11 22:45:59'),
-(699, 'Doner Fattah', '74.00', '74.00', NULL, '<p>Doner, rice, croutons, sauce, garlic dip</p>', '1707655638.jpg', 69, 13, '2024-02-11 22:47:18', '2024-02-11 22:47:18'),
-(700, 'French Fries', '30.00', '30.00', NULL, '<p>French fries with ketchup</p>', '1707655783.jpg', 76, 13, '2024-02-11 22:49:43', '2024-02-11 22:49:43'),
-(701, 'German Fries', '40.00', '40.00', NULL, '<p>Fries topped with cheddar cheese, jalapeno</p>', '1707655874.jpg', 76, 13, '2024-02-11 22:51:14', '2024-02-11 22:51:14'),
-(702, 'Steak Fries', '40.00', '40.00', NULL, '<p>Crispy fries with ranch sauce</p>', '1707655973.jpg', 76, 13, '2024-02-11 22:52:53', '2024-02-11 22:52:53'),
-(703, 'Cheddar Steak Fries', '48.00', '48.00', NULL, '<p>Crispy fries covered with cheddar cheese sauce</p>', '1707656051.jpg', 76, 13, '2024-02-11 22:54:11', '2024-02-11 22:54:11'),
-(704, 'Royal Doner Sandwich', '112.00', '112.00', NULL, '<p>Doner kebab slices with tomatoes, lettuce, fresh onion slices covered with delicious ranch sauce<br>&nbsp;</p>', '1707656420.jpg', 79, 13, '2024-02-11 23:00:20', '2024-02-11 23:00:20'),
-(705, 'Crunchy Cheese Doner Sandwich', '100.00', '100.00', NULL, '<p>Doner kebab slices, lettuce, tomato, cheese slice, 2 pieces of mozzarella cheese sticks and ranch sauce</p>', '1707656563.jpg', 79, 13, '2024-02-11 23:02:43', '2024-02-11 23:02:43'),
-(706, 'Big Doner Sandwich', '89.00', '89.00', NULL, '<p>Enjoy our special Doner kebab taste with lettuce, onion, tomatoes and Texas sauce</p>', '1707656660.jpg', 79, 13, '2024-02-11 23:04:20', '2024-02-11 23:04:20'),
-(707, 'Super Doner Sandwich', '89.00', '89.00', NULL, '<p>Doner kebab mixed with green peppers and grilled onions topped with our special cheese and ranch sauce</p>', '1707656746.jpg', 79, 13, '2024-02-11 23:05:46', '2024-02-11 23:05:46'),
-(708, 'Classic Burger', '74.00', '74.00', NULL, '<p>Beef burger patty with tomato slices, lettuce, onions and pickled cucumber pieces topped with Texas</p>', '1707656834.jpg', 69, 13, '2024-02-11 23:07:14', '2024-02-11 23:07:14'),
-(709, 'Burger Doner', '99.00', '99.00', NULL, '<p>A piece of beef burger with Doner slices, tomatoes, lettuce, onions and pickled cucumbers, covered with Texas sauce</p>', '1707656923.jpg', 79, 13, '2024-02-11 23:08:43', '2024-02-11 23:08:43'),
-(710, 'Roll Doner Sandwich', '89.00', '89.00', NULL, '<p>Make it roll! enjoy your Doner kebab with lettuce, tomatoes, and red cabbage, ranch sauce</p>', '1707657001.jpg', 79, 13, '2024-02-11 23:10:01', '2024-02-11 23:10:01'),
-(711, 'Original Doner Sandwich', '45.00', '45.00', NULL, '<p>The original taste of Doner kebab topped with ranch sauce</p>', '1707657091.jpg', 79, 13, '2024-02-11 23:11:31', '2024-02-11 23:11:31'),
-(712, 'Doner Box', '96.00', '96.00', NULL, '<p>Mix Doner kebab slices, fries, served with lettuce, covered with ranch sauce</p>', '1707657615.jpg', 77, 13, '2024-02-11 23:20:15', '2024-02-11 23:20:15'),
-(713, 'Berlin Fried Box', '96.00', '96.00', NULL, '<p>2 Berlin chicken pieces with fries, served with lettuce, topped with cheese sauce and ranch sauce</p>', '1707657721.jpg', 77, 13, '2024-02-11 23:22:01', '2024-02-11 23:22:01'),
-(714, 'Coleslaw', '33.00', '33.00', NULL, '<p>Coleslaw</p>', '1709821096.jpg', 76, 13, '2024-03-08 00:18:16', '2024-03-08 00:18:16'),
-(715, 'Green Salad', '33.00', '33.00', NULL, '<p><strong>Green Salad</strong></p>', '1709821523.jpg', 76, 13, '2024-03-08 00:21:23', '2024-03-08 00:25:23');
+INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`, `is_available`) VALUES
+(673, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-08 23:05:03', 1);
+INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`, `is_available`) VALUES
+(674, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1);
+INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`, `is_available`) VALUES
+(675, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1);
+INSERT INTO `products` (`id`, `name`, `price`, `finalprice`, `sale`, `details`, `image_temp`, `category_id`, `shop_id`, `created_at`, `updated_at`, `is_available`) VALUES
+(676, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(677, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(678, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(679, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(680, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(681, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(682, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(683, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(684, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(685, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(686, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(687, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(688, 'pizaa', '150.00', '142.50', 5, '<p><strong>piza</strong></p>', '1707224494.png', 36, 10, '2024-02-06 14:01:34', '2024-02-06 14:01:34', 1),
+(690, 'Big Chicken Sandwich', '89.00', '89.00', 0, '<p>Chicken slices with lettuce, onion slices, tomatoes, topped with Texas sauce</p>', '1707654556.jpg', 69, 13, '2024-02-11 22:29:16', '2024-05-20 08:34:08', 1),
+(691, 'Chicken Roll Sandwich', '89.00', '89.00', NULL, '<p>Chicken, pickled cucumber, garlic dip</p>', '1707654679.jpg', 69, 13, '2024-02-11 22:31:19', '2024-02-11 22:31:19', 1),
+(692, 'Crispy Ranch Sandwich', '74.00', '74.00', NULL, '<p>Crispy chicken piece with lettuce, tomatoes, topped with ranch and cheddar cheese</p>', '1707654775.jpg', 69, 13, '2024-02-11 22:32:55', '2024-02-11 22:32:55', 1),
+(693, 'Crunchy Cheese Chicken Sandwich', '100.00', '100.00', NULL, '<p>2 mozzarella sticks pieces, chicken, lettuce, tomato, cheese slice, ranch sauce</p>', '1707654875.jpg', 69, 13, '2024-02-11 22:34:35', '2024-02-11 22:34:35', 1),
+(694, 'Golden Roll Sandwich', '89.00', '89.00', NULL, '<p>Enjoy our golden panne, lettuce, tomatoes, covered with ranch sauce</p>', '1707655091.jpg', 69, 13, '2024-02-11 22:38:11', '2024-02-11 22:38:11', 1),
+(695, 'Original Chicken Shawerma Sandwich', '45.00', '45.00', NULL, '<p>Chicken, pickled cucumber, garlic dip</p>', '1707655256.jpg', 69, 13, '2024-02-11 22:40:56', '2024-02-11 22:40:56', 1),
+(696, 'Royal Chicken Sandwich', '112.00', '112.00', NULL, '<p>Chicken Shawerma with tomatoes, lettuce and fresh onion slices covered with delicious garlic dip sauce</p>', '1707655344.jpg', 69, 13, '2024-02-11 22:42:24', '2024-02-11 22:42:24', 1),
+(697, 'Super Chicken Sandwich', '89.00', '89.00', NULL, '<p>Chicken mixed with grilled peppers and onions topped with our special cheese and ranch sauce</p>', '1707655442.jpg', 69, 13, '2024-02-11 22:44:02', '2024-02-11 22:44:02', 1),
+(698, 'Chicken Fattah', '74.00', '74.00', NULL, '<p>Chicken , rice, croutons, sauce, garlic dip</p>', '1707655559.jpg', 74, 13, '2024-02-11 22:45:59', '2024-02-11 22:45:59', 1),
+(699, 'Doner Fattah', '74.00', '74.00', NULL, '<p>Doner, rice, croutons, sauce, garlic dip</p>', '1707655638.jpg', 69, 13, '2024-02-11 22:47:18', '2024-02-11 22:47:18', 1),
+(700, 'French Fries', '30.00', '30.00', NULL, '<p>French fries with ketchup</p>', '1707655783.jpg', 76, 13, '2024-02-11 22:49:43', '2024-02-11 22:49:43', 1),
+(701, 'German Fries', '40.00', '40.00', NULL, '<p>Fries topped with cheddar cheese, jalapeno</p>', '1707655874.jpg', 76, 13, '2024-02-11 22:51:14', '2024-02-11 22:51:14', 1),
+(702, 'Steak Fries', '40.00', '40.00', NULL, '<p>Crispy fries with ranch sauce</p>', '1707655973.jpg', 76, 13, '2024-02-11 22:52:53', '2024-02-11 22:52:53', 1),
+(703, 'Cheddar Steak Fries', '48.00', '48.00', NULL, '<p>Crispy fries covered with cheddar cheese sauce</p>', '1707656051.jpg', 76, 13, '2024-02-11 22:54:11', '2024-02-11 22:54:11', 1),
+(704, 'Royal Doner Sandwich', '112.00', '112.00', NULL, '<p>Doner kebab slices with tomatoes, lettuce, fresh onion slices covered with delicious ranch sauce<br>&nbsp;</p>', '1707656420.jpg', 79, 13, '2024-02-11 23:00:20', '2024-02-11 23:00:20', 1),
+(705, 'Crunchy Cheese Doner Sandwich', '100.00', '100.00', NULL, '<p>Doner kebab slices, lettuce, tomato, cheese slice, 2 pieces of mozzarella cheese sticks and ranch sauce</p>', '1707656563.jpg', 79, 13, '2024-02-11 23:02:43', '2024-02-11 23:02:43', 1),
+(706, 'Big Doner Sandwich', '89.00', '89.00', NULL, '<p>Enjoy our special Doner kebab taste with lettuce, onion, tomatoes and Texas sauce</p>', '1707656660.jpg', 79, 13, '2024-02-11 23:04:20', '2024-02-11 23:04:20', 1),
+(707, 'Super Doner Sandwich', '89.00', '89.00', NULL, '<p>Doner kebab mixed with green peppers and grilled onions topped with our special cheese and ranch sauce</p>', '1707656746.jpg', 79, 13, '2024-02-11 23:05:46', '2024-02-11 23:05:46', 1),
+(708, 'Classic Burger', '74.00', '74.00', NULL, '<p>Beef burger patty with tomato slices, lettuce, onions and pickled cucumber pieces topped with Texas</p>', '1707656834.jpg', 69, 13, '2024-02-11 23:07:14', '2024-02-11 23:07:14', 1),
+(709, 'Burger Doner', '99.00', '99.00', NULL, '<p>A piece of beef burger with Doner slices, tomatoes, lettuce, onions and pickled cucumbers, covered with Texas sauce</p>', '1707656923.jpg', 79, 13, '2024-02-11 23:08:43', '2024-02-11 23:08:43', 1),
+(710, 'Roll Doner Sandwich', '89.00', '89.00', NULL, '<p>Make it roll! enjoy your Doner kebab with lettuce, tomatoes, and red cabbage, ranch sauce</p>', '1707657001.jpg', 79, 13, '2024-02-11 23:10:01', '2024-02-11 23:10:01', 1),
+(711, 'Original Doner Sandwich', '45.00', '45.00', NULL, '<p>The original taste of Doner kebab topped with ranch sauce</p>', '1707657091.jpg', 79, 13, '2024-02-11 23:11:31', '2024-02-11 23:11:31', 1),
+(712, 'Doner Box', '96.00', '96.00', NULL, '<p>Mix Doner kebab slices, fries, served with lettuce, covered with ranch sauce</p>', '1707657615.jpg', 77, 13, '2024-02-11 23:20:15', '2024-02-11 23:20:15', 1),
+(713, 'Berlin Fried Box', '96.00', '96.00', NULL, '<p>2 Berlin chicken pieces with fries, served with lettuce, topped with cheese sauce and ranch sauce</p>', '1707657721.jpg', 77, 13, '2024-02-11 23:22:01', '2024-02-11 23:22:01', 1),
+(714, 'Coleslaw', '33.00', '33.00', NULL, '<p>Coleslaw</p>', '1709821096.jpg', 76, 13, '2024-03-08 00:18:16', '2024-03-08 00:18:16', 1),
+(715, 'Green Salad', '33.00', '33.00', NULL, '<p><strong>Green Salad</strong></p>', '1709821523.jpg', 76, 13, '2024-03-08 00:21:23', '2024-03-08 00:25:23', 1);
 
 
 
@@ -722,7 +728,8 @@ INSERT INTO `table_waiter` (`id`, `table_id`, `waiter_id`, `created_at`, `update
 (15, 17, 3, '2024-05-12 14:15:12', '2024-05-12 14:15:12');
 INSERT INTO `table_waiter` (`id`, `table_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
 (16, 18, 4, '2024-05-14 10:47:44', '2024-05-14 10:47:44');
-
+INSERT INTO `table_waiter` (`id`, `table_id`, `waiter_id`, `created_at`, `updated_at`) VALUES
+(17, 13, 2, '2024-05-20 10:47:20', '2024-05-20 10:47:20');
 
 INSERT INTO `tables` (`id`, `name`, `link`, `qrcode`, `shop_id`, `created_at`, `updated_at`) VALUES
 (13, '01', 'https://ordarme.com/tables/show/13', '1712054375_12.svg', 10, '2024-04-02 20:39:35', '2024-04-02 20:39:35');

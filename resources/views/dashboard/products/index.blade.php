@@ -42,6 +42,7 @@
                                         <th>Price</th>
                                         <th>Sale</th>
                                         <th>FinalPrice</th>
+                                        <th>Is Available?</th>
                                         <th>Category</th>
                                         <th>Created At</th>
                                         <th>Operation</th>
@@ -59,11 +60,8 @@
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->sale }} % </td>
                                         <td>{{ $product->finalprice }}</td>
-
-{{--                                        <td>{{ $product->sale }}</td>--}}
-{{--                                        <td>{{ $product->quantity }}</td>--}}
+                                        <td>{{ $product->is_available ? 'Yes' : 'No'}}</td>
                                         <td>{{ $product->category->name }}</td>
-{{--                                        <td>{{ $product->stock->name }}</td>--}}
                                         <td>{{ $product->created_at->toDateString() }}</td>
                                         <td>
 
