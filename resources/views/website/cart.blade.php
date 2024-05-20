@@ -23,7 +23,7 @@
             <form action="{{ route('order.store') }}" method="post" enctype="multipart/form-data"
                 class="woocommerce-cart-form">
                 @csrf
-                <table id="cart" class="cart_table">
+                <table id="cart" class="cart_table" style="border-collapse: collapse">
                     <thead>
                         <tr>
                             <th class="cart-col-image">Image</th>
@@ -41,7 +41,7 @@
                         @if (session('cart'))
                             @foreach (session('cart') as $id => $details)
                                 @php $total += $details['price'] * $details['quantity'] @endphp
-                                <tr data-id="{{ $id }}" class="cart_item">
+                                <tr data-id="{{ $id }}" class="cart_item" style="border-bottom: 2px solid #aaaaaa">
                                     <td data-th="Product" data-title="Product">
                                         <a class="cart-productimage" href="#"><img width="91" height="91"
                                                 src="{{ url('products/' . $details['image']) }}" alt="Image"></a>
@@ -100,7 +100,7 @@
                 </table>
                 <div class="row justify-content-end">
                     <div class="col-md-8 col-lg-7 col-xl-6">
-                        <h2 class="h4 summary-title">Cart Totals</h2>
+                        <h2 class="h4 summary-title">Cart Total</h2>
                         <table class="cart_totals">
                             <tfoot>
                                 <tr>
