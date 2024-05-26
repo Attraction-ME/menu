@@ -72,18 +72,35 @@ class ProductController extends Controller
             }
         }
 
-        $cart[$id] = [
+        $productAdded = false;
+
+    foreach ($cart as $key => $item) {
+
+        if ($item['id'] === $id &&
+            (isset($item['mainOptionId']) ? $item['mainOptionId'] === $request->mainOptionId : !isset($request->mainOptionId)) &&
+            (isset($item['extraOptionIds']) ? $item['extraOptionIds'] === $request->extraOptionIds : !isset($request->extraOptionIds))) {
+            $cart[$key]['quantity']++;
+            $productAdded = true;
+            break;
+        }
+    }
+
+    if (!$productAdded) {
+        $cart[] = [
+            "id" => $id,
             "name" => $product->name,
             "quantity" => $request->quantity,
             "price" =>  $request->totalPrice ?? $product->finalprice,
             "image" => $product->image_temp,
-            "mainOptionId" => $request->mainOptionId,
-            "mainOptionName" => $request->mainOptionName,
-            "extraOptionIds" => $request->extraOptionIds,
-            "extraOptionNames" => $request->extraOptionNames,
+            "mainOptionId" => $request->mainOptionId ?? null,
+            "mainOptionName" => $request->mainOptionName ?? null,
+            "extraOptionIds" => $request->extraOptionIds ?? null,
+            "extraOptionNames" => $request->extraOptionNames ?? null,
             "shop_id" => $product->shop_id,
             "shop_name" => $shop->name,
         ];
+    }
+
 
         session()->put('cart', $cart);
         $cartLength = count($cart);

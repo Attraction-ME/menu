@@ -360,7 +360,7 @@
                                                                                                     <span
                                                                                                         class="price-sec2"> 
                                                                                                         <span id="product-total-quantity-modal-{{ $index }}">  </span>
-                                                                                                        <span id="product-total-price-modal-{{ $index }}">  </span>
+                                                                                                        <span id="product-total-price-modal-{{ $index }}">0</span>
                                                                                                         {{ $shop->currency->name }} </span>
                                                                                                 @endif
                                                                                             </div>
@@ -557,6 +557,9 @@
     <div class="bg-success text-white p-2 rounded mx-auto" id="notify-cart" style="position:fixed; top : 8rem !important; right: 10px; display: none;">
         Added To Cart Successfully
     </div>
+    <div class="bg-danger text-white p-2 rounded mx-auto" id="notify-cart2" style="position:fixed; top : 8rem !important; right: 10px; display: none;z-index: 999999999;">
+        You Must Choise Size 
+    </div>
 
 @endsection
 @section('scripts')
@@ -619,21 +622,138 @@
         });
     </script>
 
-    <script>
+<script>
+    var debounceTimer;
 
-        $('#products-search-icon').on('click' , function() {
+    $('#search').on('keyup', function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(search, 300);
+    });
+    $('#search').on('keydown', function (e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();  // Prevent the default action of the Enter key
+    }
+});
 
-            var keyword = $('#search').val() ;
-            var shop_id = $('#search_shop').val() ;
+search();
 
-            var routePath = {!! json_encode(route('website.search.result')) !!};
-            var queryString = `?keyword=${keyword}&shop_id=${shop_id}`; 
+    function search() {
 
-            window.location.replace( encodeURI (routePath + queryString) );
+        var keyword = $('#search').val();
+        var shop_id = $('#search_shop').val();
+        if (keyword.trim() === '') {
+            // Clear the table when the keyword is empty
+            $('.mycard').html('');
+            return;
+        }
 
-        })
 
-    </script>
+
+        $.post('{{ route("website.search") }}',
+            {
+
+                _token: '{{ csrf_token()}}',
+                keyword: keyword,
+                shop_id: shop_id,
+
+            },
+
+
+            function (data) {
+
+                table_post_row(data);
+
+            });
+    }
+
+    const productShowRoute = "{{ route('product.show', ':productId') }}";
+    const productcartRoute = "{{ route('add.to.cart', ':productId') }}";
+
+    // table row with ajax
+    function table_post_row(res) {
+        let htmlView = '';
+
+        if (res.products.length <= 0) {
+            $('.mycard').html(`<h5 style="color: red;text-align: center;padding-top: 10px;" class="product-detail col-12">No Data.</h5>`);
+        } else {
+
+            for (let i = 0; i < res.products.length; i++) {
+                const productLink = productShowRoute.replace(':productId', res.products[i].id);
+                const productCart = productcartRoute.replace(':productId', res.products[i].id);
+
+
+                htmlView += `
+                                         <div style="background-color: #343537 !important;" class="shoes-screen-wrapper">
+                                                    <div class="shoes-screen-top">
+                                                        <div class="shoes-img wishlist-img">
+                                                            <a type="button" href="#" class="border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop${res.products[i].id}">
+                                                                <img style="height: 100px !important;" src="{{url('/products/${res.products[i].image_temp}')}}" alt="product">
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="shoes-screen-bottom">
+                                                        <div class="shoes-screen-bottom-full">
+                                                            <div class="shoes-screen-first">
+                                                                <a type="button" href="#" class="border-0 " data-bs-toggle="modal" data-bs-target="#staticBackdrop${res.products[i].id}">
+                                                                    <h3>${res.products[i].name}</h3>
+                                                                </a>
+                                                            </div>
+                                                            <div style="padding: 8px !important;" class="shoes-screen-second">
+                                                                <div class="cloth-txt1">
+                                                                                        ${!res.products[i].hasMainOptions ? `<span>${res.products[i].finalprice}{{$shop->currency->name}}</span>` : ` `}
+
+                                                                </div>
+                                                                <div class="shoes-screen-second-full">
+                                                                    ${!res.products[i].hasMainOptions ? `
+                        <button type="button" data-product-id="${res.products[i].id}" style="background-color: red !important;" class="border-0 center align-content-center text-center add_cart">
+                            <i class="fa fa-plus" style="color: white !important;"></i>
+                        </button>
+                    ` : `
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop${res.products[i].id}" style="background-color: green !important;" class="border-0 center align-content-center text-center">
+                            <i class="fa fa-plus" style="color: white !important;"></i>
+                        </button>
+                    `}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                        </div>
+                                                </div>
+
+
+`;
+            }
+
+            $('.mycard').html(htmlView);
+
+            $('.product__pluss').on("click", function (e) {
+                e.preventDefault();
+                var $qty = $(this).siblings(".product__input");
+                var currentVal = parseInt($qty.val(), 10);
+                if (!isNaN(currentVal)) {
+                    $qty.val(currentVal + 1);
+                }
+            });
+
+            $('.product__minuss').on("click", function (e) {
+                e.preventDefault();
+                var $qty = $(this).siblings(".product__input");
+                var currentVal = parseInt($qty.val(), 10);
+                if (!isNaN(currentVal) && currentVal > 1) {
+                    $qty.val(currentVal - 1);
+                }
+            });
+
+        }
+
+
+
+    }
+
+</script>
 
     <script>
         // Update the existing script to handle the "Add to Cart" button click
@@ -669,7 +789,14 @@
                 if ( quantity === undefined ) {
                     quantity = 1;
                 }
-
+                 // Check if totalPrice is zero
+                 if (totalPrice !== '') {
+                   if (totalPrice == 0) {
+                       $('#notify-cart2').show();
+                       $('#notify-cart2').fadeOut(10000);
+                       return;
+                    }
+                }
                 $.ajax({
                     url: '/add-to-cart/' + productId,
                     method: 'GET',
