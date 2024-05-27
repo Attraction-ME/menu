@@ -847,9 +847,17 @@ search();
                         deleteOrder();
                         updateSubtotal();
                         $('.modal').modal('hide');
+                        
+                 // Reset the form fields and other relevant elements
+                 $(`input[name=main_option_${index}][type=radio]:checked`).prop('checked', false);
+                 $(`input[name=extra_option_${index}][type=checkbox]:checked`).prop('checked', false);
+                 $(`#product-total-price-modal-${index}`).text('0');
+                 qtyInput.val('1');
+
                         // alert(response.success); // or display a success message in your UI
                         $('#notify-cart').show();
                         $('#notify-cart').fadeOut( 500 );
+
                     },
 
                     error: function(error) {
