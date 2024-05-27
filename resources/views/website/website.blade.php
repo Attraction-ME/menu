@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" dir="rtl">
+<html lang="zxx" >
 <head>
     <meta charset="utf-8" />
     <title>ordarme</title>
@@ -142,7 +142,7 @@
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
 
-        <section aria-label="section" dir="ltr"  id="Home" data-bgimage="url({{url('website/owner/images/background/1.jpg')}}) top" class="text-light">
+        <section aria-label="section"   id="Home" data-bgimage="url({{url('website/owner/images/background/1.jpg')}}) top" class="text-light">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
@@ -506,7 +506,7 @@
         <!-- section close -->
 
 
-        <section id="Element" dir="ltr" >
+        <section id="Element"  >
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
