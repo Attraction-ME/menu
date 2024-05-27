@@ -159,8 +159,8 @@
                         </div>
                         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.</p>
                         <div class="spacer-20"></div>
-                        <a class="btn-custom" href="features.html">Learn More</a>&nbsp;
-                        <a class="btn-border" href="download.html">Download</a>
+                        {{-- <a class="btn-custom" href="features.html">Learn More</a>&nbsp;
+                        <a class="btn-border" href="download.html">Download</a> --}}
                         <div class="mb-sm-30"></div>
                     </div>
 
@@ -247,7 +247,7 @@
             </div>
         </section>
 
-        <section id="Product" >
+        <section id="Product" style="direction: ltr" >
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 d-none d-lg-block d-xl-block text-center wow fadeInRight" data-wow-delay="0s">
@@ -277,8 +277,8 @@
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"><p>Est quis nulla laborum officia ad nisi ex nostrud culpa Lorem excepteur aliquip dolor aliqua irure ex. Nulla ut duis ipsum nisi elit fugiat commodo sunt reprehenderit laborum veniam eu veniam. Eiusmod minim exercitation fugiat irure ex labore incididunt do fugiat commodo aliquip sit id deserunt reprehenderit aliquip nostrud. Amet ex cupidatat excepteur aute veniam incididunt mollit cupidatat esse irure officia elit do ipsum ullamco Lorem.</p></div>
                         </div>
                         <div class="spacer-half"></div>
-                        <a class="btn-custom" href="features.html">Learn More</a>&nbsp;
-                        <a class="btn-border btn-invert" href="download.html">Download</a>
+                        {{-- <a class="btn-custom" href="features.html">Learn More</a>&nbsp;
+                        <a class="btn-border btn-invert" href="download.html">Download</a> --}}
                     </div>
                 </div>
             </div>
@@ -684,7 +684,7 @@
             </div>
         </section>
 
-        <section aria-label="section" class="no-top no-bottom">
+        {{-- <section aria-label="section" class="no-top no-bottom">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-6">
@@ -700,7 +700,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
     </div>
     <!-- content close -->
 

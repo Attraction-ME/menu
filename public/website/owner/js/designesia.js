@@ -1,13 +1,12 @@
  /* --------------------------------------------------
   * © Copyright 2020 - Elaxo by Designesia
   * --------------------------------------------------*/
-(function($) {
+ (function($) {
 	'use strict';
 
      /* --------------------------------------------------
       * template options (customable)
       * --------------------------------------------------*/
-    //   var rtl_mode = 'off'; // on - for enable RTL, off - for deactive RTL
       var rtl_mode = 'on'; // on - for enable RTL, off - for deactive RTL
 
 
@@ -1102,9 +1101,9 @@
         // rtl begin //
           if (rtl_mode=="on") {
                     jQuery("body").addClass('rtl');
-                     jQuery("#bootstrap").attr("href", 'css/bootstrap-rtl.min.css');
-                     jQuery("#bootstrap-grid").attr("href", 'css/bootstrap-grid-rtl.min.css');
-                     jQuery("#bootstrap-reboot").attr("href", 'css/bootstrap-reboot-rtl.min.css');
+                     jQuery("#bootstrap").attr("href", 'website/owner/css/bootstrap-rtl.min.css');
+                     jQuery("#bootstrap-grid").attr("href", 'website/owner/css/bootstrap-grid-rtl.min.css');
+                     jQuery("#bootstrap-reboot").attr("href", 'website/owner/css/bootstrap-reboot-rtl.min.css');
             };
 		 // rtl end //
 
