@@ -7217,8 +7217,8 @@ a.img-icon-zoom {
 .widget_tags li a {
 	border-color: #555;
 }
-.widget_tags li a:hover
-	border-color: #eceff3;
+.widget_tags li a:hover{
+	border-color:#eceff3;
 }
 footer .widget {
 	border: none;

@@ -77,57 +77,24 @@
                             <!-- mainmenu begin -->
                             <ul id="mainmenu">
                                 <li>
-                                    <a href="#Home">Home<span></span></a>
-                                    {{-- <ul>
-                                        <li><a href="index.html">Homepage 1</a></li>
-                                        <li><a href="index-2.html">Homepage 2</a></li>
-                                        <li><a href="index-3.html">Homepage 3</a></li>
-                                    </ul> --}}
+                                    <a href="#Element">آراء العملاء<span></span></a>
+
                                 </li>
                                 <li>
-                                    <a href="#About">About Us<span></span></a>
-                                    {{-- <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="jobs.html">Jobs</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul> --}}
+                                    <a href="#Page"> خطط الأسعار<span></span></a>
+
                                 </li>
                                 <li>
-                                    <a href="#Product">Products<span></span></a>
-                                    {{-- <ul>
-                                        <li><a href="features.html">Features</a></li>
-                                        <li><a href="pricing.html">Pricing</a></li>
-                                        <li><a href="reviews.html">Reviews</a></li>
-                                        <li><a href="download.html">Download</a></li>
-                                        <li><a href="video-tutorial.html">Video Tutorial</a></li>
-                                    </ul> --}}
+                                    <a href="#Product">المنتجات<span></span></a>
+
                                 </li>
                                 <li>
-                                    <a href="#Page">Pages<span></span></a>
-                                    {{-- <ul>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="login.html">Login</a></li>
-                                        <li><a href="login-2.html">Login 2</a></li>
-                                        <li><a href="register.html">Register</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                    </ul> --}}
+                                    <a  href="#About"> عن الشركة<span></span></a>
+
                                 </li>
                                 <li>
-                                    <a href="#Element">Elements<span></span></a>
-                                    {{-- <ul>
-                                        <li><a href="icons-font-awesome.html">Font Awesome Icons</a></li>
-                                        <li><a href="icons-elegant.html">Elegant Icons</a></li>
-                                        <li><a href="icons-etline.html">Etline Icons</a></li>
-                                        <li><a href="alerts.html">Alerts</a></li>
-                                        <li><a href="accordion.html">Accordion</a></li>
-                                        <li><a href="modal.html">Modal</a></li>
-                                        <li><a href="progress-bar.html">Progress Bar</a></li>
-                                        <li><a href="tabs.html">Tabs</a></li>
-                                        <li><a href="timeline.html">Timeline</a></li>
-                                        <li><a href="tooltips.html">Tooltips</a></li>
-                                        <li><a href="counters.html">Counters</a></li>
-                                    </ul> --}}
+                                    <a  href="#Home">الرئيسية <span></span></a>
+
                                 </li>
                             </ul>
                         </div>
@@ -145,7 +112,7 @@
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
 
-        <section aria-label="section"   id="Home" data-bgimage="url({{url('website/owner/images/background/1.jpg')}}) top" class="text-light">
+        <section aria-label="section"   id="Home" data-bgimage="url({{url('website/owner/images/background/4.jpg')}}) top" class="text-light">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
