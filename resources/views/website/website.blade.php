@@ -150,9 +150,9 @@
                         <div class="h1 text-light">قائمة الطعام الذكية للمزيد  <br>
                             من..
                             <div class="typed-strings">
-                                <p>سرعة </p>
-                                <p>دقة </p>
-                                <p>تحديث فوري</p>
+                                <p>سرعة الآداء </p>
+                                <p>دقة الطلبات </p>
+                                <p>التحديث الفوري</p>
                                 {{-- <p>confidence</p> --}}
                             </div>
                             <div class="typed"></div>
