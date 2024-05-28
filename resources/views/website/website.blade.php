@@ -26,6 +26,9 @@
     <link href="{{url('website/owner/css/magnific-popup.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('website/owner/css/jquery.countdown.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('website/owner/css/style.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
 
     <!-- color scheme -->
     <link id="colors" href="{{url('website/owner/css/colors/scheme-01.css')}}" rel="stylesheet" type="text/css" />
@@ -147,8 +150,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
                         <div class="spacer-10"></div>
-                        <div class="h1 text-light">قائمة الطعام الذكية للمزيد  <br>
-                            من..
+                        <div class="h1 text-light">قائمة الطعام الذكية (للحصول) على..
                             <div class="typed-strings">
                                 <p>سرعة الآداء </p>
                                 <p>دقة الطلبات </p>
@@ -179,8 +181,8 @@
             <div class="container">
 
                 <div class="text-center">
-                    <span class="p-title">Discover</span><br>
-                    <h2>Top Features</h2>
+                    <span class="p-title">إكتشف</span><br>
+                    <h2>أهم المميزات </h2>
                     <div class="small-border"></div>
                 </div>
 
@@ -190,8 +192,8 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-music bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>HD Sounds</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                <h4>تحسين الكفاءة</h4>
+                                <p>يساعد النظام في تسريع عملية الطلب والدفع، مما يزيد من كفاءة الخدمة.</p>
                             </div>
                         </div>
                     </div>
@@ -200,8 +202,8 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-list-ol bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>Playlist</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                <h4>تقليل الأخطاء</h4>
+                                <p>يقلل من فرص حدوث الأخطاء في الطلبات التي قد تنجم عن سوء الفهم أو النسيان.</p>
                             </div>
                         </div>
                     </div>
@@ -210,8 +212,8 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-star bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>Favorites</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                <h4> تقليل التكاليف</h4>
+                                <p>يقلل من الحاجة إلى الورق ويخفض تكاليف الطباعة للقوائم.</p>
                             </div>
                         </div>
                     </div>
@@ -220,8 +222,8 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-heartbeat bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>Mood Detector</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                <h4>تحسين تجربة العميل </h4>
+                                <p>يساهم في تقديم تجربة عصرية ومريحة تعزز من رضا العملاء وتشجعهم على العودة.</p>
                             </div>
                         </div>
                     </div>
@@ -230,8 +232,8 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-random bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>Shuffle</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                <h4> سهولة التحديث</h4>
+                                <p>يسهل تحديث القائمة والأسعار بسرعة وسهولة دون الحاجة لطباعة قوائم جديدة.</p>
                             </div>
                         </div>
                     </div>
@@ -240,8 +242,8 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-hourglass-start bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>Timer</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                                <h4>توفير العمالى</h4>
+                                <p>يقلل النظام من الحاجة إلى عدد كبير من العمال، مما يخفض التكاليف.</p>
                             </div>
                         </div>
                     </div>
