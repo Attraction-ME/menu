@@ -147,17 +147,21 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5 wow fadeInRight" data-wow-delay=".5s">
                         <div class="spacer-10"></div>
-                        <div class="h1 text-light">Help to improve focus<br>
-                            for more
+                        <div class="h1 text-light">قائمة الطعام الذكية للمزيد  <br>
+                            من..
                             <div class="typed-strings">
-                                <p>productive</p>
-                                <p>creative</p>
-                                <p>relax</p>
-                                <p>confidence</p>
+                                <p>سرعة </p>
+                                <p>دقة </p>
+                                <p>تحديث فوري</p>
+                                {{-- <p>confidence</p> --}}
                             </div>
                             <div class="typed"></div>
                         </div>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.</p>
+                        <p class="lead">
+                            قائمة الطعام الرقمية هي خدمة
+                             مبتكرة تتيح للمطاعم تقديم تجربة تفاعلية ومريحة للعملاء
+                             ، حيث يمكنهم مشاهدة القائمة، تصفح الأطباق بصورها، وتقديم الطلبات بسهولة عبر مسح رمز QR،
+                              مما يعزز الكفاءة ويحسن الخدمة.                    </p>
                         <div class="spacer-20"></div>
                         {{-- <a class="btn-custom" href="features.html">Learn More</a>&nbsp;
                         <a class="btn-border" href="download.html">Download</a> --}}
