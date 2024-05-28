@@ -224,7 +224,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 d-none d-lg-block d-xl-block text-center wow fadeInRight" data-wow-delay="0s">
-                        <img class="relative img-fluid" src="{{url('website/owner/images/misc/5.png')}}" alt="" />
+                        <img class="relative img-fluid" src="{{url('website/owner/images/misc/7.png')}}" alt="" />
                     </div>
 
                     <div class="col-lg-5 offset-md-1 wow fadeInLeft" data-wow-delay="0s">
