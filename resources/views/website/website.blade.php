@@ -242,7 +242,7 @@
                         <div class="f-box f-icon-left f-icon-circle f-icon-shadow">
                             <i class="fa fa-hourglass-start bg-color text-light"></i>
                             <div class="fb-text">
-                                <h4>توفير العمالى</h4>
+                                <h4>توفير العمالة</h4>
                                 <p>يقلل النظام من الحاجة إلى عدد كبير من العمال، مما يخفض التكاليف.</p>
                             </div>
                         </div>
